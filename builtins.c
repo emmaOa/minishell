@@ -45,7 +45,25 @@ int	ft_echo(t_data *data)
 	return (0);
 }
 
-int	ft_cd(t_data *data)
+int	ft_pwd(t_data *data)
 {
-	
+	char buf[1000];
+	if (ft_strncmp("pwd", data->av[1], ft_strlen(data->av[1])) == 0)
+	{
+		getcwd(buf, sizeof(buf));
+		printf("%s", buf);
+		system("leaks minishell");
+		return (0);
+	}
+	return (0);
 }
+
+// int	ft_export(t_data *data)
+// {
+// 	return (0);
+// }
+
+// int	ft_cd(t_data *data)
+// {
+	
+// }
