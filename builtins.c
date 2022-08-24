@@ -1,4 +1,4 @@
-#include "minishell.h"
+ #include "minishell.h"
 
 int	ft_check_n_echo(char *str)
 {
@@ -44,7 +44,6 @@ int	ft_echo(t_data *data)
 		printf("\n");
 	return (0);
 }
-
 int	ft_pwd(t_data *data)
 {
 	char buf[1000];
@@ -52,18 +51,6 @@ int	ft_pwd(t_data *data)
 	{
 		getcwd(buf, sizeof(buf));
 		printf("%s", buf);
-		system("leaks minishell");
-		return (0);
 	}
 	return (0);
 }
-
-// int	ft_export(t_data *data)
-// {
-// 	return (0);
-// }
-
-// int	ft_cd(t_data *data)
-// {
-	
-// }

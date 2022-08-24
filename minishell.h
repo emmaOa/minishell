@@ -9,24 +9,30 @@
 # include <stdlib.h>
 #include <fcntl.h>
 
-// typedef	struct s_list_env
-// {
-// 	void			*content;
-// 	struct s_list_env	*next;
-// }	t_list_env;
+typedef struct s_env_list
+{
+	char	*key;
+	char	*cont;
+	struct s_env_list *next;
+}			t_env_list;
 
 typedef struct s_data
 {
 	int			ac;
 	char		**av;
-	t_list	*list_env;
-	t_list	**head_list;
+	int			len_env;
+	struct s_env_list *env_list;
+	struct s_env_list **head;
+	char	**ev;
 }			t_data;
 
-int	ft_list_env(t_data	*data, char *env[]);
-int	ft_check_n_echo(char *str);
-int	ft_echo(t_data *data);
-int	ft_cd(t_data *data);
-int	ft_pwd(t_data *data);
-int	ft_export(t_data *data);
+int		arr_to_list(t_data *data, char *env[]);
+int		ft_export(t_data *data, char *env[]);
+void	printf_list_env(t_env_list **list);
+int		ft_check_n_echo(char *str);
+int		list_to_arr(t_data *data);
+char	 *cont_evn(char *env);
+int		ft_echo(t_data *data);
+char	 *key_evn(char *env);
+int		ft_pwd(t_data *data);
 #endif

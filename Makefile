@@ -1,5 +1,5 @@
 VRLIBFT= libft/libft.a
-MANDATORY= main.c builtins.c $(VRLIBFT)
+MANDATORY= main.c builtins.c env_function.c export.c $(VRLIBFT)
 
 CC=cc
 FLAGS= #-Wall -Werror -Wextra
