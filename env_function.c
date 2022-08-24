@@ -56,7 +56,7 @@ void	printf_list_env(t_env_list **list)
 	}
 }
 
-int	arr_to_list(t_data *data, char *env[])
+t_env_list	**arr_to_list(t_data *data, char *env[])
 {
 	int i;
 
@@ -75,7 +75,7 @@ int	arr_to_list(t_data *data, char *env[])
 		i++;
 	}
 	data->env_list->next = NULL;
-	return (0);
+	return data->head;
 }
 
 int	list_to_arr(t_data *data)
@@ -90,7 +90,6 @@ int	list_to_arr(t_data *data)
 	{
 		data->ev[i] = (char *)malloc((ft_strlen(tmp->cont) + ft_strlen(tmp->key) + 1));
 		data->ev[i] = ft_strjoin(tmp->key, tmp->cont);
-		printf("%s\n", data->ev[i]);
 		tmp = tmp->next;
 		i++;
 	}
