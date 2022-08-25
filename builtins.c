@@ -38,10 +38,11 @@ int	ft_echo(t_data *data)
 					printf(" ");
 				i++;
 			}
+			if (n == 0)
+				printf("\n");
 		}
 	}
-	if (n == 0)
-		printf("\n");
+
 	return (0);
 }
 int	ft_pwd(t_data *data)

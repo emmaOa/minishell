@@ -1,5 +1,4 @@
 #include "minishell.h"
-
 char *key_evn(char *env)
 {
 	int	i;
@@ -9,6 +8,8 @@ char *key_evn(char *env)
 	i = 0;
 	while (env[i] != '=')
 		i++;
+	if (env[i] == '\0')
+		return (NULL);
 	len = i;
 	key = malloc(len + 2);
 	i = 0;
@@ -32,49 +33,52 @@ char *cont_evn(char *env)
 	i = 0;
 	j = 0;
 	cont = malloc(ft_strlen(env));
-	while (env[i] != '=')
+	while (env[i] && env[i] != '=')
 		i++;
-	i++;
-	while (env[i])
+	if (env[i] != '=' || env[i + 1] == '\0')
+		cont[j] = '\0';
+	else
 	{
-		cont[j] = env[i];
 		i++;
-		j++;
+		while (env[i])
+		{
+			cont[j] = env[i];
+			i++;
+			j++;
+		}
+		cont[j] = '\0';
 	}
-	cont[j] = '\0';
 	return cont;
 }
 
-void	printf_list_env(t_env_list **list)
+void	printf_list_env(t_env_list *list)
 {
-	t_env_list *first_node;
-	first_node = *list;
-	while (first_node->next)
+	t_env_list *tmp;
+	tmp = list;
+	while (tmp->next)
 	{
-		printf("%s%s\n", first_node->key, first_node->cont);
-		first_node = first_node->next;
+		printf("%s%s\n", tmp->key, tmp->cont);
+		tmp = tmp->next;
 	}
+	printf("%s%s\n", tmp->key, tmp->cont);
 }
 
-t_env_list	**arr_to_list(t_data *data, char *env[])
+t_env_list	*arr_to_list(t_data *data, char *str[])
 {
+	t_env_list *tmp;
 	int i;
 
 	i = 0;
-	data->head = (t_env_list **)malloc(sizeof(t_env_list *));
-	data->env_list = (t_env_list *)malloc(sizeof(t_env_list));
-	data->len_env = 1;
-	*data->head = data->env_list;
-	while (env[i])
+	data->head = NULL;
+	while (str[i])
 	{
-		data->env_list->key = key_evn(env[i]);
-		data->env_list->cont = cont_evn(env[i]);
-		data->env_list->next = (t_env_list *)malloc(sizeof(t_env_list));
-		data->env_list = data->env_list->next;
-		data->len_env++;
+		tmp = malloc(sizeof(t_env_list));
+		tmp->key = key_evn(str[i]);
+		tmp->cont = cont_evn(str[i]);
+		tmp->next = NULL;
+		ft_lstadd_back_mini(&data->head, tmp);
 		i++;
 	}
-	data->env_list->next = NULL;
 	return data->head;
 }
 
@@ -84,8 +88,8 @@ int	list_to_arr(t_data *data)
 
 	i = 0;
 	t_env_list *tmp;
-	tmp = *data->head;
-	data->ev = (char **)malloc(data->len_env * sizeof(char *));
+	tmp = data->head_env;
+	data->ev = (char **)malloc(ft_lstsize_mini(data->head_env) * sizeof(char *));
 	while (tmp->next)
 	{
 		data->ev[i] = (char *)malloc((ft_strlen(tmp->cont) + ft_strlen(tmp->key) + 1));

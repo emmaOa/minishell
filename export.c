@@ -1,40 +1,53 @@
 #include "minishell.h"
 
-int		ft_export_arv(t_data *data)
+int	check_valid_enva_jout(t_env_list *node)
 {
+	return (0);
+}
+
+int	ft_export_arv(t_data *data)
+{
+	t_env_list *tmp;
+
+	int i = 0;
+	tmp = data->arv_list;
+
+	while (ft_strncmp("export", tmp->key, ft_strlen(tmp->key)) != 0)
+		tmp = tmp->next;
+	tmp = tmp->next;
+	ft_lstadd_back_mini(&data->head_env, tmp);
+	tmp = data->head_env;
+	printf_list_env(tmp);
 	return (0);
 }
 
 int	ft_export(t_data *data)
 {
-	int	i;
-	int	j;
 	int	alpha;
-	t_env_list *tmp;
+	t_env_list *env;
 
-	i = 0;
 	alpha = 'A';
-	tmp = *data->head_env;
+	env = data->head_env;
 	if (data->ac == 2)
 	{
 		if (ft_strncmp("export", data->av[1], ft_strlen(data->av[1])) == 0)
 		{
 			while (alpha <= 'Z')
 			{
-				while (tmp->next)
+				while (env->next)
 				{
-					if (tmp->key[0] == alpha)
-						printf("declare -x %s\"%s\"\n", tmp->key, tmp->cont);
-					tmp = tmp->next;
+					if (env->key[0] == alpha)
+						printf("declare -x %s\"%s\"\n", env->key, env->cont);
+					env = env->next;
 				}
-				tmp = *data->head_env;
+				env = data->head_env;
 				alpha++;
 			}
-			while (tmp->next)
+			while (env->next)
 			{
-				if (tmp->key[0] < 'A' || tmp->key[0] > 'Z')
-					printf("declare -x %s\"%s\"\n", tmp->key, tmp->cont);
-				tmp = tmp->next;
+				if (env->key[0] < 'A' || env->key[0] > 'Z')
+					printf("declare -x %s\"%s\"\n", env->key, env->cont);
+				env = env->next;
 			}
 		}
 	}
