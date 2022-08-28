@@ -11,20 +11,30 @@ t_env_list	*ft_lstlast_mini(t_env_list *lst)
 	return (lst);
 }
 
-void	ft_lstadd_back_mini(t_env_list **lst, t_env_list *new)
+// void	ft_lstadd_back_withoutcont(t_env_list **lst, t_env_list *new)
+// {
+// 	t_env_list	*p;
+// 	t_env_list	*tmp;
+
+// 	tmp = 	NULL;
+// 	if (new == 0)
+// 		return ;
+// 	if (new->key[ft_strlen(new->key)] != '=')
+// 	{
+// 		if (*lst == 0)
+// 		{
+// 			*lst = new;
+// 			return ;
+// 		}
+// 	}
+// 	p = ft_lstlast_mini(*lst);
+// 	p->next = new;
+// }
+
+void	lstadd_back(t_env_list **lst, t_env_list *new)
 {
 	t_env_list	*p;
-	t_env_list	*tmp;
 
-	tmp = 	NULL;
-	if (check_valid_enva_jout(new) == 1)
-	{
-		printf(" : not a valid identifier\n");
-		if (new->next)
-			new = new->next;
-		else
-			new = NULL;
-	}
 	if (new == 0)
 		return ;
 	if (*lst == 0)
@@ -35,6 +45,9 @@ void	ft_lstadd_back_mini(t_env_list **lst, t_env_list *new)
 	p = ft_lstlast_mini(*lst);
 	p->next = new;
 }
+
+
+
 
 t_env_list	*ft_lstnew_mini(void *key, void *cont)
 {

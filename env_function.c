@@ -11,15 +11,14 @@ char *key_evn(char *env)
 	if (env[i] == '\0')
 		return (NULL);
 	len = i;
-	key = malloc(len + 2);
+	key = malloc(len + 1);
 	i = 0;
 	while (i < len)
 	{
 		key[i] = env[i];
 		i++;
 	}
-	key[len] = '=';
-	key[len + 1] = '\0';
+	key[len] = '\0';
 	return (key);
 	
 }
@@ -57,10 +56,55 @@ void	printf_list_env(t_env_list *list)
 	tmp = list;
 	while (tmp->next)
 	{
-		printf("%s%s\n", tmp->key, tmp->cont);
+		printf("%s=%s\n", tmp->key, tmp->cont);
 		tmp = tmp->next;
 	}
 	printf("%s%s\n", tmp->key, tmp->cont);
+}
+
+t_env_list	*clean_arv(t_env_list *env, t_env_list *new, t_data *data)
+{
+	t_env_list *t_new;
+	t_env_list *tmp;
+	t_env_list *result;
+
+	t_new = new;
+	result= NULL;
+	while (t_new)
+	{
+		if (check_valid_enva_jout(t_new) == 1)
+			printf("%s : not a valid identifier\n", t_new->key);
+		else if (check_valid_enva_jout(t_new) == 2 || check_valid_enva_jout(t_new) == 0)
+		{
+			tmp = malloc(sizeof(t_env_list));
+			if (check_valid_enva_jout(t_new) == 0)
+			{
+				tmp->key = t_new->key;
+				tmp->cont = t_new->cont;
+				tmp->next = NULL;
+			}
+			else
+			{
+				if (doubl_export(data->head_env, t_new) == NULL)
+				{
+					if (doubl_export(result, t_new) == NULL)
+						tmp->cont = t_new->cont;
+					else
+						tmp->cont = doubl_export(result, t_new);
+				}
+				else
+					tmp->cont = doubl_export(data->head_env, t_new);
+				tmp->key = ft_strndup(t_new->key, (ft_strlen(t_new->key) - 1));	
+				tmp->next = NULL;
+			}
+			lstadd_back(&result, tmp);
+		}
+		if (t_new->next)
+			t_new = t_new->next;
+		else
+			break;
+	}
+	return result;
 }
 
 t_env_list	*arr_to_list(t_data *data, char *str[])
@@ -76,7 +120,7 @@ t_env_list	*arr_to_list(t_data *data, char *str[])
 		tmp->key = key_evn(str[i]);
 		tmp->cont = cont_evn(str[i]);
 		tmp->next = NULL;
-		ft_lstadd_back_mini(&data->head, tmp);
+		lstadd_back(&data->head, tmp);
 		i++;
 	}
 	return data->head;
