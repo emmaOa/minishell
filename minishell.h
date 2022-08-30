@@ -39,7 +39,6 @@ t_env_list	*ft_lstlast_mini(t_env_list *lst);
 int			check_valid_enva_jout(char *str);
 void		printf_list_env(t_env_list *list);
 void		lstadd_back(t_env_list **lst, t_env_list *new);
-char		*doubl_export(t_env_list *list, t_env_list *node);
 int			ft_lstsize_mini(t_env_list *lst);
 int			clean_arv(t_data *data);
 int			ft_export_arv(t_data *data);
@@ -51,8 +50,9 @@ int			ft_echo(t_data *data);
 char		 *key_evn(char *env);
 int			ft_pwd(t_data *data);
 char		 *ft_strndup(char *str, int len);
+void	check_dele(t_env_list *data, t_env_list *node);
 int			ft_strcmp(const char *d, const char *s);
-void		dele_node(t_env_list **head, t_env_list *node);
+void		dele_node(t_env_list *node);
 int	remplace_double_0(t_data *data, t_env_list *new);
 int	remplace_double_2(t_data *data, t_env_list *new);
 #endif

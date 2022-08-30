@@ -26,24 +26,7 @@ void	lstadd_back(t_env_list **lst, t_env_list *new)
 	p->next = new;
 }
 
-void	dele_node(t_env_list **head, t_env_list *node)
-{
-	t_env_list *list;
-	t_env_list *tmp;
-	if (!*head || !node)
-		return ;
-	while (list->next)
-	{
-		if (ft_strcmp(list->key, node->key) == 0)
-		{
-			tmp = list->next;
-			list = tmp->next;
-			free(tmp);
-			tmp = NULL;
-		}
-	}
-	return ;
-}
+
 
 void	lstadd_back_export(t_data *data)
 {
@@ -52,16 +35,13 @@ void	lstadd_back_export(t_data *data)
 
 	env = data->head_env;
 	arv = data->arv_list;
-	if (arv == 0)
-		return ;
+	clean_arv(data);
 	if (env == 0)
 	{
-		clean_arv(data);
 		env = data->arv_list;
 		return ;
 	}
 	env = ft_lstlast_mini(data->head_env);
-	clean_arv(data);
 	env->next = data->arv_list;
 }
 

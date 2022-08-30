@@ -56,40 +56,48 @@ void	printf_list_env(t_env_list *list)
 	tmp = list;
 	if (tmp)
 	{
-		while (tmp->next)
+		while (tmp)
 		{
 			printf("declare -x %s%s\n", tmp->key, tmp->cont);
 			tmp = tmp->next;
 		}
-		printf("declare -x %s%s\n", tmp->key, tmp->cont);
 	}
 }
 
 int	clean_arv(t_data *data)
 {
-	t_env_list *arv;
+	t_env_list	*arv;
+	t_env_list	*tmp;
+	int	i;
 
 	arv = data->arv_list;
-
-	while (arv->next)
+	i = 0;
+	tmp = NULL;
+	while (arv)
 	{
 		if (check_valid_enva_jout(arv->key) == 1)
 		{
 			printf("%s : not a valid identifier\n", arv->key);
-			dele_node(&data->arv_list, arv);
+			if (tmp == NULL)
+				data->arv_list = arv->next;
+			tmp = arv;
+			arv = arv->next;
+			dele_node(tmp);
 		}
-		if (check_valid_enva_jout(arv->key) == 0
+		else if (check_valid_enva_jout(arv->key) == 0
 			|| check_valid_enva_jout(arv->key) == 2)
 		{
 			if (check_valid_enva_jout(arv->key) == 0)
-				remplace_double(data, arv, 0);
+					remplace_double(data, arv, 0);
 			else if (check_valid_enva_jout(arv->key) == 2)
 				remplace_double(data, arv, 2);
 		}
+		if (!arv)
+			break;
+		tmp = arv;
 		arv = arv->next;
+		i++;
 	}
-	arv = data->arv_list;
-	printf_list_env(arv);
 	return (0);
 }
 
@@ -180,25 +188,3 @@ int	list_to_arr(t_data *data)
 	data->ev[i] = NULL;
 	return (0);
 }
-
-			// if (check_valid_enva_jout(t_new->key) == 0)
-			// {
-			// 	tmp->key = t_new->key;
-			// 	tmp->cont = remplace_double(data, t_new);
-			// 	tmp->next = NULL;
-			// }
-			// else
-			// {
-			// 	if (doubl_export(data->head_env, t_new) == NULL)
-			// 	{
-			// 		if (doubl_export(result, t_new) == NULL)
-			// 			tmp->cont = t_new->cont;
-			// 		else
-			// 			tmp->cont = doubl_export(result, t_new);
-			// 	}
-			// 	else
-			// 		tmp->cont = doubl_export(data->head_env, t_new);
-			// 	tmp->key = ft_strndup(t_new->key, (ft_strlen(t_new->key) - 1));	
-			// 	tmp->next = NULL;
-			// }
-			// lstadd_back(&result, tmp);

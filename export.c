@@ -25,35 +25,32 @@ int	check_valid_enva_jout(char *str)
 
 int	remplace_double_0(t_data *data, t_env_list *new)
 {
-	t_env_list *env;
-	t_env_list *arv;
-	int i;
+	t_env_list	*env;
+	t_env_list	*arv;
+	t_env_list	*tmp;
 
-	i = 0;
 	env = data->head_env;
 	arv = data->arv_list;
 	if(env)
 	{
-		while (env->next)
+		while (env)
 		{
 			if (ft_strcmp(new->key, env->key) == 0)
 			{
-				env->cont = new->cont;
-				dele_node(&data->arv_list, new);
+				printf("env == 0");
+				check_dele(data->head_env, env);
 			}
 			env = env->next;
 		}
 	}
 	if (arv)
 	{
-		while (arv->next)
-		{
-			if (ft_strcmp(new->key, arv->key) == 0)
-			{
-				arv->cont = new->cont;
-				dele_node(&data->arv_list, new);
-			}
+		while (ft_strcmp(arv->key, new->key) != 0)
 			arv = arv->next;
+		if (arv)
+		{
+			new->cont = arv->cont;
+			check_dele(data->arv_list, arv);
 		}
 	}
 	return (0);
@@ -73,23 +70,21 @@ int	remplace_double_2(t_data *data, t_env_list *new)
 		{
 			if (ft_strcmp(new->key, env->key) == 0)
 			{
-				env->cont = ft_strjoin(env->cont, new->cont);
-				dele_node(&data->arv_list, new);
+				new->cont = ft_strjoin(env->cont, new->cont);
+				check_dele(data->head_env, env);
+				break;
 			}
 			env = env->next;
 		}
 	}
 	if (arv)
 	{
-		while (arv->next)
+		while (ft_strcmp(arv->key, new->key) != 0)
+			arv = arv->next;
+		if (arv)
 		{
-			printf("%s\n", arv->key);
-			if (ft_strcmp(new->key, arv->key) == 0)
-			{
-				arv->cont = ft_strjoin(arv->cont, new->cont);
-				dele_node(&data->arv_list, new);
-			}
-			arv = arv->next; 
+			new->cont = ft_strjoin(arv->cont, new->cont);
+			check_dele(data->arv_list, arv);
 		}
 	}
 	return (0);
@@ -102,48 +97,24 @@ int	remplace_double(t_data *data, t_env_list *new, int ret)
 	arv = data->arv_list;
 	if (ret == 0)
 		remplace_double_0(data, new);
-	else if (ret == 2)
+	// printf("%s\n", data->arv_list->key);
+	// exit(0);
+	 if (ret == 2)
 		remplace_double_2(data, new);
+	
 	return (0);
-}
-
-char *doubl_export(t_env_list *list, t_env_list *node)
-{
-	t_env_list *tmp;
-	char *str;
-
-	tmp = list;
-	str = NULL;
-	if (list != 0)
-	{
-		while (tmp->next)
-		{
-			if (ft_strncmp(tmp->key, node->key, ft_strlen(tmp->key) == 0)
-				&& node->key[ft_strlen(tmp->key) + 1] == '\0')
-				str = ft_strjoin(tmp->next->cont, node->cont);
-			tmp = tmp->next;
-		}
-	}
-	return str;
 }
 
 int	ft_export_arv(t_data *data)
 {
-	t_env_list *tmp;
-	t_env_list *clean;
+	t_env_list	*arv;
+	t_env_list	*tmp;
 
-	tmp = data->arv_list;
-
-	if (tmp)
-	{
-		while (tmp->next && ft_strcmp("export", tmp->key) != 0)
-		{
-			dele_node(&data->arv_list, tmp);
-			tmp = tmp->next;
-		}
-		dele_node(&data->arv_list, tmp);
-		lstadd_back_export(data);
-	}
+	arv = data->arv_list;
+	data->arv_list = arv->next->next;
+	dele_node(arv->next);
+	dele_node(arv);
+	lstadd_back_export(data);
 	return (0);
 }
 
