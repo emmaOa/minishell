@@ -54,57 +54,43 @@ void	printf_list_env(t_env_list *list)
 {
 	t_env_list *tmp;
 	tmp = list;
-	while (tmp->next)
+	if (tmp)
 	{
-		printf("%s=%s\n", tmp->key, tmp->cont);
-		tmp = tmp->next;
+		while (tmp->next)
+		{
+			printf("declare -x %s%s\n", tmp->key, tmp->cont);
+			tmp = tmp->next;
+		}
+		printf("declare -x %s%s\n", tmp->key, tmp->cont);
 	}
-	printf("%s%s\n", tmp->key, tmp->cont);
 }
 
-t_env_list	*clean_arv(t_env_list *env, t_env_list *new, t_data *data)
+int	clean_arv(t_data *data)
 {
-	t_env_list *t_new;
-	t_env_list *tmp;
-	t_env_list *result;
+	t_env_list *arv;
 
-	t_new = new;
-	result= NULL;
-	while (t_new)
+	arv = data->arv_list;
+
+	while (arv->next)
 	{
-		if (check_valid_enva_jout(t_new) == 1)
-			printf("%s : not a valid identifier\n", t_new->key);
-		else if (check_valid_enva_jout(t_new) == 2 || check_valid_enva_jout(t_new) == 0)
+		if (check_valid_enva_jout(arv->key) == 1)
 		{
-			tmp = malloc(sizeof(t_env_list));
-			if (check_valid_enva_jout(t_new) == 0)
-			{
-				tmp->key = t_new->key;
-				tmp->cont = t_new->cont;
-				tmp->next = NULL;
-			}
-			else
-			{
-				if (doubl_export(data->head_env, t_new) == NULL)
-				{
-					if (doubl_export(result, t_new) == NULL)
-						tmp->cont = t_new->cont;
-					else
-						tmp->cont = doubl_export(result, t_new);
-				}
-				else
-					tmp->cont = doubl_export(data->head_env, t_new);
-				tmp->key = ft_strndup(t_new->key, (ft_strlen(t_new->key) - 1));	
-				tmp->next = NULL;
-			}
-			lstadd_back(&result, tmp);
+			printf("%s : not a valid identifier\n", arv->key);
+			dele_node(&data->arv_list, arv);
 		}
-		if (t_new->next)
-			t_new = t_new->next;
-		else
-			break;
+		if (check_valid_enva_jout(arv->key) == 0
+			|| check_valid_enva_jout(arv->key) == 2)
+		{
+			if (check_valid_enva_jout(arv->key) == 0)
+				remplace_double(data, arv, 0);
+			else if (check_valid_enva_jout(arv->key) == 2)
+				remplace_double(data, arv, 2);
+		}
+		arv = arv->next;
 	}
-	return result;
+	arv = data->arv_list;
+	printf_list_env(arv);
+	return (0);
 }
 
 t_env_list	*arr_to_list(t_data *data, char *str[])
@@ -121,6 +107,56 @@ t_env_list	*arr_to_list(t_data *data, char *str[])
 		tmp->cont = cont_evn(str[i]);
 		tmp->next = NULL;
 		lstadd_back(&data->head, tmp);
+		i++;
+	}
+	return data->head;
+}
+
+int	check_equal(char *str, int indec)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '=' || indec < 2)
+			return 1;
+	}
+	return 0;
+}
+
+t_env_list	*arv_to_list(t_data *data, char *str[])
+{
+	t_env_list *tmp1;
+	t_env_list *tmp2;
+	int i;
+
+	i = 0;
+	data->head = NULL;
+	data->key_without_cont = NULL;
+	while (str[i])
+	{
+		if (check_equal(str[i], i) == 1)
+		{
+			tmp1 = malloc(sizeof(t_env_list));
+			tmp1->key = key_evn(str[i]);
+			tmp1->cont = cont_evn(str[i]);
+			tmp1->next = NULL;
+			lstadd_back(&data->head, tmp1);
+		}
+		else if (check_equal(str[i], i) == 0)
+		{
+			if (check_valid_enva_jout(str[i]) == 0)
+			{
+				tmp2 = malloc(sizeof(t_env_list));
+				tmp2->key = key_evn(str[i]);
+				tmp2->cont = cont_evn(str[i]);
+				tmp2->next = NULL;
+				lstadd_back(&data->key_without_cont, tmp2);
+			}
+			else
+				printf("%s : not a valid identifier\n", str[i]);
+		}
 		i++;
 	}
 	return data->head;
@@ -144,3 +180,25 @@ int	list_to_arr(t_data *data)
 	data->ev[i] = NULL;
 	return (0);
 }
+
+			// if (check_valid_enva_jout(t_new->key) == 0)
+			// {
+			// 	tmp->key = t_new->key;
+			// 	tmp->cont = remplace_double(data, t_new);
+			// 	tmp->next = NULL;
+			// }
+			// else
+			// {
+			// 	if (doubl_export(data->head_env, t_new) == NULL)
+			// 	{
+			// 		if (doubl_export(result, t_new) == NULL)
+			// 			tmp->cont = t_new->cont;
+			// 		else
+			// 			tmp->cont = doubl_export(result, t_new);
+			// 	}
+			// 	else
+			// 		tmp->cont = doubl_export(data->head_env, t_new);
+			// 	tmp->key = ft_strndup(t_new->key, (ft_strlen(t_new->key) - 1));	
+			// 	tmp->next = NULL;
+			// }
+			// lstadd_back(&result, tmp);

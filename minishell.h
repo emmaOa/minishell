@@ -25,23 +25,23 @@ typedef struct s_data
 	struct s_env_list *env_list;
 	struct s_env_list *key_without_cont;
 	struct s_env_list *head;
-
 	struct s_env_list *head_env;
 	char	**ev;
 }			t_data;
 
+void		lstadd_back_export(t_data *data);
+t_env_list	*check_key_without_cont(t_env_list *arv, t_data *data);
 t_env_list	*arr_to_list(t_data *data, char *str[]);
+int			remplace_double(t_data *data, t_env_list *new, int ret);
+t_env_list	*arv_to_list(t_data *data, char *str[]);
 t_env_list	*ft_lstnew_mini(void *key, void *cont);
 t_env_list	*ft_lstlast_mini(t_env_list *lst);
-void		lstadd_back_export(t_env_list **lst, t_env_list *new, t_data *data);
-int			check_valid_enva_jout(t_env_list *node);
-// void	check_key_without_cont(t_data *data);
-// void	ft_lstadd_back_withoutcont(t_env_list **lst, t_env_list *new);
+int			check_valid_enva_jout(char *str);
 void		printf_list_env(t_env_list *list);
-void	lstadd_back(t_env_list **lst, t_env_list *new);
-char	*doubl_export(t_env_list *list, t_env_list *node);
+void		lstadd_back(t_env_list **lst, t_env_list *new);
+char		*doubl_export(t_env_list *list, t_env_list *node);
 int			ft_lstsize_mini(t_env_list *lst);
-t_env_list	*clean_arv(t_env_list *arv, t_env_list *new, t_data *data);
+int			clean_arv(t_data *data);
 int			ft_export_arv(t_data *data);
 int			ft_check_n_echo(char *str);
 int			list_to_arr(t_data *data);
@@ -50,5 +50,9 @@ char		 *cont_evn(char *env);
 int			ft_echo(t_data *data);
 char		 *key_evn(char *env);
 int			ft_pwd(t_data *data);
-char *ft_strndup(char *str, int len);
+char		 *ft_strndup(char *str, int len);
+int			ft_strcmp(const char *d, const char *s);
+void		dele_node(t_env_list **head, t_env_list *node);
+int	remplace_double_0(t_data *data, t_env_list *new);
+int	remplace_double_2(t_data *data, t_env_list *new);
 #endif

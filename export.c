@@ -1,25 +1,113 @@
 #include "minishell.h"
 
-int	check_valid_enva_jout(t_env_list *node)
+int	check_valid_enva_jout(char *str)
 {
 	int i;
 
 	i = 1;
-	if ((!ft_isalpha(node->key[0]) && node->key[0] != '_'))
-		return (1);
-	while (node->key[i])
+	if ((!ft_isalpha(str[0]) && str[0] != '_'))
 	{
-		if (!ft_isalpha(node->key[i]) && !ft_isalnum(node->key[i]) && node->key[i] != '_'
-			&& (node->key[i] == '+' && node->key[i + 1] != '\0'))
+		
+		// exit(0);
+		return (1);
+	}
+	while (str[i])
+	{
+		if (!ft_isalpha(str[i]) && !ft_isalnum(str[i]) && str[i] != '_'
+			&& (str[i] == '+' && str[i + 1] != '\0'))
 			return (1);
-		if (node->key[i] == '+' && node->key[i + 1] == '\0')
+		if (str[i] == '+' && str[i + 1] == '\0')
 			return (2);
 		i++;
 	}
 	return (0);
 }
 
-char *	doubl_export(t_env_list *list, t_env_list *node)
+int	remplace_double_0(t_data *data, t_env_list *new)
+{
+	t_env_list *env;
+	t_env_list *arv;
+	int i;
+
+	i = 0;
+	env = data->head_env;
+	arv = data->arv_list;
+	if(env)
+	{
+		while (env->next)
+		{
+			if (ft_strcmp(new->key, env->key) == 0)
+			{
+				env->cont = new->cont;
+				dele_node(&data->arv_list, new);
+			}
+			env = env->next;
+		}
+	}
+	if (arv)
+	{
+		while (arv->next)
+		{
+			if (ft_strcmp(new->key, arv->key) == 0)
+			{
+				arv->cont = new->cont;
+				dele_node(&data->arv_list, new);
+			}
+			arv = arv->next;
+		}
+	}
+	return (0);
+}
+
+int	remplace_double_2(t_data *data, t_env_list *new)
+{
+	t_env_list *env;
+	t_env_list *arv;
+
+	env = data->head_env;
+	arv = data->arv_list;
+	new->key = ft_strndup(new->key, (ft_strlen(new->key) - 1));
+	if(env)
+	{
+		while (env->next)
+		{
+			if (ft_strcmp(new->key, env->key) == 0)
+			{
+				env->cont = ft_strjoin(env->cont, new->cont);
+				dele_node(&data->arv_list, new);
+			}
+			env = env->next;
+		}
+	}
+	if (arv)
+	{
+		while (arv->next)
+		{
+			printf("%s\n", arv->key);
+			if (ft_strcmp(new->key, arv->key) == 0)
+			{
+				arv->cont = ft_strjoin(arv->cont, new->cont);
+				dele_node(&data->arv_list, new);
+			}
+			arv = arv->next; 
+		}
+	}
+	return (0);
+}
+
+int	remplace_double(t_data *data, t_env_list *new, int ret)
+{
+	t_env_list *arv;
+
+	arv = data->arv_list;
+	if (ret == 0)
+		remplace_double_0(data, new);
+	else if (ret == 2)
+		remplace_double_2(data, new);
+	return (0);
+}
+
+char *doubl_export(t_env_list *list, t_env_list *node)
 {
 	t_env_list *tmp;
 	char *str;
@@ -39,38 +127,23 @@ char *	doubl_export(t_env_list *list, t_env_list *node)
 	return str;
 }
 
-void	lstadd_back_export(t_env_list **lst, t_env_list *new, t_data *data)
-{
-	t_env_list	*p;
-	t_env_list	*tmp;
-
-	tmp = 	NULL;
-	if (new == 0)
-		return ;
-	if (*lst == 0)
-	{
-		*lst = clean_arv(*lst, new, data);
-		return ;
-	}
-	p = ft_lstlast_mini(*lst);
-	p->next = clean_arv(*lst, new, data);
-}
-
 int	ft_export_arv(t_data *data)
 {
 	t_env_list *tmp;
-	t_env_list *key;
+	t_env_list *clean;
 
-	// check_key_without_cont(data);
-	data->key_without_cont = NULL;	
 	tmp = data->arv_list;
-	key = data->arv_list;
-	while (ft_strncmp("export", tmp->key, ft_strlen(tmp->key)) != 0)
-		tmp = tmp->next;
-	tmp = tmp->next;
-	key = tmp;
-	lstadd_back_export(&data->head_env, tmp, data);
-	// lstadd_back_export(&data->key_without_cont, key, data);
+
+	if (tmp)
+	{
+		while (tmp->next && ft_strcmp("export", tmp->key) != 0)
+		{
+			dele_node(&data->arv_list, tmp);
+			tmp = tmp->next;
+		}
+		dele_node(&data->arv_list, tmp);
+		lstadd_back_export(data);
+	}
 	return (0);
 }
 
@@ -85,6 +158,7 @@ int	ft_export(t_data *data)
 	{
 		if (ft_strncmp("export", data->av[1], ft_strlen(data->av[1])) == 0)
 		{
+			lstadd_back(&env, data->key_without_cont);
 			while (alpha <= 'Z')
 			{
 				while (env->next)
@@ -127,20 +201,7 @@ int	ft_export(t_data *data)
 			env = env->next;
 		}
 		printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+		printf_list_env(data->key_without_cont);
 	}
 	return (0);
 }
-
-// void	check_key_without_cont(t_data *data)
-// {
-// 	t_env_list	*tmp;
-
-// 	tmp = data->arv_list;	
-// 	while (ft_strncmp("export", tmp->key, ft_strlen(tmp->key)) != 0)
-// 		tmp = tmp->next;
-// 	tmp = tmp->next;
-// 	exit(0);
-// 	// printf("%s\n", tmp->key);
-// 	ft_lstadd_back_withoutcont(&data->key_without_cont, tmp);
-// 	printf_list_env(data->key_without_cont);
-// }

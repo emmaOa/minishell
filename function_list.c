@@ -11,26 +11,6 @@ t_env_list	*ft_lstlast_mini(t_env_list *lst)
 	return (lst);
 }
 
-// void	ft_lstadd_back_withoutcont(t_env_list **lst, t_env_list *new)
-// {
-// 	t_env_list	*p;
-// 	t_env_list	*tmp;
-
-// 	tmp = 	NULL;
-// 	if (new == 0)
-// 		return ;
-// 	if (new->key[ft_strlen(new->key)] != '=')
-// 	{
-// 		if (*lst == 0)
-// 		{
-// 			*lst = new;
-// 			return ;
-// 		}
-// 	}
-// 	p = ft_lstlast_mini(*lst);
-// 	p->next = new;
-// }
-
 void	lstadd_back(t_env_list **lst, t_env_list *new)
 {
 	t_env_list	*p;
@@ -46,8 +26,44 @@ void	lstadd_back(t_env_list **lst, t_env_list *new)
 	p->next = new;
 }
 
+void	dele_node(t_env_list **head, t_env_list *node)
+{
+	t_env_list *list;
+	t_env_list *tmp;
+	if (!*head || !node)
+		return ;
+	while (list->next)
+	{
+		if (ft_strcmp(list->key, node->key) == 0)
+		{
+			tmp = list->next;
+			list = tmp->next;
+			free(tmp);
+			tmp = NULL;
+		}
+	}
+	return ;
+}
 
+void	lstadd_back_export(t_data *data)
+{
+	t_env_list	*env;
+	t_env_list	*arv;
 
+	env = data->head_env;
+	arv = data->arv_list;
+	if (arv == 0)
+		return ;
+	if (env == 0)
+	{
+		clean_arv(data);
+		env = data->arv_list;
+		return ;
+	}
+	env = ft_lstlast_mini(data->head_env);
+	clean_arv(data);
+	env->next = data->arv_list;
+}
 
 t_env_list	*ft_lstnew_mini(void *key, void *cont)
 {
