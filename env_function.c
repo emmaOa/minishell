@@ -54,13 +54,10 @@ void	printf_list_env(t_env_list *list)
 {
 	t_env_list *tmp;
 	tmp = list;
-	if (tmp)
+	while (tmp)
 	{
-		while (tmp)
-		{
-			printf("declare -x %s%s\n", tmp->key, tmp->cont);
-			tmp = tmp->next;
-		}
+		printf("declare -x %s%s\n", tmp->key, tmp->cont);
+		tmp = tmp->next;
 	}
 }
 
@@ -94,8 +91,12 @@ int	clean_arv(t_data *data)
 		}
 		if (!arv)
 			break;
-		tmp = arv;
+		// tmp = arv;
+		// if (arv)
+		exit(0);
 		arv = arv->next;
+		// else
+		// 	break;
 		i++;
 	}
 	return (0);

@@ -7,8 +7,6 @@ int	check_valid_enva_jout(char *str)
 	i = 1;
 	if ((!ft_isalpha(str[0]) && str[0] != '_'))
 	{
-		
-		// exit(0);
 		return (1);
 	}
 	while (str[i])
@@ -28,31 +26,73 @@ int	remplace_double_0(t_data *data, t_env_list *new)
 	t_env_list	*env;
 	t_env_list	*arv;
 	t_env_list	*tmp;
+	t_env_list	*res;
 
 	env = data->head_env;
 	arv = data->arv_list;
+	int i = 0;
+	// printf_list_env(data->arv_list);
+	// exit(0);
 	if(env)
 	{
 		while (env)
 		{
-			if (ft_strcmp(new->key, env->key) == 0)
-			{
-				printf("env == 0");
-				check_dele(data->head_env, env);
-			}
+				// printf("%s\n", env->key);
+				// exit(0);
+			// if (ft_strcmp(new->key, env->key) == 0)
+			// {
+			// 	check_dele(data->head_env, env);
+			// }
 			env = env->next;
 		}
 	}
-	if (arv)
+	// exit(0);
+	// while (ft_strcmp(arv->key, new->key) != 0)
+	// 	{
+	// 		arv = arv->next;
+	// 	}
+	// 	if (arv == new)
+	// 	{
+	// 	// 			arv->cont = new->cont;
+	// 	// tmp = new;
+	// 	// arv = new->next;
+	// 	// // dele_node(tmp);
+
+	// 		printf("jjj\n");
+	// 	printf_list_env(data->arv_list);
+	// 	}
+	// 	printf_list_env(data->arv_list);
+
+	// 	exit(0);
+	// 	// printf("%s\n", arv->key);
+	// 	// printf("%s\n", new->key);
+	// 	// exit(0);
+	// 	// if (arv)
+	// 	// {
+	// 	// 	new->cont = arv->cont;
+	// 	// 	check_dele(data->arv_list, arv);
+	// 	// }
+	printf("------>%s\n", new->key);
+	while (arv)
 	{
-		while (ft_strcmp(arv->key, new->key) != 0)
-			arv = arv->next;
-		if (arv)
+		if (ft_strcmp(arv->key, new->key) == 0 && i == 1)
 		{
+			printf("jj\n");
 			new->cont = arv->cont;
-			check_dele(data->arv_list, arv);
+			tmp = arv;
+			printf("%s%s\n", res->key, res->cont);
+			res = arv->next;
+			printf("%s%s\n", res->key, res->cont);
+			dele_node(fcle);
+			break;
 		}
+		if (ft_strcmp(arv->key, new->key) == 0)
+			i = 1;
+		res = arv;
+		arv = arv->next;
 	}
+	exit(0);
+	printf_list_env(data->arv_list);
 	return (0);
 }
 
@@ -97,8 +137,6 @@ int	remplace_double(t_data *data, t_env_list *new, int ret)
 	arv = data->arv_list;
 	if (ret == 0)
 		remplace_double_0(data, new);
-	// printf("%s\n", data->arv_list->key);
-	// exit(0);
 	 if (ret == 2)
 		remplace_double_2(data, new);
 	
@@ -153,6 +191,7 @@ int	ft_export(t_data *data)
 	else
 	{
 		ft_export_arv(data);
+		exit(0);
 		env = data->head_env;
 		while (alpha <= 'Z')
 		{
