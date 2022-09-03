@@ -26,23 +26,43 @@ void	lstadd_back(t_env_list **lst, t_env_list *new)
 	p->next = new;
 }
 
-
-
 void	lstadd_back_export(t_data *data)
 {
 	t_env_list	*env;
 	t_env_list	*arv;
+	t_env_list	*tmp;
 
-	env = data->head_env;
 	arv = data->arv_list;
-	clean_arv(data);
-	if (env == 0)
+	env = data->head_env;
+	while (arv)
 	{
-		env = data->arv_list;
-		return ;
+		if (check_valid_enva_jout(arv->key) == 2)
+		{
+			if (plus_equals(data->head_env, arv) == 0)
+			{
+				tmp = malloc(sizeof(t_env_list));
+				tmp->key = ft_strndup(arv->key, (ft_strlen(arv->key) - 1));
+				tmp->cont = arv->cont;
+				tmp->next = NULL;
+				lstadd_back(&data->head_env, tmp);
+			}
+		}
+		else if (check_valid_enva_jout(arv->key) == 0)
+		{
+			if (just_equals(data->head_env, arv) == 0)
+			{
+				tmp = malloc(sizeof(t_env_list));
+				tmp->key = arv->key;
+				tmp->cont = arv->cont;
+				tmp->next = NULL;
+				lstadd_back(&data->head_env, tmp);
+			}
+		}
+		else if (check_valid_enva_jout(arv->key) == 1)
+			printf("`%s=%s': not a valid identifier\n", arv->key, arv->cont);
+		arv = arv->next;
 	}
-	env = ft_lstlast_mini(data->head_env);
-	env->next = data->arv_list;
+	
 }
 
 t_env_list	*ft_lstnew_mini(void *key, void *cont)

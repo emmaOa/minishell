@@ -61,43 +61,36 @@ void	printf_list_env(t_env_list *list)
 	}
 }
 
-int	clean_arv(t_data *data)
+int just_equals(t_env_list *t_env, t_env_list *node)
 {
-	t_env_list	*arv;
-	t_env_list	*tmp;
-	int	i;
+	t_env_list *env;
 
-	arv = data->arv_list;
-	i = 0;
-	tmp = NULL;
-	while (arv)
+	env = t_env;
+	while (env)
 	{
-		if (check_valid_enva_jout(arv->key) == 1)
+		if (ft_strcmp(env->key, node->key) == 0)
 		{
-			printf("%s : not a valid identifier\n", arv->key);
-			if (tmp == NULL)
-				data->arv_list = arv->next;
-			tmp = arv;
-			arv = arv->next;
-			dele_node(tmp);
+			env->cont = node->cont;
+			return (1);
 		}
-		else if (check_valid_enva_jout(arv->key) == 0
-			|| check_valid_enva_jout(arv->key) == 2)
+		env = env->next;
+	}
+	return (0);
+}
+
+int	plus_equals(t_env_list *t_env, t_env_list *node)
+{
+	t_env_list *env;
+
+	env = t_env;
+	while (env)
+	{
+		if (ft_strcmp(env->key, node->key) == 0)
 		{
-			if (check_valid_enva_jout(arv->key) == 0)
-					remplace_double(data, arv, 0);
-			else if (check_valid_enva_jout(arv->key) == 2)
-				remplace_double(data, arv, 2);
+			env->cont = ft_strjoin(env->cont, node->cont);
+			return (1);
 		}
-		if (!arv)
-			break;
-		// tmp = arv;
-		// if (arv)
-		exit(0);
-		arv = arv->next;
-		// else
-		// 	break;
-		i++;
+		env = env->next;
 	}
 	return (0);
 }
@@ -169,6 +162,31 @@ t_env_list	*arv_to_list(t_data *data, char *str[])
 		i++;
 	}
 	return data->head;
+}
+
+int	prin_if(t_env_list *t_env, t_env_list *t_without_key)
+{
+	t_env_list *env;
+	t_env_list *without_key;
+	int i;
+
+	env = t_env;
+	without_key = t_without_key;
+	i = 0;
+
+	while (without_key)
+	{
+		while (env)
+		{
+			if (ft_strcmp(env->key, without_key->key) == 0)
+				i = 1;
+			env = env->next;
+		}
+		if (i == 0)
+			printf("declare -x %s\n", without_key->key);
+		without_key = without_key->next;
+	}
+	return (0);
 }
 
 int	list_to_arr(t_data *data)

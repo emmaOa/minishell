@@ -17,11 +17,6 @@ int	main(int arc, char *arv[], char *env[])
 		data->ev = env;
 		data->head_env = arr_to_list(data, env);
 		data->arv_list = arv_to_list(data, arv);
-		// printf_list_env(data->head_env );
-		// printf("%s%s\n", data->head_env->key, data->head_env->cont)
-		// lstadd_back(&data->head_env, data->key_without_cont);
-		// printf_list_env(data->head_env);
-		// exit(0);
 		ft_pwd(data);
 		ft_echo(data);
 		ft_export(data);
@@ -29,5 +24,10 @@ int	main(int arc, char *arv[], char *env[])
 	//<<< function to use >>>
 	//	- int		list_to_arr(t_data *data);
 	//	- void		printf_list_env(t_env_list *list);
+	// t_env_list	*ft_lstnew_mini(void *key, void *cont);
+	// t_env_list	*ft_lstlast_mini(t_env_list *lst);
+	// void		dele_node(t_env_list *node);
+	// void		check_dele(t_env_list *data, t_env_list *node);
+	// int			ft_lstsize_mini(t_env_list *lst);
 	return (0);
 }

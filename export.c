@@ -21,128 +21,6 @@ int	check_valid_enva_jout(char *str)
 	return (0);
 }
 
-int	remplace_double_0(t_data *data, t_env_list *new)
-{
-	t_env_list	*env;
-	t_env_list	*arv;
-	t_env_list	*tmp;
-	t_env_list	*res;
-
-	env = data->head_env;
-	arv = data->arv_list;
-	int i = 0;
-	// printf_list_env(data->arv_list);
-	// exit(0);
-	if(env)
-	{
-		while (env)
-		{
-				// printf("%s\n", env->key);
-				// exit(0);
-			// if (ft_strcmp(new->key, env->key) == 0)
-			// {
-			// 	check_dele(data->head_env, env);
-			// }
-			env = env->next;
-		}
-	}
-	// exit(0);
-	// while (ft_strcmp(arv->key, new->key) != 0)
-	// 	{
-	// 		arv = arv->next;
-	// 	}
-	// 	if (arv == new)
-	// 	{
-	// 	// 			arv->cont = new->cont;
-	// 	// tmp = new;
-	// 	// arv = new->next;
-	// 	// // dele_node(tmp);
-
-	// 		printf("jjj\n");
-	// 	printf_list_env(data->arv_list);
-	// 	}
-	// 	printf_list_env(data->arv_list);
-
-	// 	exit(0);
-	// 	// printf("%s\n", arv->key);
-	// 	// printf("%s\n", new->key);
-	// 	// exit(0);
-	// 	// if (arv)
-	// 	// {
-	// 	// 	new->cont = arv->cont;
-	// 	// 	check_dele(data->arv_list, arv);
-	// 	// }
-	printf("------>%s\n", new->key);
-	while (arv)
-	{
-		if (ft_strcmp(arv->key, new->key) == 0 && i == 1)
-		{
-			printf("jj\n");
-			new->cont = arv->cont;
-			tmp = arv;
-			printf("%s%s\n", res->key, res->cont);
-			res = arv->next;
-			printf("%s%s\n", res->key, res->cont);
-			dele_node(fcle);
-			break;
-		}
-		if (ft_strcmp(arv->key, new->key) == 0)
-			i = 1;
-		res = arv;
-		arv = arv->next;
-	}
-	exit(0);
-	printf_list_env(data->arv_list);
-	return (0);
-}
-
-int	remplace_double_2(t_data *data, t_env_list *new)
-{
-	t_env_list *env;
-	t_env_list *arv;
-
-	env = data->head_env;
-	arv = data->arv_list;
-	new->key = ft_strndup(new->key, (ft_strlen(new->key) - 1));
-	if(env)
-	{
-		while (env->next)
-		{
-			if (ft_strcmp(new->key, env->key) == 0)
-			{
-				new->cont = ft_strjoin(env->cont, new->cont);
-				check_dele(data->head_env, env);
-				break;
-			}
-			env = env->next;
-		}
-	}
-	if (arv)
-	{
-		while (ft_strcmp(arv->key, new->key) != 0)
-			arv = arv->next;
-		if (arv)
-		{
-			new->cont = ft_strjoin(arv->cont, new->cont);
-			check_dele(data->arv_list, arv);
-		}
-	}
-	return (0);
-}
-
-int	remplace_double(t_data *data, t_env_list *new, int ret)
-{
-	t_env_list *arv;
-
-	arv = data->arv_list;
-	if (ret == 0)
-		remplace_double_0(data, new);
-	 if (ret == 2)
-		remplace_double_2(data, new);
-	
-	return (0);
-}
-
 int	ft_export_arv(t_data *data)
 {
 	t_env_list	*arv;
@@ -160,14 +38,16 @@ int	ft_export(t_data *data)
 {
 	int	alpha;
 	t_env_list *env;
+	t_env_list *without_equals;
 
 	alpha = 'A';
 	env = data->head_env;
+	without_equals = data->key_without_cont;
 	if (data->ac == 2)
 	{
 		if (ft_strncmp("export", data->av[1], ft_strlen(data->av[1])) == 0)
 		{
-			lstadd_back(&env, data->key_without_cont);
+			env = data->head_env;
 			while (alpha <= 'Z')
 			{
 				while (env->next)
@@ -186,12 +66,12 @@ int	ft_export(t_data *data)
 				env = env->next;
 			}
 			printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+			prin_if(data->head_env, data->key_without_cont);
 		}
 	}
 	else
 	{
 		ft_export_arv(data);
-		exit(0);
 		env = data->head_env;
 		while (alpha <= 'Z')
 		{
@@ -211,7 +91,8 @@ int	ft_export(t_data *data)
 			env = env->next;
 		}
 		printf("declare -x %s=\"%s\"\n", env->key, env->cont);
-		printf_list_env(data->key_without_cont);
+		prin_if(data->head_env, data->key_without_cont);
+		
 	}
 	return (0);
 }
