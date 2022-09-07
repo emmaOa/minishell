@@ -3,49 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 10:14:45 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/26 01:30:59 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/11/10 18:51:26 by omeslall          #+#    #+#             */
+/*   Updated: 2022/02/11 18:53:12 by omeslall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-// #include <stdlib.h>
-#include "libft.h"
+#include"libft.h"
 
-static	int	check(size_t sign)
+long long	ft_atoi(const char *str)
 {
-	if (sign == 1)
-		return (-1);
-	return (0);
-}
-
-int	ft_atoi(const char *str)
-{
-	size_t				i;
-	size_t				k;
-	int					sign;
-	unsigned long long	n;
+	int			i;
+	long		count;
+	long long	nbr;
 
 	i = 0;
-	n = 0;
-	sign = 1;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	count = 1;
+	nbr = 0;
+	while (str[i] == '\n' || str[i] == '\r' || str[i] == '\t'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == ' ')
 		i++;
 	if (str[i] == '-')
+		count = -1;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9' && str[i] != '\0')
 	{
-		sign *= -1;
+		nbr = (str[i] - '0') + (nbr * 10);
 		i++;
 	}
-	else if (str[i] == '+')
-		i++;
-	k = i;
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-		n = n * 10 + str[i++] - 48;
-	k = i - k;
-	if (k > 19 || n > 9223372036854775807)
-		return (check(sign));
-	n = n * sign;
-	return ((int)n);
+	return (nbr * count);
 }

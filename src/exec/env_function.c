@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include"../../include/minishell.h"
 char *key_evn(char *env)
 {
 	int	i;
@@ -8,7 +8,7 @@ char *key_evn(char *env)
 	i = 0;
 	while (env[i] != '=')
 		i++;
-	if (env[i] == '\0')
+	if (!env[i])
 		return (NULL);
 	len = i;
 	key = malloc(len + 1);
@@ -50,7 +50,19 @@ char *cont_evn(char *env)
 	return cont;
 }
 
-void	printf_list_env(t_env_list *list)
+int	printf_list(t_env_list *list)
+{
+	t_env_list *tmp;
+	tmp = list;
+	while (tmp)
+	{
+		printf("%s=%s\n", tmp->key, tmp->cont);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void	printf_list_expo(t_env_list *list)
 {
 	t_env_list *tmp;
 	tmp = list;
@@ -95,7 +107,7 @@ int	plus_equals(t_env_list *t_env, t_env_list *node)
 	return (0);
 }
 
-t_env_list	*arr_to_list(t_data *data, char *str[])
+t_env_list	*arr_to_list(t_exec_data *data, char *str[])
 {
 	t_env_list *tmp;
 	int i;
@@ -114,20 +126,42 @@ t_env_list	*arr_to_list(t_data *data, char *str[])
 	return data->head;
 }
 
+
+
+// t_env_list	*arv_unset(t_data *data, char *str[])
+// {
+// 	t_env_list *tmp;
+// 	int i;
+
+// 	i = 0;
+// 	data->arv_unset = NULL;
+// 	while (str[i])
+// 	{
+// 		tmp = malloc(sizeof(t_env_list));
+// 		tmp->key = str[i];
+// 		tmp->cont = "\0";
+// 		tmp->next = NULL;
+// 		lstadd_back(&data->arv_unset, tmp);
+// 		i++;
+// 	}
+// 	return data->arv_unset;
+// }
+
 int	check_equal(char *str, int indec)
 {
 	int i;
 
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i])
 	{
-		if (str[i] == '=' || indec < 2)
+		if (str[i] == '=' || indec < 1)
 			return 1;
+		i++;
 	}
 	return 0;
 }
 
-t_env_list	*arv_to_list(t_data *data, char *str[])
+t_env_list	*arv_to_list(t_exec_data *data, char *str[])
 {
 	t_env_list *tmp1;
 	t_env_list *tmp2;
@@ -189,21 +223,21 @@ int	prin_if(t_env_list *t_env, t_env_list *t_without_key)
 	return (0);
 }
 
-int	list_to_arr(t_data *data)
-{
-	int i;
+// int	list_to_arr(t_data *data)
+// {
+// 	int i;
 
-	i = 0;
-	t_env_list *tmp;
-	tmp = data->head_env;
-	data->ev = (char **)malloc(ft_lstsize_mini(data->head_env) * sizeof(char *));
-	while (tmp->next)
-	{
-		data->ev[i] = (char *)malloc((ft_strlen(tmp->cont) + ft_strlen(tmp->key) + 1));
-		data->ev[i] = ft_strjoin(tmp->key, tmp->cont);
-		tmp = tmp->next;
-		i++;
-	}
-	data->ev[i] = NULL;
-	return (0);
-}
+// 	i = 0;
+// 	t_env_list *tmp;
+// 	tmp = data->head_env;
+// 	data->ev = (char **)malloc(ft_lstsize_mini(data->head_env) * sizeof(char *));
+// 	while (tmp->next)
+// 	{
+// 		data->ev[i] = (char *)malloc((ft_strlen(tmp->cont) + ft_strlen(tmp->key) + 1));
+// 		data->ev[i] = ft_strjoin(tmp->key, tmp->cont);
+// 		tmp = tmp->next;
+// 		i++;
+// 	}
+// 	data->ev[i] = NULL;
+// 	return (0);
+// }

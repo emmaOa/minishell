@@ -22,6 +22,7 @@ typedef struct s_data
 	char		**av;
 	int			len_env;
 	struct s_env_list *arv_list;
+	struct s_env_list *arv_unset;
 	struct s_env_list *env_list;
 	struct s_env_list *key_without_cont;
 	struct s_env_list *head;
@@ -30,9 +31,9 @@ typedef struct s_data
 }			t_data;
 
 t_env_list	*arv_to_list(t_data *data, char *str[]);
-// t_env_list	*check_key_without_cont(t_env_list *arv, t_data *data);
 t_env_list	*arr_to_list(t_data *data, char *str[]);
 t_env_list	*ft_lstnew_mini(void *key, void *cont);
+t_env_list	*arv_unset(t_data *data, char *str[]);
 t_env_list	*ft_lstlast_mini(t_env_list *lst);
 char		 *cont_evn(char *env);
 char		 *ft_strndup(char *str, int len);
@@ -54,4 +55,8 @@ int			just_equals(t_env_list *t_env, t_env_list *node);
 int			plus_equals(t_env_list *t_env, t_env_list *node);
 int			ft_strcmp(const char *d, const char *s);
 int			prin_if(t_env_list *t_list, t_env_list *node);
+int			ft_env(t_data *data);
+int			ft_unset(t_data *data);
+int			check_unset(char *str);
+int			printf_list(t_env_list *list);
 #endif

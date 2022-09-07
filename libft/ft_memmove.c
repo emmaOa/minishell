@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:34:08 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/25 23:22:35 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/11/10 19:41:48 by omeslall          #+#    #+#             */
+/*   Updated: 2021/11/14 18:55:33 by omeslall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*d;
-	char	*s;
+	char			*cdst;
+	const char		*csrc;
+	char			*revdst;
+	const char		*revsrc;
 
-	d = (char *)dst;
-	s = (char *)src;
-	if (!dst && !src)
-		return (NULL);
-	if (dst > src)
-	{
-		while (len-- > 0)
-		{
-			d[len] = s[len];
-		}
-	}
+	cdst = dst;
+	csrc = src;
+	revdst = cdst + (len - 1);
+	revsrc = csrc + (len - 1);
+	if (dst == src || len == 0)
+		return (dst);
+	if (dst < src)
+		while (len--)
+			*cdst++ = *csrc++;
 	else
-		ft_memcpy(d, s, len);
+		while (len--)
+			*revdst-- = *revsrc--;
 	return (dst);
 }

@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ftstrnstr.c                                     :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 18:39:51 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/25 22:01:38 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/11/10 20:53:50 by omeslall          #+#    #+#             */
+/*   Updated: 2021/11/14 18:57:06 by omeslall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
-char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+char	*ft_strnstr(char *str, char *to_find, size_t n)
 {
 	size_t	i;
 	size_t	j;
-	char	*s;
-	char	*f;
 
 	i = 0;
-	s = (char *)str;
-	f = (char *)to_find;
-	if (f[0] == '\0')
-		return (s);
-	while (s[i] != '\0' && i < len)
+	if (*to_find == 0)
+		return (str);
+	while (str[i] && i < n)
 	{
 		j = 0;
-		while (f[j] == s[i + j] && (i + j) < len)
+		while (str[i + j] == to_find[j] && (i + j) < n)
 		{
-			if (f[j + 1] == '\0')
-			{
-				return (s + i);
-			}
 			j++;
+			if (to_find[j] == '\0')
+				return (str + i);
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

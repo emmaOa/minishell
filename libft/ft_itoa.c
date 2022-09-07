@@ -3,54 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 04:37:36 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/26 01:22:57 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/11/10 18:44:22 by omeslall          #+#    #+#             */
+/*   Updated: 2021/11/16 14:55:30 by omeslall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int	count_len(int n)
+static int	count_numbers(long n)
 {
-	int	count;
+	long	m;
+	int		count;
 
 	count = 0;
-	if (n <= 0)
-		count++;
-	while (n)
+	m = n;
+	if (n == 0)
+		count = 1;
+	while (m > 0)
 	{
+		m = m / 10;
 		count++;
-		n = n / 10;
 	}
 	return (count);
 }
 
+static void	ft_iter(char *str, int count, long j, long m)
+{
+	if (count == 1)
+		str[--count] = j + 48;
+	else
+	{
+		while (count--)
+		{
+			m = j % 10;
+			j = j / 10;
+			str[count] = m + 48;
+		}
+	}
+}
+
 char	*ft_itoa(int n)
 {
-	char	*str_nb;
-	long	i;
+	int		count;
+	long	m;
+	char	*str;
+	int		negative;
+	long	j;
 
-	i = count_len(n);
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	str_nb = malloc(sizeof(char) * i + 1);
-	if (!str_nb)
+	j = n;
+	m = 0;
+	count = j < 0;
+	negative = j < 0;
+	if (j < 0)
+		j = j * -1;
+	count = count + count_numbers(j);
+	str = (char *)malloc(count * sizeof(char) + 1);
+	if (!str)
 		return (NULL);
-	if (n < 0)
-	{
-		str_nb[0] = '-';
-		n *= -1;
-	}
-	if (n == 0)
-		str_nb[0] = '0';
-	str_nb[i--] = '\0';
-	while (n != 0)
-	{
-		str_nb[i] = (n % 10) + '0';
-		i--;
-		n = n / 10;
-	}
-	return (str_nb);
+	str [count] = '\0';
+	ft_iter(str, count, j, m);
+	if (negative == 1)
+		str [0] = '-';
+	return (str);
 }

@@ -3,27 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 13:27:32 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/05 16:14:33 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/11/10 19:07:47 by omeslall          #+#    #+#             */
+/*   Updated: 2021/11/14 18:58:05 by omeslall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <strings.h>
-#include "libft.h"
+#include"libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	k;
-	char	*p;
+	size_t	i;
+	void	*str;
 
-	k = count * size;
-	p = malloc(k);
-	if (!p)
+	i = count * size;
+	str = malloc(i);
+	if (!str)
 		return (NULL);
-	ft_bzero(p, k);
-	return (p);
+	return (ft_bzero(str, i));
 }

@@ -3,31 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: skadi <skadi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 17:34:17 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/25 21:54:34 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/11/10 20:50:32 by omeslall          #+#    #+#             */
+/*   Updated: 2022/06/25 23:26:05 by skadi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 {
-	size_t	i;
 	size_t	j;
+	size_t	i;
 
 	i = 0;
-	j = 0;
-	while (src[j] != '\0')
-		j++;
-	if (dstsize == 0)
-		return (j);
-	while (i < j && i < (dstsize - 1))
-	{
-		dst[i] = src[i];
+	while (src[i])
 		i++;
+	if (n == 0)
+		return (i);
+	j = 0;
+	printf("src %s \n", dest);
+	while (src[j] != '\0' && j < n - 1)
+	{
+	printf("inside loop \n");
+		dest[j] = src[j];
+		j++;
+	printf("inside loop2 \n");
 	}
-	dst[i] = '\0';
-	return (j);
+	dest[j] = '\0';
+	return (i);
 }
