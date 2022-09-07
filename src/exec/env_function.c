@@ -1,26 +1,25 @@
 #include"../../include/minishell.h"
-char *key_evn(char *env)
+char *key_evn(char *str)
 {
 	int	i;
 	int	len;
 	char *key;
 
 	i = 0;
-	while (env[i] != '=')
+	while (str[i] && str[i] != '=')
 		i++;
-	if (!env[i])
+	if (!str[i])
 		return (NULL);
 	len = i;
 	key = malloc(len + 1);
 	i = 0;
 	while (i < len)
 	{
-		key[i] = env[i];
+		key[i] = str[i];
 		i++;
 	}
 	key[len] = '\0';
 	return (key);
-	
 }
 
 char *cont_evn(char *env)
@@ -48,6 +47,44 @@ char *cont_evn(char *env)
 		cont[j] = '\0';
 	}
 	return cont;
+}
+
+t_env_list	*arv_to_list(t_exec_data *data, char *str[])
+{
+	t_env_list *tmp1;
+	t_env_list *tmp2;
+	int i;
+
+	i = 0;
+	data->head = NULL;
+	data->key_without_cont = NULL;
+	while (str[i])
+	{
+		if (check_equal(str[i], i) == 1)
+		{
+			tmp1 = malloc(sizeof(t_env_list));
+			tmp1->key = key_evn(str[i]);
+			tmp1->cont = cont_evn(str[i]);
+			tmp1->next = NULL;
+			lstadd_back(&data->head, tmp1);
+		}
+		else if (check_equal(str[i], i) == 0)
+		{
+			if (check_valid_enva_jout(str[i]) == 0)
+			{
+				tmp2 = malloc(sizeof(t_env_list));
+				tmp2->key = str[i];
+				tmp2->cont = NULL;
+				tmp2->next = NULL;
+				printf("%s\n", tmp2->key);
+				lstadd_back(&data->key_without_cont, tmp2);
+			}
+			else
+				printf("%s : not a valid identifier\n", str[i]);
+		}
+		i++;
+	}
+	return data->head;
 }
 
 int	printf_list(t_env_list *list)
@@ -161,42 +198,7 @@ int	check_equal(char *str, int indec)
 	return 0;
 }
 
-t_env_list	*arv_to_list(t_exec_data *data, char *str[])
-{
-	t_env_list *tmp1;
-	t_env_list *tmp2;
-	int i;
 
-	i = 0;
-	data->head = NULL;
-	data->key_without_cont = NULL;
-	while (str[i])
-	{
-		if (check_equal(str[i], i) == 1)
-		{
-			tmp1 = malloc(sizeof(t_env_list));
-			tmp1->key = key_evn(str[i]);
-			tmp1->cont = cont_evn(str[i]);
-			tmp1->next = NULL;
-			lstadd_back(&data->head, tmp1);
-		}
-		else if (check_equal(str[i], i) == 0)
-		{
-			if (check_valid_enva_jout(str[i]) == 0)
-			{
-				tmp2 = malloc(sizeof(t_env_list));
-				tmp2->key = key_evn(str[i]);
-				tmp2->cont = cont_evn(str[i]);
-				tmp2->next = NULL;
-				lstadd_back(&data->key_without_cont, tmp2);
-			}
-			else
-				printf("%s : not a valid identifier\n", str[i]);
-		}
-		i++;
-	}
-	return data->head;
-}
 
 int	prin_if(t_env_list *t_env, t_env_list *t_without_key)
 {
@@ -212,7 +214,7 @@ int	prin_if(t_env_list *t_env, t_env_list *t_without_key)
 	{
 		while (env)
 		{
-			if (ft_strcmp(env->key, without_key->key) == 0)
+			if (ft_strncmp(env->key, without_key->key, ft_strlen(without_key->key)) == 0)
 				i = 1;
 			env = env->next;
 		}

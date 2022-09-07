@@ -88,6 +88,7 @@ typedef struct s_env_list
 typedef struct s_exec_data
 {
    char   *name_built;
+   int    nb_arv;
    struct s_env_list *head_env;
    struct s_env_list *env_list;
    struct s_env_list *key_without_cont;
@@ -104,7 +105,7 @@ t_token	*init_token(char *value,int type);
 t_token	*fill_token(t_lexer *lexer);
 int		get_type(char *value);
 int		is_a_special_char(char c);
-int		parse(char *line, char **envp);
+int 	parse(char *line, char **envp, t_exec_data *e_data);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strequ(char *s1, char *s2);
 void	lexer_skip_whitespaces(t_lexer *lexer);
@@ -138,27 +139,29 @@ int	    count_args(char **args);
 char    **create_envp(char **envp);
 //-----------------------------------------------------
 
-t_exec_data     *is_builtins(t_list *exec);
-int         	exec_builtins(t_list *exec, t_exec_data *e_data);
-int	            ft_echo(char **arv);
-int	            ft_check_n_echo(char *str);
-int	            nb_arv(char **str);
-int	            ft_pwd(void);
-char *key_evn(char *env);
-char *cont_evn(char *env);
-int	printf_list(t_env_list *list);
-void	printf_list_expo(t_env_list *list);
-int just_equals(t_env_list *t_env, t_env_list *node);
-int	plus_equals(t_env_list *t_env, t_env_list *node);
-t_env_list	*arr_to_list(t_exec_data *data, char *str[]);
-int	check_equal(char *str, int indec);
-int	check_valid_enva_jout(char *str);
-void	dele_node(t_env_list *node);
-void	lstadd_back_export(t_exec_data *data);
-int	prin_if(t_env_list *t_env, t_env_list *t_without_key);
-char *ft_strndup(char *str, int len);
-void	lstadd_back(t_env_list **lst, t_env_list *new);
+t_exec_data	*is_builtins(t_list *exec, t_exec_data *e_data);
 t_env_list	*arv_to_list(t_exec_data *data, char *str[]);
+t_env_list	*arr_to_list(t_exec_data *data, char *str[]);
+int         exec_builtins(t_list *exec, t_exec_data *e_data);
+int	        ft_echo(char **arv);
+int	        ft_check_n_echo(char *str);
+int	        nb_arv(char **str);
+int	        ft_pwd(void);
+char        *key_evn(char *env);
+char        *cont_evn(char *env);
+int	        printf_list(t_env_list *list);
+void	    printf_list_expo(t_env_list *list);
+int         just_equals(t_env_list *t_env, t_env_list *node);
+int	        plus_equals(t_env_list *t_env, t_env_list *node);
+int	        check_equal(char *str, int indec);
+int	        check_valid_enva_jout(char *str);
+void	    dele_node(t_env_list *node);
+void	    lstadd_back_export(t_exec_data *data);
+int	        prin_if(t_env_list *t_env, t_env_list *t_without_key);
+char        *ft_strndup(char *str, int len);
+void    	lstadd_back(t_env_list **lst, t_env_list *new);
+int	        ft_export(t_exec_data *data);
+int     	ft_export_arv(t_exec_data *data);
 
 // t_env_list	*arv_unset(t_data *data, char *str[]);
 // t_env_list	*arv_to_list(t_data *data, char *str[]);

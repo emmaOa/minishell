@@ -87,9 +87,8 @@ void	printer(t_list *exec)
 
 extern int	g_exit_status;
 
-int	parse(char *line, char **envp)
+int	parse(char *line, char **envp, t_exec_data *e_data)
 {
-	t_exec_data	*e_data;
 	t_token *token;
 	t_lexer *lexer;
 	t_list	*exec;
@@ -111,7 +110,7 @@ int	parse(char *line, char **envp)
 		token = get_next_token(lexer);
 	}
 	printer(exec);
-	e_data = is_builtins(exec);
+	e_data = is_builtins(exec, e_data);
 	if (e_data->name_built != NULL)
 		exec_builtins(exec, e_data);
 	return (g_exit_status);

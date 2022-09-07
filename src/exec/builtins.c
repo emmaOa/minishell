@@ -1,7 +1,5 @@
 #include"../../include/minishell.h"
 
-
-
 int	exec_builtins(t_list *exec, t_exec_data *e_data)
 {
 	char **arv;
@@ -13,6 +11,8 @@ int	exec_builtins(t_list *exec, t_exec_data *e_data)
 		ft_echo(arv);
 	else if (ft_strncmp(arv[0], "pwd", ft_strlen("pwd")) == 0)
 		ft_pwd();
+	else if (ft_strncmp(arv[0], "export", ft_strlen("export")) == 0)
+		ft_export(e_data);
 	return (0);
 }
 

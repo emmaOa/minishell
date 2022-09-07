@@ -27,7 +27,7 @@ int	ft_export_arv(t_exec_data *data)
 	t_env_list	*arv;
 
 	arv = data->arv_list;
-	data->arv_list = arv->next->next;
+	data->arv_list = arv->next;
 	dele_node(arv);
 	lstadd_back_export(data);
 	return (0);
@@ -42,7 +42,7 @@ int	ft_export(t_exec_data *data)
 	alpha = 'A';
 	env = data->head_env;
 	without_equals = data->key_without_cont;
-	if (nb_arv(data->parse->args) == 1)
+	if (data->nb_arv == 1)
 	{
 		env = data->head_env;
 		while (alpha <= 'Z')
@@ -63,9 +63,31 @@ int	ft_export(t_exec_data *data)
 			env = env->next;
 		}
 		printf("declare -x %s=\"%s\"\n", env->key, env->cont);
-		prin_if(data->head_env, data->key_without_cont);
+		prin_if(data->head_env, without_equals);
 	}
 	else
+	{
 		ft_export_arv(data);
+		// env = data->head_env;
+		// while (alpha <= 'Z')
+		// {
+		// 	while (env->next)
+		// 	{
+		// 		if (env->key[0] == alpha)
+		// 			printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+		// 		env = env->next;
+		// 	}
+		// 	env = data->head_env;
+		// 	alpha++;
+		// }
+		// while (env->next)
+		// {
+		// 	if (env->key[0] < 'A' || env->key[0] > 'Z')
+		// 		printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+		// 	env = env->next;
+		// }
+		// printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+		// prin_if(data->head_env, without_equals);
+	}
 	return (0);
 }
