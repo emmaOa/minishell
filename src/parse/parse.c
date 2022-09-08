@@ -113,6 +113,5 @@ int	parse(char *line, char **envp, t_exec_data *e_data)
 	e_data = is_builtins(exec, e_data);
 	if (e_data->name_built != NULL)
 		exec_builtins(exec, e_data);
-	return (g_exit_status);
 	return(0);
 }

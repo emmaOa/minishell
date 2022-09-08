@@ -76,7 +76,6 @@ t_env_list	*arv_to_list(t_exec_data *data, char *str[])
 				tmp2->key = str[i];
 				tmp2->cont = NULL;
 				tmp2->next = NULL;
-				printf("%s\n", tmp2->key);
 				lstadd_back(&data->key_without_cont, tmp2);
 			}
 			else
@@ -223,22 +222,22 @@ int	prin_if(t_env_list *t_env, t_env_list *t_without_key)
 // 	return (0);
 // }
 
-// t_env_list	*arv_unset(t_data *data, char *str[])
-// {
-// 	t_env_list *tmp;
-// 	int i;
+void	arv_unset(t_exec_data *data, char *str[])
+{
+	t_env_list *tmp;
+	int i;
 
-// 	i = 0;
-// 	data->arv_unset = NULL;
-// 	while (str[i])
-// 	{
-// 		tmp = malloc(sizeof(t_env_list));
-// 		tmp->key = str[i];
-// 		tmp->cont = "\0";
-// 		tmp->next = NULL;
-// 		lstadd_back(&data->arv_unset, tmp);
-// 		i++;
-// 	}
-// 	return data->arv_unset;
-// }
+	i = 0;
+	data->arv_unset = NULL;
+	while (str[i])
+	{
+		tmp = malloc(sizeof(t_env_list));
+		tmp->key = str[i];
+		tmp->cont = "\0";
+		tmp->next = NULL;
+		lstadd_back(&data->arv_unset, tmp);
+		i++;
+	}
+	return ;
+}
 

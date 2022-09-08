@@ -94,6 +94,7 @@ typedef struct s_exec_data
    struct s_env_list *key_without_cont;
    struct s_env_list *arv_list;
    struct s_env_list *head;
+   struct s_env_list *arv_unset;
    struct s_data *parse;
 }               t_exec_data;
 
@@ -163,6 +164,10 @@ void    	lstadd_back(t_env_list **lst, t_env_list *new);
 int	        ft_export(t_exec_data *data);
 int     	ft_export_arv(t_exec_data *data);
 void    	lstadd_back_plus(t_env_list **lst, t_env_list *new);
+int        	check_unset(char *str);
+int         ft_env(t_exec_data *data);
+int     	ft_unset(t_exec_data *data);
+void	    arv_unset(t_exec_data *data, char *str[]);
 
 // t_env_list	*arv_unset(t_data *data, char *str[]);
 // t_env_list	*arv_to_list(t_data *data, char *str[]);
