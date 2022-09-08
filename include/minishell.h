@@ -154,5 +154,6 @@ int        	check_unset(char *str);
 int         ft_env(t_exec_data *data);
 int     	ft_unset(t_exec_data *data);
 void	    arv_unset(t_exec_data *data, char *str[]);
+int         ft_exit();
 
 #endif

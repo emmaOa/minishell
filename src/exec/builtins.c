@@ -19,7 +19,14 @@ int	exec_builtins(t_list *exec, t_exec_data *e_data)
 	}
 	else if (ft_strncmp(arv[0], "env", ft_strlen("env")) == 0)
 		ft_env(e_data);
+	else if (ft_strncmp(arv[0], "exit", ft_strlen("exit")) == 0)
+		ft_exit(e_data);
 	return (0);
+}
+
+int ft_exit()
+{
+	exit(0);
 }
 
 int	ft_check_n_echo(char *str)
