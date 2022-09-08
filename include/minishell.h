@@ -162,6 +162,7 @@ char        *ft_strndup(char *str, int len);
 void    	lstadd_back(t_env_list **lst, t_env_list *new);
 int	        ft_export(t_exec_data *data);
 int     	ft_export_arv(t_exec_data *data);
+void    	lstadd_back_plus(t_env_list **lst, t_env_list *new);
 
 // t_env_list	*arv_unset(t_data *data, char *str[]);
 // t_env_list	*arv_to_list(t_data *data, char *str[]);

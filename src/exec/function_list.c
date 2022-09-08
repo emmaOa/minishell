@@ -11,6 +11,26 @@ t_env_list	*ft_lstlast_mini(t_env_list *lst)
 	return (lst);
 }
 
+void	lstadd_back_plus(t_env_list **lst, t_env_list *new)
+{
+	t_env_list	*tmp;
+
+	if (new == 0)
+		return ;
+	while (new)
+	{
+		if (just_equals(*lst, new) == 0)
+		{
+			tmp = malloc(sizeof(t_env_list));
+			tmp->cont = new->cont;
+			tmp->key = new->key;
+			tmp->next = NULL;
+			lstadd_back(lst, tmp);
+		}
+		new = new->next;
+	}
+}
+
 void	lstadd_back(t_env_list **lst, t_env_list *new)
 {
 	t_env_list	*p;

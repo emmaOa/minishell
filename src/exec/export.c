@@ -74,7 +74,7 @@ int	ft_export(t_exec_data *data)
 	else
 	{
 		ft_export_arv(data);
-		lstadd_back(&data->head_env, data->key_without_cont);
+		lstadd_back_plus(&data->head_env, data->key_without_cont);
 	}
 	return (0);
 }
