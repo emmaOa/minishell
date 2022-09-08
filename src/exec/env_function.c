@@ -134,7 +134,7 @@ int	plus_equals(t_env_list *t_env, t_env_list *node)
 	env = t_env;
 	while (env)
 	{
-		if (ft_strcmp(env->key, node->key) == 0)
+		if (ft_strncmp(env->key, node->key, ft_strlen(env->key)) == 0)
 		{
 			env->cont = ft_strjoin(env->cont, node->cont);
 			return (1);
@@ -162,27 +162,6 @@ t_env_list	*arr_to_list(t_exec_data *data, char *str[])
 	}
 	return data->head;
 }
-
-
-
-// t_env_list	*arv_unset(t_data *data, char *str[])
-// {
-// 	t_env_list *tmp;
-// 	int i;
-
-// 	i = 0;
-// 	data->arv_unset = NULL;
-// 	while (str[i])
-// 	{
-// 		tmp = malloc(sizeof(t_env_list));
-// 		tmp->key = str[i];
-// 		tmp->cont = "\0";
-// 		tmp->next = NULL;
-// 		lstadd_back(&data->arv_unset, tmp);
-// 		i++;
-// 	}
-// 	return data->arv_unset;
-// }
 
 int	check_equal(char *str, int indec)
 {
@@ -243,3 +222,23 @@ int	prin_if(t_env_list *t_env, t_env_list *t_without_key)
 // 	data->ev[i] = NULL;
 // 	return (0);
 // }
+
+// t_env_list	*arv_unset(t_data *data, char *str[])
+// {
+// 	t_env_list *tmp;
+// 	int i;
+
+// 	i = 0;
+// 	data->arv_unset = NULL;
+// 	while (str[i])
+// 	{
+// 		tmp = malloc(sizeof(t_env_list));
+// 		tmp->key = str[i];
+// 		tmp->cont = "\0";
+// 		tmp->next = NULL;
+// 		lstadd_back(&data->arv_unset, tmp);
+// 		i++;
+// 	}
+// 	return data->arv_unset;
+// }
+

@@ -6,9 +6,7 @@ int	check_valid_enva_jout(char *str)
 
 	i = 1;
 	if ((!ft_isalpha(str[0]) && str[0] != '_'))
-	{
 		return (1);
-	}
 	while (str[i])
 	{
 		if (!ft_isalpha(str[i]) && !ft_isalnum(str[i]) && str[i] != '_'
@@ -47,47 +45,36 @@ int	ft_export(t_exec_data *data)
 		env = data->head_env;
 		while (alpha <= 'Z')
 		{
-			while (env->next)
+			while (env)
 			{
 				if (env->key[0] == alpha)
-					printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+				{
+					if (env->cont)
+						printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+					else
+						printf("declare -x %s\n", env->key);
+				}
 				env = env->next;
 			}
 			env = data->head_env;
 			alpha++;
 		}
-		while (env->next)
+		while (env)
 		{
 			if (env->key[0] < 'A' || env->key[0] > 'Z')
-				printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+			{
+				if (env->cont)
+					printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+				else
+					printf("declare -x %s\n", env->key);
+			}
 			env = env->next;
 		}
-		printf("declare -x %s=\"%s\"\n", env->key, env->cont);
-		prin_if(data->head_env, without_equals);
 	}
 	else
 	{
 		ft_export_arv(data);
-		// env = data->head_env;
-		// while (alpha <= 'Z')
-		// {
-		// 	while (env->next)
-		// 	{
-		// 		if (env->key[0] == alpha)
-		// 			printf("declare -x %s=\"%s\"\n", env->key, env->cont);
-		// 		env = env->next;
-		// 	}
-		// 	env = data->head_env;
-		// 	alpha++;
-		// }
-		// while (env->next)
-		// {
-		// 	if (env->key[0] < 'A' || env->key[0] > 'Z')
-		// 		printf("declare -x %s=\"%s\"\n", env->key, env->cont);
-		// 	env = env->next;
-		// }
-		// printf("declare -x %s=\"%s\"\n", env->key, env->cont);
-		// prin_if(data->head_env, without_equals);
+		lstadd_back(&data->head_env, data->key_without_cont);
 	}
 	return (0);
 }
