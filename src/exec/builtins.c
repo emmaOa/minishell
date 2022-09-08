@@ -75,15 +75,11 @@ int	ft_pwd(void)
 int ft_env(t_exec_data *data)
 {
 	t_env_list *env;
-	int i;
 
 	env = data->head_env;
 	while (env)
 	{
-		i = 0;
-		while (env->key[i] != '=' || env->key)
-			i++;
-		if (env->key[i] == '=')
+		if (env->cont)
 			printf("%s=%s\n", env->key, env->cont);
 		env = env->next;
 	}

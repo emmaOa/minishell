@@ -84,19 +84,6 @@ void	lstadd_back_export(t_exec_data *data)
 	}
 }
 
-// t_env_list	*ft_lstnew_mini(void *key, void *cont)
-// {
-// 	t_env_list	*new;
-
-// 	new = (t_env_list *)malloc(sizeof(t_env_list));
-// 	if (!new)
-// 		return (NULL);
-// 	new->cont = cont;
-// 	new->key = key;
-// 	new->next = NULL;
-// 	return (new);
-// }
-
 int	ft_lstsize_mini(t_env_list *lst)
 {
 	int	count;
@@ -108,5 +95,18 @@ int	ft_lstsize_mini(t_env_list *lst)
 		count++;
 	}
 	return (count);
+}
+
+t_env_list	*ft_lstnew_mini(void *key, void *cont)
+{
+	t_env_list	*new;
+
+	new = (t_env_list *)malloc(sizeof(t_env_list));
+	if (!new)
+		return (NULL);
+	new->cont = cont;
+	new->key = key;
+	new->next = NULL;
+	return (new);
 }
 
