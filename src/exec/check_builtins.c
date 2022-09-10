@@ -3,13 +3,11 @@
 t_exec_data	*is_builtins(t_list *exec, t_exec_data *e_data)
 {
 	char **arv;
-	int i;
 
 	arv = ((t_data *)exec->content)->args;
 	e_data->arv_list = arv_to_list(e_data, arv);
 	e_data->nb_arv = nb_arv(arv);
 	e_data->name_built = NULL;
-	i = 0;
 	if ((ft_strncmp(arv[0], "echo", ft_strlen("echo")) == 0)
 		|| (ft_strncmp(arv[0], "pwd", ft_strlen("pwd")) == 0)
 		|| (ft_strncmp(arv[0], "export", ft_strlen("export")) == 0)

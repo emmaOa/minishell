@@ -35,11 +35,9 @@ int	ft_export(t_exec_data *data)
 {
 	int	alpha;
 	t_env_list *env;
-	t_env_list *without_equals;
 
 	alpha = 'A';
 	env = data->head_env;
-	without_equals = data->key_without_cont;
 	if (data->nb_arv == 1)
 	{
 		env = data->head_env;

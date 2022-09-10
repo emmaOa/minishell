@@ -21,6 +21,8 @@ int	exec_builtins(t_list *exec, t_exec_data *e_data)
 		ft_env(e_data);
 	else if (ft_strncmp(arv[0], "exit", ft_strlen("exit")) == 0)
 		exit(0);
+	if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
+		ft_cd(exec, e_data);
 	return (0);
 }
 
@@ -127,7 +129,6 @@ int	ft_unset(t_exec_data *data)
 		}
 		arv = arv->next;
 	}
-	printf_list_expo(data->head_env);
 	return (0);
 }
 

@@ -25,8 +25,7 @@ t_list	*init_execution(char **envp)
 t_data	*init_data(char **envp)
 {
 	t_data *data;
-	int		i;
-	i = 0;
+	
 	data = malloc(sizeof(t_data));
 	data->args = NULL;
 	data->error = 0;

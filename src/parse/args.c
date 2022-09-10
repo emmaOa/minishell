@@ -27,9 +27,7 @@ int len_2d_array(void **array)
 void    fill_args(t_list *exec,t_token *token)
 {
     char	*arg;
-	int		len;
 
-	len = len_2d_array((void **)(((t_data *)exec->content)->args));
 	if(((t_data *)exec->content)->error != 1)
 	{
 		arg = ft_strdup("");

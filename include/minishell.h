@@ -14,10 +14,12 @@
 # define MINISHELL_H
 
 #include <unistd.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <dirent.h>
 #include <ctype.h>
 #include <sys/types.h>
 # include <sys/time.h>
@@ -27,6 +29,8 @@
 #include "../libft/libft.h"
 #include <fcntl.h>
 #include <signal.h>
+
+int v_error;
 
 typedef struct s_token
 {
@@ -74,6 +78,7 @@ typedef struct s_env_list
 typedef struct s_exec_data
 {
    char   *name_built;
+   char   *pwd;
    int    nb_arv;
    struct s_env_list *head_env;
    struct s_env_list *env_list;
@@ -154,5 +159,7 @@ int        	check_unset(char *str);
 int         ft_env(t_exec_data *data);
 int     	ft_unset(t_exec_data *data);
 void	    arv_unset(t_exec_data *data, char *str[]);
+int         ft_cd(t_list *exec, t_exec_data *e_data);
+char        *check_home(t_list *exec);
 
 #endif

@@ -48,12 +48,10 @@ void	lstadd_back(t_env_list **lst, t_env_list *new)
 
 void	lstadd_back_export(t_exec_data *data)
 {
-	t_env_list	*env;
 	t_env_list	*arv;
 	t_env_list	*tmp;
 
 	arv = data->arv_list;
-	env = data->head_env;
 	while (arv)
 	{
 		if (check_valid_enva_jout(arv->key) == 2)
@@ -110,3 +108,35 @@ t_env_list	*ft_lstnew_mini(void *key, void *cont)
 	return (new);
 }
 
+char *check_home(t_list *exec)
+{
+	char *path;
+	int i;
+	int j;
+	int x;
+
+
+	i = 0;
+	x = 0;
+	while (((t_data *)exec->content)->envp[i])
+	{
+		if (ft_strncmp(((t_data *)exec->content)->envp[i], "HOME", ft_strlen("HOME")) == 0)
+		{
+			path = malloc(ft_strlen(((t_data *)exec->content)->envp[i]) - ft_strlen("HOME"));
+			j = 0;
+			while (((t_data *)exec->content)->envp[i][j] != '=')
+				j++;
+			j++;
+			while (((t_data *)exec->content)->envp[i][j])
+			{
+				path[x] = ((t_data *)exec->content)->envp[i][j];
+				x++;
+				j++;
+			}
+			path[x] = '\0';
+			return (path);
+		}
+		i++;
+	}
+	return (NULL);
+}

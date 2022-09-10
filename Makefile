@@ -4,7 +4,8 @@ MANDATORY= src/minishell.c src/lexer/lexer.c src/lexer/token.c src/lexer/lexer_u
 		src/parse/qaout.c  src/parse/expand.c src/parse/expand_utils.c\
 		src/parse/envp.c src/errors_handle/handle_errors.c\
 		src/exec/main.c src/exec/builtins.c src/exec/env_function.c src/exec/export.c\
-		src/exec/function_list.c src/exec/function_util.c src/exec/check_builtins.c $(VRLIBFT)\
+		src/exec/function_list.c src/exec/function_util.c src/exec/check_builtins.c\
+		src/exec/cd.c $(VRLIBFT)\
 
 CC=cc
 FLAGS= -Wall -Werror -Wextra

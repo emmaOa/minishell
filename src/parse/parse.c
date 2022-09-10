@@ -93,6 +93,7 @@ int	parse(char *line, char **envp, t_exec_data *e_data)
 	t_lexer *lexer;
 	t_list	*exec;
 
+	(void)e_data;
 	if(!handle_errors(line))
 		return(0);
 	lexer = init_lexer(line);
@@ -110,6 +111,7 @@ int	parse(char *line, char **envp, t_exec_data *e_data)
 		token = get_next_token(lexer);
 	}
 	printer(exec);
+	
 	e_data = is_builtins(exec, e_data);
 	if (e_data->name_built != NULL)
 		exec_builtins(exec, e_data);
