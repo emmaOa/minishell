@@ -34,6 +34,7 @@ char *val_env(char **env)
 
 	i = 0;
 	j = 0;
+	x = 0;
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PWD", ft_strlen("PWD")) == 0)
@@ -103,20 +104,11 @@ int	ft_echo(char **arv)
 int	ft_pwd(t_exec_data *data)
 {
 	char buf[1000];
-	(void)data;
 
-	getcwd(buf, sizeof(buf));
-	if (buf != NULL)
-	{
+	if (getcwd(buf, sizeof(buf)) != '\0')
 		printf("%s\n", buf);
-		printf("my -->%s\n", data->pwd);
-
-	}
 	else
-	{
-
-		printf("not good :(\n");
-	}
+		printf("my -->%s\n", data->pwd);
 	return (0);
 }
 

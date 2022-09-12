@@ -5,33 +5,54 @@ int ft_cd(t_list *exec, t_exec_data *e_data)
     char **arv;
    	char buf[1000];
     char *cur_pwd;
-
+    char *new_pwd;
 
     errno = 0;
-    getcwd(buf, sizeof(buf));
-    // if (buf != NULL)
-    //     e_data->pwd = getcwd(buf, sizeof(buf));
-    cur_pwd = ft_strjoin(buf, "/");
     arv = ((t_data *)exec->content)->args;
     if (nb_arv(arv) <= 2)
     {
-        if (nb_arv(arv) == 1 || ft_strncmp(arv[1], "~", ft_strlen(arv[1])) == 0)
-            chdir(check_home(exec));
-        else
+        if (getcwd(buf, sizeof(buf)) != '\0')
         {
-            ft_pwd(e_data);
-            cur_pwd = ft_strjoin(cur_pwd, arv[1]);
-            // e_data->pwd = cur_pwd;
-            chdir(cur_pwd);
-            ft_pwd(e_data);
+            e_data->pwd = getcwd(buf, sizeof(buf));
+            if (nb_arv(arv) == 1 || ft_strncmp(arv[1], "~", ft_strlen(arv[1])) == 0)
+                chdir(check_home(exec));
+            else
+            {
+                ft_pwd(e_data);
+                cur_pwd = ft_strjoin("/", arv[1]);
+                new_pwd = ft_strjoin(buf, cur_pwd);
+                e_data->pwd = ft_strjoin(buf, cur_pwd);
+                chdir(new_pwd);
+                ft_pwd(e_data);
+            }
+        }
+        else if (getcwd(buf, sizeof(buf)) == '\0' )
+        {
+            printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+            e_data->pwd = ft_strjoin(e_data->pwd, "/");
+            e_data->pwd = ft_strjoin(e_data->pwd, arv[1]);
+            return (0);
         }
     }
     else
         printf("minishell: cd: too many arguments\n");
     if (errno != 0)
         printf("minishell cd: %s: %s\n", arv[1], strerror(errno));
-    else
-        e_data->pwd = cur_pwd;
-    printf("save pwd : %s\n", e_data->pwd);
+    return (0);
+}
+
+int check_trash(char *buf)
+{
+    char **path;
+    int i;
+
+    path = ft_split(buf, '/');
+    i = 0;
+    while (path[i])
+    {
+        if (ft_strncmp(path[i], ".Trash/", ft_strlen(path[i])) == 0)
+            return (1);
+        i++;
+    }
     return (0);
 }
