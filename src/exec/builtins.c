@@ -3,13 +3,12 @@
 int	exec_builtins(t_list *exec, t_exec_data *e_data)
 {
 	char **arv;
-	(void)e_data;
 
 	arv = ((t_data *)exec->content)->args;
 	if (ft_strncmp(e_data->name_built, "echo", ft_strlen("echo")) == 0)
 		ft_echo(arv);
 	else if (ft_strncmp(arv[0], "pwd", ft_strlen("pwd")) == 0)
-		ft_pwd();
+		ft_pwd(e_data);
 	else if (ft_strncmp(arv[0], "export", ft_strlen("export")) == 0)
 		ft_export(e_data);
 	else if (ft_strncmp(arv[0], "unset", ft_strlen("unset")) == 0)
@@ -24,6 +23,39 @@ int	exec_builtins(t_list *exec, t_exec_data *e_data)
 	if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
 		ft_cd(exec, e_data);
 	return (0);
+}
+
+char *val_env(char **env)
+{
+	int i;
+	int j;
+	int x;
+	char *val;
+
+	i = 0;
+	j = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], "PWD", ft_strlen("PWD")) == 0)
+		{
+			val = malloc(ft_strlen(env[i]) + 1);
+			while (env[i][j] != '=')
+				j++;
+			while (env[i][++j])
+			{
+				val[x] = env[i][j];
+				x++;
+			}
+			val[x] = '\0';
+		}
+		i++;
+	}
+	if (j == 0)
+	{
+		val = malloc(ft_strlen("not PWD") + 1);
+		val = "not PWD";
+	}
+	return (val);
 }
 
 int	ft_check_n_echo(char *str)
@@ -68,11 +100,23 @@ int	ft_echo(char **arv)
 	return (0);
 }
 
-int	ft_pwd(void)
+int	ft_pwd(t_exec_data *data)
 {
 	char buf[1000];
+	(void)data;
+
 	getcwd(buf, sizeof(buf));
-	printf("%s\n", buf);
+	if (buf != NULL)
+	{
+		printf("%s\n", buf);
+		printf("my -->%s\n", data->pwd);
+
+	}
+	else
+	{
+
+		printf("not good :(\n");
+	}
 	return (0);
 }
 

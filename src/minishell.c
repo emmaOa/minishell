@@ -17,6 +17,7 @@ int	g_exit_status;
 int main(int ac,char **av,char **envp)
 {
 	char *line;
+
 	t_exec_data *e_data;
 
 	if (!av || !envp)
@@ -25,6 +26,7 @@ int main(int ac,char **av,char **envp)
 	if (ac == 1)
 	{
 		e_data = malloc(sizeof(t_exec_data));
+		e_data->pwd = val_env(envp);
 		e_data->head_env =  arr_to_list(e_data, envp);
 		while(1337)
 		{

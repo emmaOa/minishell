@@ -138,7 +138,7 @@ int         exec_builtins(t_list *exec, t_exec_data *e_data);
 int	        ft_echo(char **arv);
 int	        ft_check_n_echo(char *str);
 int	        nb_arv(char **str);
-int	        ft_pwd(void);
+int	        ft_pwd(t_exec_data *e_data);
 char        *key_evn(char *env);
 char        *cont_evn(char *env);
 int	        printf_list(t_env_list *list);
@@ -161,5 +161,6 @@ int     	ft_unset(t_exec_data *data);
 void	    arv_unset(t_exec_data *data, char *str[]);
 int         ft_cd(t_list *exec, t_exec_data *e_data);
 char        *check_home(t_list *exec);
+char        *val_env(char **env);
 
 #endif

@@ -9,7 +9,7 @@ t_exec_data	*is_builtins(t_list *exec, t_exec_data *e_data)
 	e_data->nb_arv = nb_arv(arv);
 	e_data->name_built = NULL;
 	if ((ft_strncmp(arv[0], "echo", ft_strlen("echo")) == 0)
-		|| (ft_strncmp(arv[0], "pwd", ft_strlen("pwd")) == 0)
+		|| (ft_strncmp(arv[0], "pwd", ft_strlen(arv[0])) == 0)
 		|| (ft_strncmp(arv[0], "export", ft_strlen("export")) == 0)
 		|| (ft_strncmp(arv[0], "env", ft_strlen("env")) == 0)
 		|| (ft_strncmp(arv[0], "exit", ft_strlen("exit")) == 0)
