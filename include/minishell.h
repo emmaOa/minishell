@@ -35,6 +35,7 @@ int v_error;
 typedef struct s_token
 {
     char *value;
+    int  i;
     enum
     {
         ARG,
@@ -51,6 +52,9 @@ typedef struct t_lexer
     size_t len_line;
     char c;
     unsigned int i;
+    int          here_doc;
+    char        cp;
+    char        cpp;
 	unsigned int j;
 }       t_lexer;
 
@@ -64,6 +68,7 @@ typedef struct s_data
 	char	**outfiles;
 	char 	**append;
     char    **envp;
+    char    *delimiter;
 }       t_data;
 
 
@@ -96,7 +101,7 @@ t_token	*get_next_token(t_lexer *lexer);
 t_token	*init_token(char *value,int type);
 t_token	*fill_token(t_lexer *lexer);
 int		get_type(char *value);
-int		is_a_special_char(char c);
+int		is_a_special_char(t_lexer *lexer);
 int 	parse(char *line, char **envp, t_exec_data *e_data);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strequ(char *s1, char *s2);
@@ -113,7 +118,7 @@ int		position_quote_d(char *s, int f);
 void	double_quote(t_list *exec,char *value,char **arg,int i);
 void	qaout(t_list *exec, char *value, char **arg, int i);
 int		position_quote(char *s, int f);
-void    fill_args(t_list *exec,t_token *token);
+void    fill_args(t_list *exec,t_token *token, t_lexer *lexer);
 void	**ft_2d_realloc(void **arg,int size);
 int		len_2d_array(void **array);
 void	fill_pipe(t_list *exec, char **envp);

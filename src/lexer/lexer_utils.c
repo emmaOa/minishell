@@ -12,10 +12,10 @@
 
 #include"../../include/minishell.h"
 
-int		is_a_special_char(char c)
+int		is_a_special_char(t_lexer *lexer)
 {
-    if (c == ' ' || c == '\t' || c == '|' || c == '\0' 
-    || c == '>' || c == '<')
+    if (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '|' || lexer->c == '\0' 
+    || lexer->c == '>' || lexer->c == '<')
         return (1);
     return (0);
 }

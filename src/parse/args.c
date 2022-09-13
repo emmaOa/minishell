@@ -24,12 +24,23 @@ int len_2d_array(void **array)
     return (i);
 }
 
-void    fill_args(t_list *exec,t_token *token)
+// char *last_arg(t_list *exec)
+// {
+// 	int i;
+// 	char **ar;
+
+// 	i = 0;
+// 	if (((t_data *)exec->content)->args)
+
+// }
+
+void    fill_args(t_list *exec,t_token *token, t_lexer *lexer)
 {
     char	*arg;
-
+	(void)lexer;
 	if(((t_data *)exec->content)->error != 1)
 	{
+		token->i++;
 		arg = ft_strdup("");
 		if(check_qaout(token->value))
 			qaout(exec,token->value, &arg,0);
@@ -40,7 +51,12 @@ void    fill_args(t_list *exec,t_token *token)
 			return;
 		}
 		else
+		{
     		arg = ft_strdup(token->value);
+			printf("%s\n", arg);
+			if (lexer->here_doc == 2)
+				((t_data *)exec->content)->delimiter = arg;
+		}
 		((t_data *)exec->content)->args = (char **)ft_2d_realloc((void **)(((t_data *)exec->content)->args),len_2d_array((void **)(((t_data *)exec->content)->args)) + 1);
 		((t_data *)exec->content)->args[len_2d_array((void **)(((t_data *)exec->content)->args))] = arg;	
 	}

@@ -31,7 +31,7 @@ t_token *arg_token(t_lexer *lexer)
 {    
 	char	c;
 
-    while (!is_a_special_char(lexer->c))
+    while (!is_a_special_char(lexer))
 	{
 		if (lexer->c == '"' || lexer->c == '\'')
 		{

@@ -26,7 +26,7 @@
 // 		// ft_env(data);
 // 		ft_unset(data);
 // 	}
-// 	//<<< function to use >>>
+// 	//<function to use >>>
 // 	//	- int		list_to_arr(t_data *data);
 // 	//	- void		printf_list_env(t_env_list *list);
 // 	// t_env_list	*ft_lstnew_mini(void *key, void *cont);

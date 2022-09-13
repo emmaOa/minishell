@@ -34,6 +34,7 @@ t_data	*init_data(char **envp)
 	data->n_infiles = 0;
 	data->outfiles = NULL;
 	data->append = NULL;
+	data->delimiter = NULL;
 	data->envp = malloc(sizeof(char *) * (len_2d_array((void**)envp) + 1));
 	data->envp = create_envp(envp);
 	return (data);

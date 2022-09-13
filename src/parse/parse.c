@@ -68,6 +68,13 @@ void	printer(t_list *exec)
 			printf("-----------------append-------------------------\n");
 				
 		}
+		if(((t_data *)exec->content)->delimiter)
+		{
+			printf("-----------------delimiter-------------------------\n");
+					printf("---((t_data *)exec->content)->delimiter--->%s\n",((t_data *)exec->content)->delimiter);
+			printf("-----------------delimiter-------------------------\n");
+				
+		}
 		printf("========================================================================================\n");
 		// i = 0;
 		// if(((t_data *)exec->content)->envp)
@@ -97,12 +104,14 @@ int	parse(char *line, char **envp, t_exec_data *e_data)
 	if(!handle_errors(line))
 		return(0);
 	lexer = init_lexer(line);
+	
 	token = get_next_token(lexer);
 	exec = init_execution(envp);
 	while (token)
 	{
+		token->i = 0;
 		if(token->type == ARG)
-			fill_args(ft_lstlast(exec), token);
+			fill_args(ft_lstlast(exec), token, lexer);
 		else if(token->type == L_REDIRECTION || token->type == R_REDIRECTION)
 			fill_redirections(ft_lstlast(exec), &token, lexer);
 		else if(token->type == PIPE)
