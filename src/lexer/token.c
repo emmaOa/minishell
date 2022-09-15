@@ -14,12 +14,14 @@ t_token *fill_token(t_lexer *lexer)
 {
     t_token *token = NULL;
     char    *value;
+    char    *value2;
     int     type;
     
     value = ft_substr(lexer->line, lexer->j, lexer->i);
+    value2 = ft_substr(lexer->line, lexer->j + 1, lexer->i + 1);
     if (*value)
     {
-        type = get_type(value);
+        type = get_type(value, value2, lexer);
         token = init_token(value, type);
         lexer->j = lexer->i;
         return (token);

@@ -20,9 +20,14 @@ int		is_a_special_char(t_lexer *lexer)
     return (0);
 }
 
-int get_type(char *value)
+int get_type(char *value, char *value2, t_lexer *lexer)
 {
-    if (ft_strequ(value, ">"))
+    if (ft_strequ(value, "<") && ft_strequ(value2, "<"))
+    {
+        lexer_advance(lexer);
+        return (HERE_DOC);
+    }
+   else if (ft_strequ(value, ">"))
         return (R_REDIRECTION);
     else if (ft_strequ(value, "<"))
         return (L_REDIRECTION);

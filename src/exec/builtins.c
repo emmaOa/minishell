@@ -4,24 +4,28 @@ int	exec_builtins(t_list *exec, t_exec_data *e_data)
 {
 	char **arv;
 
-	arv = ((t_data *)exec->content)->args;
-	if (ft_strncmp(e_data->name_built, "echo", ft_strlen("echo")) == 0)
-		ft_echo(arv);
-	else if (ft_strncmp(arv[0], "pwd", ft_strlen("pwd")) == 0)
-		ft_pwd(e_data);
-	else if (ft_strncmp(arv[0], "export", ft_strlen("export")) == 0)
-		ft_export(e_data);
-	else if (ft_strncmp(arv[0], "unset", ft_strlen("unset")) == 0)
+	arv = NULL;
+	if (((t_data *)exec->content)->args)
 	{
-		arv_unset(e_data, ((t_data *)exec->content)->args);
-		ft_unset(e_data);
+		arv = ((t_data *)exec->content)->args;
+		if (ft_strncmp(e_data->name_built, "echo", ft_strlen("echo")) == 0)
+			ft_echo(arv);
+		else if (ft_strncmp(arv[0], "pwd", ft_strlen("pwd")) == 0)
+			ft_pwd(e_data);
+		else if (ft_strncmp(arv[0], "export", ft_strlen("export")) == 0)
+			ft_export(e_data);
+		else if (ft_strncmp(arv[0], "unset", ft_strlen("unset")) == 0)
+		{
+			arv_unset(e_data, ((t_data *)exec->content)->args);
+			ft_unset(e_data);
+		}
+		else if (ft_strncmp(arv[0], "env", ft_strlen("env")) == 0)
+			ft_env(e_data);
+		else if (ft_strncmp(arv[0], "exit", ft_strlen("exit")) == 0)
+			exit(0);
+		if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
+			ft_cd(exec, e_data);
 	}
-	else if (ft_strncmp(arv[0], "env", ft_strlen("env")) == 0)
-		ft_env(e_data);
-	else if (ft_strncmp(arv[0], "exit", ft_strlen("exit")) == 0)
-		exit(0);
-	if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
-		ft_cd(exec, e_data);
 	return (0);
 }
 
@@ -105,7 +109,7 @@ int	ft_pwd(t_exec_data *data)
 {
 	char buf[1000];
 
-	if (getcwd(buf, sizeof(buf)) != '\0')
+	if (getcwd(buf, sizeof(buf)))
 		printf("%s\n", buf);
 	else
 		printf("my -->%s\n", data->pwd);

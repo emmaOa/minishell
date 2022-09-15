@@ -11,22 +11,20 @@ int ft_cd(t_list *exec, t_exec_data *e_data)
     arv = ((t_data *)exec->content)->args;
     if (nb_arv(arv) <= 2)
     {
-        if (getcwd(buf, sizeof(buf)) != '\0')
+        if (getcwd(buf, sizeof(buf)))
         {
             e_data->pwd = getcwd(buf, sizeof(buf));
             if (nb_arv(arv) == 1 || ft_strncmp(arv[1], "~", ft_strlen(arv[1])) == 0)
                 chdir(check_home(exec));
             else
             {
-                ft_pwd(e_data);
                 cur_pwd = ft_strjoin("/", arv[1]);
                 new_pwd = ft_strjoin(buf, cur_pwd);
                 e_data->pwd = ft_strjoin(buf, cur_pwd);
                 chdir(new_pwd);
-                ft_pwd(e_data);
             }
         }
-        else if (getcwd(buf, sizeof(buf)) == '\0' )
+        else
         {
             printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
             e_data->pwd = ft_strjoin(e_data->pwd, "/");

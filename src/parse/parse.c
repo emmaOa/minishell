@@ -104,21 +104,23 @@ int	parse(char *line, char **envp, t_exec_data *e_data)
 	if(!handle_errors(line))
 		return(0);
 	lexer = init_lexer(line);
-	
 	token = get_next_token(lexer);
 	exec = init_execution(envp);
 	while (token)
 	{
-		token->i = 0;
+		
 		if(token->type == ARG)
-			fill_args(ft_lstlast(exec), token, lexer);
+				fill_args(ft_lstlast(exec), token, lexer);
 		else if(token->type == L_REDIRECTION || token->type == R_REDIRECTION)
 			fill_redirections(ft_lstlast(exec), &token, lexer);
 		else if(token->type == PIPE)
 			fill_pipe(exec, envp);
+		else if(token->type == HERE_DOC)
+			here_d(ft_lstlast(exec), &token, lexer);
 		free_token(token);
 		token = get_next_token(lexer);
 	}
+	((t_data *)exec->content)->delimiter = lexer->here_doc;
 	printer(exec);
 	
 	e_data = is_builtins(exec, e_data);

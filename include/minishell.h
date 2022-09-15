@@ -35,10 +35,10 @@ int v_error;
 typedef struct s_token
 {
     char *value;
-    int  i;
     enum
     {
         ARG,
+        HERE_DOC,
         R_REDIRECTION = '>',
         L_REDIRECTION = '<',
         PIPE = '|',
@@ -52,7 +52,7 @@ typedef struct t_lexer
     size_t len_line;
     char c;
     unsigned int i;
-    int          here_doc;
+    char        *here_doc;
     char        cp;
     char        cpp;
 	unsigned int j;
@@ -100,7 +100,7 @@ void	lexer_advance(t_lexer *lexer);
 t_token	*get_next_token(t_lexer *lexer);
 t_token	*init_token(char *value,int type);
 t_token	*fill_token(t_lexer *lexer);
-int		get_type(char *value);
+int		get_type(char *value, char *value2, t_lexer *lexer);
 int		is_a_special_char(t_lexer *lexer);
 int 	parse(char *line, char **envp, t_exec_data *e_data);
 int		ft_strcmp(char *s1, char *s2);
@@ -168,5 +168,6 @@ int         ft_cd(t_list *exec, t_exec_data *e_data);
 char        *check_home(t_list *exec);
 char        *val_env(char **env);
 int         check_trash(char *buf);
+void    	here_d(t_list *exec, t_token **token, t_lexer *lexer);
 
 #endif

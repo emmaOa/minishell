@@ -58,30 +58,41 @@ t_env_list	*arv_to_list(t_exec_data *data, char *str[])
 	i = 0;
 	data->head = NULL;
 	data->key_without_cont = NULL;
-	while (str[i])
+	if (str)
 	{
-		if (check_equal(str[i], i) == 1)
+		while (str[i])
 		{
-			tmp1 = malloc(sizeof(t_env_list));
-			tmp1->key = key_evn(str[i]);
-			tmp1->cont = cont_evn(str[i]);
-			tmp1->next = NULL;
-			lstadd_back(&data->head, tmp1);
-		}
-		else if (check_equal(str[i], i) == 0)
-		{
-			if (check_valid_enva_jout(str[i]) == 0)
+			if (check_equal(str[i], i) == 1)
 			{
-				tmp2 = malloc(sizeof(t_env_list));
-				tmp2->key = str[i];
-				tmp2->cont = NULL;
-				tmp2->next = NULL;
-				lstadd_back(&data->key_without_cont, tmp2);
+				tmp1 = malloc(sizeof(t_env_list));
+				tmp1->key = key_evn(str[i]);
+				tmp1->cont = cont_evn(str[i]);
+				tmp1->next = NULL;
+				lstadd_back(&data->head, tmp1);
 			}
-			else
-				printf("%s : not a valid identifier\n", str[i]);
+			else if (check_equal(str[i], i) == 0)
+			{
+				if (check_valid_enva_jout(str[i]) == 0)
+				{
+					tmp2 = malloc(sizeof(t_env_list));
+					tmp2->key = str[i];
+					tmp2->cont = NULL;
+					tmp2->next = NULL;
+					lstadd_back(&data->key_without_cont, tmp2);
+				}
+				else
+					printf("%s : not a valid identifier\n", str[i]);
+			}
+			i++;
 		}
-		i++;
+	}
+	else
+	{
+		tmp1 = malloc(sizeof(t_env_list));
+		tmp1->key = "NULL";
+		tmp1->cont = "NULL";
+		tmp1->next = NULL;
+		lstadd_back(&data->head, tmp1);
 	}
 	return data->head;
 }
