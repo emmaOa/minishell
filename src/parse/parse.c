@@ -32,15 +32,11 @@ void	printer(t_list *exec)
 			printf("-----------------args-------------------------\n\n");
 		}
 		i = 0;
-		if(((t_data *)exec->content)->infiles)
+		if(((t_data *)exec->content)->infiles != -2)
 		{
 			printf("-----------------infiles-------------------------\n");
-			while(((t_data *)exec->content)->n_infiles > i)
-			{
-					printf("---((t_data *)exec->content)->infiles[%d]--->%d\n",i,((t_data *)exec->content)->infiles[i]);
+					printf("---((t_data *)exec->content)->infiles--->%d\n",((t_data *)exec->content)->infiles);
 					printf("---((t_data *)exec->content)->inf[%d]--->%s\n",i,((t_data *)exec->content)->inf);
-				i++;
-			}
 			printf("-----------------infiles-------------------------\n\n");
 				
 		}
@@ -73,6 +69,13 @@ void	printer(t_list *exec)
 			printf("-----------------delimiter-------------------------\n");
 					printf("---((t_data *)exec->content)->delimiter--->%s\n",((t_data *)exec->content)->delimiter);
 			printf("-----------------delimiter-------------------------\n");
+				
+		}
+		if(((t_data *)exec->content)->error)
+		{
+			printf("-----------------error-------------------------\n");
+					printf("---((t_data *)exec->content)->error--->%d\n",((t_data *)exec->content)->error);
+			printf("-----------------error-------------------------\n");
 				
 		}
 		printf("========================================================================================\n");

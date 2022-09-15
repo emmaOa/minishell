@@ -30,7 +30,7 @@ t_data	*init_data(char **envp)
 	data->args = NULL;
 	data->error = 0;
 	data->inf = NULL;
-	data->infiles = NULL;
+	data->infiles = -2;
 	data->n_infiles = 0;
 	data->outfiles = NULL;
 	data->append = NULL;

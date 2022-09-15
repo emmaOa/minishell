@@ -63,7 +63,7 @@ typedef struct s_data
     char 	**args;
     int 	error;
 	char	*inf;
-	int 	*infiles;
+	int 	infiles;
 	int 	n_infiles;
 	char	**outfiles;
 	char 	**append;
