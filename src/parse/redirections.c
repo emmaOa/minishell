@@ -56,15 +56,17 @@ void	here_d(t_list *exec, t_token **token, t_lexer *lexer)
 		delimiter = (*token)->value;
 		while (1)
 		{
-			ft_putstr_fd("> ", 1);
-			line = readline("");
-			if (ft_strncmp(delimiter, line, ft_strlen(line)) != 0)
-			{
-				ft_putstr_fd(line, fd);
-				free(line);
-			}
-			else
+			line = readline("> ");
+			if (ft_strcmp(delimiter, line) == 0)
 				break;
+			else
+			{
+				if (line)
+				{
+					ft_putstr_fd(line, fd);
+					free(line);
+				}
+			}
 		}
 		if (((t_data *)exec->content)->infiles != -1)
 			((t_data *)exec->content)->infiles = fd;

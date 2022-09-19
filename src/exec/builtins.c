@@ -26,7 +26,10 @@ int	exec_builtins(t_list *exec, t_exec_data *e_data)
 		if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
 			ft_cd(exec, e_data);
 	}
-	return (0);
+	if (e_data->nb_node != 1)
+		exit(0);
+	else
+		return (0);
 }
 
 char *val_env(char **env)

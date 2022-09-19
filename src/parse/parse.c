@@ -125,9 +125,30 @@ int	parse(char *line, char **envp, t_exec_data *e_data)
 	}
 	((t_data *)exec->content)->delimiter = lexer->here_doc;
 	printer(exec);
-	
+	e_data->nb_node = ft_lstsize(exec);
 	e_data = is_builtins(exec, e_data);
-	if (e_data->name_built != NULL)
+	if  (e_data->nb_node <= 1 && e_data->name_built != NULL)
 		exec_builtins(exec, e_data);
+	else
+	{
+		ft_pipe(e_data);
+		e_data->i = 0;
+		while (exec)
+		{
+			e_data->forck = fork();
+			if (e_data->forck == -1)
+				ft_exit_bonus("error: failed in fork");
+			if (e_data->forck == 0)
+				mult_pipe(e_data, exec);
+			e_data->i++;
+			// ft_putstr_fd("run\n", 2);
+			
+			exec = exec->next;
+		}
+		ft_close(e_data);
+		ft_wait(e_data);
+		// exit(0);
+	}
+
 	return(0);
 }

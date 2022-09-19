@@ -85,6 +85,12 @@ typedef struct s_exec_data
    char   *name_built;
    char   *pwd;
    int    nb_arv;
+   int    nb_node;
+   int    **fd_pipe;
+   int    fd_outfiles;
+   int    forck;
+   char   *url;
+   int    i;
    struct s_env_list *head_env;
    struct s_env_list *env_list;
    struct s_env_list *key_without_cont;
@@ -169,5 +175,17 @@ char        *check_home(t_list *exec);
 char        *val_env(char **env);
 int         check_trash(char *buf);
 void    	here_d(t_list *exec, t_token **token, t_lexer *lexer);
+void         exec_cmd(t_exec_data *e_data, t_list *exec);
+int     	ft_pipe(t_exec_data *e_data);
+void    	ft_exit_bonus(char *s);
+int     	ft_open_outfiles(t_exec_data *e_data, t_list *exec);
+int     	mult_pipe(t_exec_data *e_data, t_list *exec);
+void       	ft_foork(t_exec_data *e_data, t_list *exec);
+void    	ft_close(t_exec_data *data);
+char    	*ft_path(char *env[]);
+int     	ft_len_2d(char **tabl);
+char    	*ft_url(char *path, t_list *exec);
+void    	ft_wait(t_exec_data *e_data);
+void    	ft_free_int(int **tabl, int start, int len);
 
 #endif

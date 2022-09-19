@@ -27,6 +27,8 @@ int main(int ac,char **av,char **envp)
 	{
 		e_data = malloc(sizeof(t_exec_data));
 		e_data->pwd = val_env(envp);
+		e_data->url = NULL;
+		e_data->fd_outfiles = -2;
 		e_data->head_env =  arr_to_list(e_data, envp);
 		while(1337)
 		{
