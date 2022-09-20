@@ -75,8 +75,19 @@ void	ft_foork(t_exec_data *e_data, t_list *exec)
 			if (dup2(((t_data *)exec->content)->infiles, 0) < 0)
 				ft_exit_bonus("failed dup2 stdin first command");
 		}
-		if (dup2(e_data->fd_pipe[e_data->i][1], 1) < 0)
-			ft_exit_bonus("failed dup2 stdout first command");
+		if (e_data->nb_node != 1)
+		{
+			if (e_data->fd_outfiles != -2)
+			{
+				if (dup2(e_data->fd_outfiles, 0) < 0)
+					ft_exit_bonus("failed dup2 stdin first command");
+			}
+			else
+			{
+				if (dup2(e_data->fd_pipe[e_data->i][1], 1) < 0)
+					ft_exit_bonus("failed dup2 stdout first command");
+			}
+		}
 	}
 	else
 	{
@@ -127,9 +138,15 @@ int	mult_pipe(t_exec_data *e_data, t_list *exec)
 	}
 	ft_close(e_data);
 	if (e_data->name_built != NULL)
+	{
+		printf("builtin\n");
 		exec_builtins(exec, e_data);
+	}
 	else
+	{
+		printf("cmd\n");
 		exec_cmd(e_data, exec);
+	}
 	return (0);
 }
 
