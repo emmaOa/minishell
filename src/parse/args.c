@@ -77,5 +77,5 @@ int	count_args(char **args)
 	i = 0;
 	while (args[i])
 		i++;
-	return (i + 1);
+	return (i);
 }

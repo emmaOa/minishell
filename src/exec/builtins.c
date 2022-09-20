@@ -13,7 +13,10 @@ int	exec_builtins(t_list *exec, t_exec_data *e_data)
 		else if (ft_strncmp(arv[0], "pwd", ft_strlen("pwd")) == 0)
 			ft_pwd(e_data);
 		else if (ft_strncmp(arv[0], "export", ft_strlen("export")) == 0)
+		{
+			e_data->arv_list = arv_to_list(e_data, arv);
 			ft_export(e_data);
+		}
 		else if (ft_strncmp(arv[0], "unset", ft_strlen("unset")) == 0)
 		{
 			arv_unset(e_data, ((t_data *)exec->content)->args);
@@ -148,7 +151,10 @@ int	ft_unset(t_exec_data *data)
 	while (arv)
 	{
 		if (check_unset(arv->key) == 1)
-			printf("`%s': not a valid identifier\n", arv->key);
+		{
+			ft_putstr_fd(arv->key, 2);
+			ft_putstr_fd(" : not a valid identifier\n", 2);
+		}
 		else
 		{
 			while (env)

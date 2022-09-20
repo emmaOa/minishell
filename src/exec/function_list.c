@@ -77,7 +77,12 @@ void	lstadd_back_export(t_exec_data *data)
 			}
 		}
 		else if (check_valid_enva_jout(arv->key) == 1)
-			printf("`%s=%s': not a valid identifier\n", arv->key, arv->cont);
+		{
+			ft_putstr_fd(arv->key, 2);
+			ft_putstr_fd("=", 2);
+			ft_putstr_fd(arv->cont, 2);
+			ft_putstr_fd(" : not a valid identifier\n", 2);
+		}
 		arv = arv->next;
 	}
 }

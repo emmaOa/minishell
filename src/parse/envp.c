@@ -24,7 +24,7 @@ char	**add_env(char **strs, char *arg)
 		args[1] = NULL;//free
 		return (args);
 	}
-	args = (char **)malloc(sizeof(char *) * (count_args(strs) + 1));
+	args = (char **)malloc(sizeof(char *) * (count_args(strs) + 2));
 	i = -1;
 	while (strs[++i])
 		args[i] = ft_strdup(strs[i]);

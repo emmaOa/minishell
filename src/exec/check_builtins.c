@@ -5,7 +5,7 @@ t_exec_data	*is_builtins(t_list *exec, t_exec_data *e_data)
 	char **arv;
 
 	arv = ((t_data *)exec->content)->args;
-	e_data->arv_list = arv_to_list(e_data, arv);
+	// e_data->arv_list = arv_to_list(e_data, arv);
 	e_data->nb_arv = nb_arv(arv);
 	e_data->name_built = NULL;
 	if (!arv)

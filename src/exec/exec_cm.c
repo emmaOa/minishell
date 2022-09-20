@@ -53,16 +53,20 @@ int	ft_open_outfiles(t_exec_data *data, t_list *exec)
 	i = 0;
 	errno = 0;
 	name_files = ((t_data *)exec->content)->outfiles;
-	while (i < count_args(name_files))
+	if (name_files)
 	{
-		data->fd_outfiles = open(name_files[i], O_CREAT, 0644);
-		if (data->fd_outfiles == -1)
+		while (i < count_args(name_files))
 		{
-			ft_putstr_fd(strerror(errno), 2);
-			exit (errno);
+			data->fd_outfiles = open(name_files[i], O_CREAT | O_RDWR, 0666);
+			if (data->fd_outfiles == -1)
+			{
+				perror(strerror(errno));
+				exit (errno);
+			}
+			i++;
 		}
-		i++;
 	}
+
 	return (0);
 }
 
@@ -75,24 +79,39 @@ void	ft_foork(t_exec_data *e_data, t_list *exec)
 			if (dup2(((t_data *)exec->content)->infiles, 0) < 0)
 				ft_exit_bonus("failed dup2 stdin first command");
 		}
-		if (e_data->nb_node != 1)
+		else
 		{
 			if (e_data->fd_outfiles != -2)
 			{
-				if (dup2(e_data->fd_outfiles, 0) < 0)
+				// ft_putnbr_fd(123, 2);
+				if (dup2(e_data->fd_outfiles, 1) < 0)
 					ft_exit_bonus("failed dup2 stdin first command");
 			}
 			else
 			{
-				if (dup2(e_data->fd_pipe[e_data->i][1], 1) < 0)
-					ft_exit_bonus("failed dup2 stdout first command");
+				if (e_data->nb_node != 1)
+				{
+					if (dup2(e_data->fd_pipe[e_data->i][1], 1) < 0)
+						ft_exit_bonus("failed dup2 stdout first command");
+				}
 			}
+
 		}
 	}
 	else
 	{
-		if (dup2(e_data->fd_pipe[e_data->i - 1][0], 0) < 0)
-			ft_exit_bonus("failed dup2 stdin last command");
+		// ft_putnbr_fd(321, 2);
+		if (((t_data *)exec->content)->infiles != -2)
+		{
+			if (dup2(((t_data *)exec->content)->infiles, 0) < 0)
+				ft_exit_bonus("failed dup2 stdin first command");
+		}
+		else
+		{
+			if (dup2(e_data->fd_pipe[e_data->i - 1][0], 0) < 0)
+				ft_exit_bonus("failed dup2 stdin last command");
+
+		}
 		if (e_data->fd_outfiles != -2)
 		{
 			if (dup2(e_data->fd_outfiles, 1) < 0)
@@ -105,7 +124,7 @@ int	mult_pipe(t_exec_data *e_data, t_list *exec)
 {
 	if (((t_data *)exec->content)->infiles == -1)
 	{
-		ft_putstr_fd(ft_strjoin(((t_data *)exec->content)->inf, ": No such file or directory"), 2);
+		ft_putstr_fd(ft_strjoin(((t_data *)exec->content)->inf, ": No such file or directory\n"), 2);
 		exit(1);
 	}
 	if (((t_data *)exec->content)->outfiles)
@@ -121,8 +140,9 @@ int	mult_pipe(t_exec_data *e_data, t_list *exec)
 		}
 		else
 		{
-			if (dup2(e_data->fd_pipe[e_data->i][1], 1) < 0)
-				ft_exit_bonus("failed dup2 stdout last command");
+			if (dup2(e_data->fd_pipe[e_data->i - 1][0], 0) < 0)
+				ft_exit_bonus("failed dup2 stdin last command");
+
 		}
 
 		if (e_data->fd_outfiles != -2)
@@ -132,21 +152,19 @@ int	mult_pipe(t_exec_data *e_data, t_list *exec)
 		}
 		else
 		{
-			if (dup2(e_data->fd_pipe[e_data->i - 1][0], 0) < 0)
-				ft_exit_bonus("failed dup2 stdin last command");
+			if (dup2(e_data->fd_pipe[e_data->i][1], 1) < 0)
+				ft_exit_bonus("failed dup2 stdout last command");
 		}
 	}
+	// if (((t_data *)exec->content)->infiles != -2)
+	// 	close(((t_data *)exec->content)->infiles);
+	if (e_data->fd_outfiles != -2 && e_data->fd_outfiles != -1)
+		close(e_data->fd_outfiles);
 	ft_close(e_data);
 	if (e_data->name_built != NULL)
-	{
-		printf("builtin\n");
 		exec_builtins(exec, e_data);
-	}
 	else
-	{
-		printf("cmd\n");
 		exec_cmd(e_data, exec);
-	}
 	return (0);
 }
 

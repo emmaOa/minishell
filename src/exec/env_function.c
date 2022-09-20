@@ -81,7 +81,10 @@ t_env_list	*arv_to_list(t_exec_data *data, char *str[])
 					lstadd_back(&data->key_without_cont, tmp2);
 				}
 				else
-					printf("%s : not a valid identifier\n", str[i]);
+				{
+					ft_putstr_fd(str[i], 2);
+					ft_putstr_fd(" : not a valid identifier\n", 2);
+				}
 			}
 			i++;
 		}
