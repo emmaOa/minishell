@@ -1,6 +1,6 @@
 #include"../../include/minishell.h"
 
-int	exec_builtins(t_list *exec, t_exec_data *e_data)
+void	exec_builtins(t_list *exec, t_exec_data *e_data)
 {
 	char **arv;
 
@@ -29,10 +29,7 @@ int	exec_builtins(t_list *exec, t_exec_data *e_data)
 		if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
 			ft_cd(exec, e_data);
 	}
-	if (e_data->nb_node != 1)
-		exit(0);
-	else
-		return (0);
+	exit(0);
 }
 
 char *val_env(char **env)
@@ -145,6 +142,8 @@ int	ft_unset(t_exec_data *data)
 
 	env = data->head_env;
 	arv = data->arv_unset;
+	if (!arv->next)
+		exit(0);
 	data->arv_unset = arv->next;
 	dele_node(arv);
 	arv = data->arv_unset;
@@ -159,18 +158,21 @@ int	ft_unset(t_exec_data *data)
 		{
 			while (env)
 			{
+				// printf("%s\n", env->key);
 				if (ft_strncmp(env->key, arv->key, ft_strlen(env->key)) == 0)
 				{
 					if (env == data->head_env)
 					{
 						data->head_env = data->head_env->next;
 						free(env);
-						break;
+						return (0);
 					}
 					tmp = env;
 					prev->next = env->next;
+					// printf("%s\n", env->next->key);
 					free(tmp);
-					break;
+					ft_env(data);
+					return (0);
 				}
 				prev = env;
 				env = env->next;

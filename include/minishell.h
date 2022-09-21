@@ -145,7 +145,7 @@ char    **create_envp(char **envp);
 t_exec_data	*is_builtins(t_list *exec, t_exec_data *e_data);
 t_env_list	*arv_to_list(t_exec_data *data, char *str[]);
 t_env_list	*arr_to_list(t_exec_data *data, char *str[]);
-int         exec_builtins(t_list *exec, t_exec_data *e_data);
+void         exec_builtins(t_list *exec, t_exec_data *e_data);
 int	        ft_echo(char **arv);
 int	        ft_check_n_echo(char *str);
 int	        nb_arv(char **str);
