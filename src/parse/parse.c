@@ -97,6 +97,12 @@ void	printer(t_list *exec)
 
 extern int	g_exit_status;
 
+void sig_handler(int signum)
+{
+	(void)signum;
+  printf("\nminishell:");
+}
+
 int	parse(char *line, char **envp, t_exec_data *e_data)
 {
 	t_token *token;

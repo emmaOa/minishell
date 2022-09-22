@@ -171,9 +171,7 @@ int	ft_unset(t_exec_data *data)
 					}
 					tmp = env;
 					prev->next = env->next;
-					// printf("%s\n", env->next->key);
 					free(tmp);
-					ft_env(data);
 					return (0);
 				}
 				prev = env;

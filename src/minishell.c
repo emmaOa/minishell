@@ -22,14 +22,16 @@ int main(int ac,char **av,char **envp)
 
 	if (!av || !envp)
 		return(0);
-	g_exit_status = 0;
+	errno = 0;
 	if (ac == 1)
 	{
 		e_data = malloc(sizeof(t_exec_data));
 		e_data->pwd = val_env(envp);
 		e_data->url = NULL;
 		e_data->fd_outfiles = -2;
-		e_data->head_env =  arr_to_list(e_data, envp);
+		arr_to_list(e_data, envp);
+		signal(SIGINT,sig_handler);
+		signal(SIGQUIT,SIG_IGN);
 		while(1337)
 		{
 			line = readline("minishell:");
@@ -41,5 +43,5 @@ int main(int ac,char **av,char **envp)
 				parse(line, envp, e_data);
 		}
 	}
-	return(g_exit_status);
+	return(errno);
 }

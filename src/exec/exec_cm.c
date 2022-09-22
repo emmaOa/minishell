@@ -100,7 +100,6 @@ void	ft_foork(t_exec_data *e_data, t_list *exec)
 	}
 	else
 	{
-		// ft_putnbr_fd(321, 2);
 		if (((t_data *)exec->content)->infiles != -2)
 		{
 			if (dup2(((t_data *)exec->content)->infiles, 0) < 0)
@@ -120,8 +119,21 @@ void	ft_foork(t_exec_data *e_data, t_list *exec)
 	}
 }
 
+void	free_bonus_int(int **tabl, int start, int len)
+{
+	while (start < len)
+	{
+		free(tabl[start]);
+		start++;
+	}
+	free(tabl);
+}
+
 int	mult_pipe(t_exec_data *e_data, t_list *exec)
 {
+	// signal(SIGINT,SIG_IGN);
+	signal(SIGQUIT, SIG_DFL);
+
 	if (((t_data *)exec->content)->infiles == -1)
 	{
 		ft_putstr_fd(ft_strjoin(((t_data *)exec->content)->inf, ": No such file or directory\n"), 2);

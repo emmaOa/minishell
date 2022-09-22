@@ -188,5 +188,6 @@ char    	*ft_url(char *path, t_list *exec);
 void    	ft_wait(t_exec_data *e_data);
 void    	ft_free_int(int **tabl, int start, int len);
 void    	free_bonus_int(int **tabl, int start, int len);
+void         sig_handler(int signum);
 
 #endif

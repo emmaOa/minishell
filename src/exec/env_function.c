@@ -157,23 +157,22 @@ int	plus_equals(t_env_list *t_env, t_env_list *node)
 	return (0);
 }
 
-t_env_list	*arr_to_list(t_exec_data *data, char *str[])
+void	arr_to_list(t_exec_data *data, char *str[])
 {
 	t_env_list *tmp;
 	int i;
 
 	i = 0;
-	data->head = NULL;
+	data->head_env = NULL;
 	while (str[i])
 	{
 		tmp = malloc(sizeof(t_env_list));
 		tmp->key = key_evn(str[i]);
 		tmp->cont = cont_evn(str[i]);
 		tmp->next = NULL;
-		lstadd_back(&data->head, tmp);
+		lstadd_back(&data->head_env, tmp);
 		i++;
 	}
-	return data->head;
 }
 
 int	check_equal(char *str, int indec)
