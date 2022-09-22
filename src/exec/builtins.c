@@ -1,6 +1,6 @@
 #include"../../include/minishell.h"
 
-void	exec_builtins(t_list *exec, t_exec_data *e_data)
+int	exec_builtins(t_list *exec, t_exec_data *e_data)
 {
 	char **arv;
 
@@ -29,7 +29,9 @@ void	exec_builtins(t_list *exec, t_exec_data *e_data)
 		if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
 			ft_cd(exec, e_data);
 	}
-	exit(0);
+	if (e_data->nb_node != 1)
+		exit(0);
+	return (0);
 }
 
 char *val_env(char **env)

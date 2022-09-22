@@ -144,8 +144,8 @@ char    **create_envp(char **envp);
 
 t_exec_data	*is_builtins(t_list *exec, t_exec_data *e_data);
 t_env_list	*arv_to_list(t_exec_data *data, char *str[]);
-t_env_list	*arr_to_list(t_exec_data *data, char *str[]);
-void         exec_builtins(t_list *exec, t_exec_data *e_data);
+void        arr_to_list(t_exec_data *data, char *str[]);
+int         exec_builtins(t_list *exec, t_exec_data *e_data);
 int	        ft_echo(char **arv);
 int	        ft_check_n_echo(char *str);
 int	        nb_arv(char **str);
@@ -187,5 +187,6 @@ int     	ft_len_2d(char **tabl);
 char    	*ft_url(char *path, t_list *exec);
 void    	ft_wait(t_exec_data *e_data);
 void    	ft_free_int(int **tabl, int start, int len);
+void    	free_bonus_int(int **tabl, int start, int len);
 
 #endif
