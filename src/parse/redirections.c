@@ -37,40 +37,56 @@ void	fill_redirections(t_list *exec, t_token **token, t_lexer *lexer)
 	}
 }
 
-void	here_d(t_list *exec, t_token **token, t_lexer *lexer)
+int	here_d(t_list *exec, t_token **token, t_lexer *lexer)
 {
 	int	fd;
 	char *delimiter;
 	char *line;
+	int id_fork;
 
+	((t_data *)exec->content)->i = 2;
 	fd = open((*token)->value, O_CREAT | O_RDWR, 0644);
 	if (fd == -1)
 	{
 		((t_data *)exec->content)->inf = ft_strdup((*token)->value);
 		((t_data *)exec->content)->error = 1;
 	}
+	
 	free_token(*token);
-	*token = get_next_token(lexer);
-	if((*token)->type == ARG)
+	id_fork = fork();
+	if (id_fork == -1)
+		ft_exit_bonus("error: failed in fork herdoc");
+	if (id_fork == 0)
 	{
-		delimiter = (*token)->value;
-		while (1)
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT,SIG_DFL);
+		*token = get_next_token(lexer);
+		if((*token)->type == ARG)
 		{
-			line = readline("> ");
-			if (ft_strcmp(delimiter, line) == 0)
-				break;
-			else
+			delimiter = (*token)->value;
+			while (1)
 			{
-				if (line)
+				line = readline("> ");
+				if (ft_strcmp(delimiter, line) == 0 || !line)
 				{
-					ft_putstr_fd(line, fd);
-					free(line);
+					((t_data *)exec->content)->i = 0;
+					return (0);
+				}
+				else
+				{
+					if (line)
+					{
+						ft_putstr_fd(line, fd);
+						free(line);
+					}
 				}
 			}
+			if (((t_data *)exec->content)->infiles != -1)
+				((t_data *)exec->content)->infiles = fd;
 		}
-		if (((t_data *)exec->content)->infiles != -1)
-			((t_data *)exec->content)->infiles = fd;
 	}
+	wait(NULL);
+	return (0);
 }
 
 void	fill_infile(t_list *exec, t_token *token)

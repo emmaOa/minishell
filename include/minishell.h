@@ -69,6 +69,7 @@ typedef struct s_data
 	char 	**append;
     char    **envp;
     char    *delimiter;
+    int     i;
 }       t_data;
 
 
@@ -174,8 +175,8 @@ int         ft_cd(t_list *exec, t_exec_data *e_data);
 char        *check_home(t_list *exec);
 char        *val_env(char **env);
 int         check_trash(char *buf);
-void    	here_d(t_list *exec, t_token **token, t_lexer *lexer);
-void         exec_cmd(t_exec_data *e_data, t_list *exec);
+int     	here_d(t_list *exec, t_token **token, t_lexer *lexer);
+void        exec_cmd(t_exec_data *e_data, t_list *exec);
 int     	ft_pipe(t_exec_data *e_data);
 void    	ft_exit_bonus(char *s);
 int     	ft_open_outfiles(t_exec_data *e_data, t_list *exec);

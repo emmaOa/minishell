@@ -131,7 +131,7 @@ void	free_bonus_int(int **tabl, int start, int len)
 
 int	mult_pipe(t_exec_data *e_data, t_list *exec)
 {
-	// signal(SIGINT,SIG_IGN);
+	signal(SIGINT,SIG_IGN);
 	signal(SIGQUIT, SIG_DFL);
 
 	if (((t_data *)exec->content)->infiles == -1)
@@ -154,7 +154,6 @@ int	mult_pipe(t_exec_data *e_data, t_list *exec)
 		{
 			if (dup2(e_data->fd_pipe[e_data->i - 1][0], 0) < 0)
 				ft_exit_bonus("failed dup2 stdin last command");
-
 		}
 
 		if (e_data->fd_outfiles != -2)

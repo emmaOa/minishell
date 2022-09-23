@@ -100,7 +100,13 @@ extern int	g_exit_status;
 void sig_handler(int signum)
 {
 	(void)signum;
-  printf("\nminishell:");
+	printf("\n");
+    rl_replace_line("", 0);
+    rl_on_new_line();
+    rl_redisplay();
+// 	rl_replace_line()
+// 	ft_putstr_fd("imane\n", 2);
+//   printf("\nminishell:");
 }
 
 int	parse(char *line, char **envp, t_exec_data *e_data)
@@ -126,6 +132,8 @@ int	parse(char *line, char **envp, t_exec_data *e_data)
 			fill_pipe(exec, envp);
 		else if(token->type == HERE_DOC)
 			here_d(ft_lstlast(exec), &token, lexer);
+		if (((t_data *)exec->content)->i == 2)
+			return 0;
 		free_token(token);
 		token = get_next_token(lexer);
 	}
