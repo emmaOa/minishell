@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/10 19:44:25 by omeslall          #+#    #+#             */
-/*   Updated: 2021/11/10 19:44:26 by omeslall         ###   ########.fr       */
+/*   Created: 2021/11/25 20:16:39 by iouazzan          #+#    #+#             */
+/*   Updated: 2021/11/26 03:45:23 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	if (fd < 0)
+		return ;
+	write (fd, &c, sizeof(char));
 }

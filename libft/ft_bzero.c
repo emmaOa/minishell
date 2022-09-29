@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/10 19:03:25 by omeslall          #+#    #+#             */
-/*   Updated: 2021/11/14 18:55:59 by omeslall         ###   ########.fr       */
+/*   Created: 2021/11/03 09:17:54 by iouazzan          #+#    #+#             */
+/*   Updated: 2021/11/20 23:38:19 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 void	*ft_bzero(void *str, size_t n)
 {
@@ -26,9 +26,3 @@ void	*ft_bzero(void *str, size_t n)
 	}
 	return (str);
 }
-// int main()
-// {
-// 	unsigned char b[] = "";
-// 	ft_bzero(b+5,5);
-// 	printf("%s",b);
-// }

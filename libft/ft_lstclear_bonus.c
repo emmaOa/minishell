@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 00:22:40 by omeslall          #+#    #+#             */
-/*   Updated: 2022/02/12 01:15:27 by omeslall         ###   ########.fr       */
+/*   Created: 2021/11/26 01:52:13 by iouazzan          #+#    #+#             */
+/*   Updated: 2021/11/26 01:52:19 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst)
 {
-	t_list	*p;
+	t_list	*temp;
 
-	if (*lst == NULL && del == NULL)
-		return ;
-	while (*lst)
+	while (*lst != NULL)
 	{
-		p = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = p;
+		temp = *lst;
+		*lst = (*lst)->next;
+		free(temp);
 	}
 }

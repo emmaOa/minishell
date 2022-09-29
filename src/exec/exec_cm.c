@@ -70,20 +70,19 @@ int	ft_open_outfiles(t_exec_data *data, t_list *exec)
 	return (0);
 }
 
-void	ft_foork(t_exec_data *e_data, t_list *exec)
+void	ft_foork(t_exec_data *e_data)
 {
 	if (e_data->i == 0)
 	{
-		if (((t_data *)exec->content)->infiles != -2)
+		if (e_data->infile != -2)
 		{
-			if (dup2(((t_data *)exec->content)->infiles, 0) < 0)
+			if (dup2(e_data->infile, 0) < 0)
 				ft_exit_bonus("failed dup2 stdin first command");
 		}
 		else
 		{
 			if (e_data->fd_outfiles != -2)
 			{
-				// ft_putnbr_fd(123, 2);
 				if (dup2(e_data->fd_outfiles, 1) < 0)
 					ft_exit_bonus("failed dup2 stdin first command");
 			}
@@ -100,9 +99,9 @@ void	ft_foork(t_exec_data *e_data, t_list *exec)
 	}
 	else
 	{
-		if (((t_data *)exec->content)->infiles != -2)
+		if (e_data->infile != -2)
 		{
-			if (dup2(((t_data *)exec->content)->infiles, 0) < 0)
+			if (dup2(e_data->infile, 0) < 0)
 				ft_exit_bonus("failed dup2 stdin first command");
 		}
 		else
@@ -131,10 +130,9 @@ void	free_bonus_int(int **tabl, int start, int len)
 
 int	mult_pipe(t_exec_data *e_data, t_list *exec)
 {
-	signal(SIGINT,SIG_IGN);
+	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-
-	if (((t_data *)exec->content)->infiles == -1)
+	if (e_data->infile == -1)
 	{
 		ft_putstr_fd(ft_strjoin(((t_data *)exec->content)->inf, ": No such file or directory\n"), 2);
 		exit(1);
@@ -142,12 +140,12 @@ int	mult_pipe(t_exec_data *e_data, t_list *exec)
 	if (((t_data *)exec->content)->outfiles)
 		ft_open_outfiles(e_data, exec);
 	if (e_data->i == 0 || e_data->i == e_data->nb_node - 1)
-		ft_foork(e_data, exec);
+		ft_foork(e_data);
 	else
 	{
-		if (((t_data *)exec->content)->infiles != -2)
+		if (e_data->infile != -2)
 		{
-			if (dup2(((t_data *)exec->content)->infiles, 0) < 0)
+			if (dup2(e_data->infile, 0) < 0)
 				ft_exit_bonus("failed dup2 stdin first command");
 		}
 		else
@@ -172,6 +170,7 @@ int	mult_pipe(t_exec_data *e_data, t_list *exec)
 	if (e_data->fd_outfiles != -2 && e_data->fd_outfiles != -1)
 		close(e_data->fd_outfiles);
 	ft_close(e_data);
+
 	if (e_data->name_built != NULL)
 		exec_builtins(exec, e_data);
 	else
@@ -199,6 +198,9 @@ void	ft_wait(t_exec_data *e_data)
 		wait(NULL);
 		i++;
 	}
+	g_glob.child = 0;
+	signal(SIGQUIT,SIG_IGN);
+	signal(SIGINT,sig_handler);
 }
 
 void	ft_free_int(int **tabl, int start, int len)
@@ -268,9 +270,9 @@ void	exec_cmd(t_exec_data *e_data, t_list *exec)
 	(void)e_data;
 	char *url;
 
-	url = ft_url(ft_path(((t_data *)exec->content)->envp), exec);
+	url = ft_url(ft_path(g_glob.envp), exec);
 	if (url == NULL)
 		ft_exit_bonus("command not founde");
-	if (execve(url, ((t_data *)exec->content)->args, ((t_data *)exec->content)->envp) < 0)
+	if (execve(url, ((t_data *)exec->content)->args, g_glob.envp) < 0)
 		ft_exit_bonus("command not execute");
 }

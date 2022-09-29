@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/10 19:44:03 by omeslall          #+#    #+#             */
-/*   Updated: 2021/11/10 19:44:15 by omeslall         ###   ########.fr       */
+/*   Created: 2021/11/02 15:07:43 by iouazzan          #+#    #+#             */
+/*   Updated: 2021/11/26 02:01:33 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 void	*ft_memset(void *str, int c, size_t n)
 {

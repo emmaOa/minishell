@@ -113,7 +113,7 @@ t_env_list	*ft_lstnew_mini(void *key, void *cont)
 	return (new);
 }
 
-char *check_home(t_list *exec)
+char *check_home(void)
 {
 	char *path;
 	int i;
@@ -123,18 +123,18 @@ char *check_home(t_list *exec)
 
 	i = 0;
 	x = 0;
-	while (((t_data *)exec->content)->envp[i])
+	while (g_glob.envp[i])
 	{
-		if (ft_strncmp(((t_data *)exec->content)->envp[i], "HOME", ft_strlen("HOME")) == 0)
+		if (ft_strncmp(g_glob.envp[i], "HOME", ft_strlen("HOME")) == 0)
 		{
-			path = malloc(ft_strlen(((t_data *)exec->content)->envp[i]) - ft_strlen("HOME"));
+			path = malloc(ft_strlen(g_glob.envp[i]) - ft_strlen("HOME"));
 			j = 0;
-			while (((t_data *)exec->content)->envp[i][j] != '=')
+			while (g_glob.envp[i][j] != '=')
 				j++;
 			j++;
-			while (((t_data *)exec->content)->envp[i][j])
+			while (g_glob.envp[i][j])
 			{
-				path[x] = ((t_data *)exec->content)->envp[i][j];
+				path[x] = g_glob.envp[i][j];
 				x++;
 				j++;
 			}

@@ -29,11 +29,13 @@ int main(int ac,char **av,char **envp)
 		e_data->pwd = val_env(envp);
 		e_data->url = NULL;
 		e_data->fd_outfiles = -2;
+		e_data->infile = -2;
+		g_glob.child = 0;
 		arr_to_list(e_data, envp);
-		signal(SIGINT,sig_handler);
 		signal(SIGQUIT,SIG_IGN);
+		signal(SIGINT,sig_handler);
 		while(1337)
-		{
+		{	
 			line = readline("minishell:");
 			if (!line)
 				break;

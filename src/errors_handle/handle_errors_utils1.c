@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
+/*   handle_errors_utils1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 01:49:54 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/26 01:50:11 by iouazzan         ###   ########.fr       */
+/*   Created: 2022/09/25 03:05:33 by omeslall          #+#    #+#             */
+/*   Updated: 2022/09/25 03:10:32 by omeslall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"../../include/minishell.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	utils_handle_errors(char *argv, size_t *i, size_t *j)
 {
-	if (!lst || !new)
-		return ;
-	new ->next = *lst;
-	*lst = new;
+	if (argv[*i] == '"' || argv[*i] == 39)
+	{
+		*j = *i + 1;
+		while (argv[*j] != argv[*i])
+			*j += 1;
+		*i = *j;
+	}
 }
