@@ -58,7 +58,7 @@ char	*fill_expand(t_list *exec, char *value)
 
 	i = -1;
 	(void)exec;
-	value = ft_strjoin(value, "=");
+	value = ft_strjoin(ft_strdup(value), "=");
 	while (g_glob.envp[++i])
 	{
 		if (ft_strncmp(g_glob.envp[i], value, ft_strlen(value)) == 0)

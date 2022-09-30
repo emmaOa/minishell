@@ -31,9 +31,9 @@ int main(int ac,char **av,char **envp)
 		e_data->fd_outfiles = -2;
 		e_data->infile = -2;
 		g_glob.child = 0;
+		e_data->ev = NULL;
 		arr_to_list(e_data, envp);
-		signal(SIGQUIT,SIG_IGN);
-		signal(SIGINT,sig_handler);
+		sig_main();
 		while(1337)
 		{	
 			line = readline("minishell:");
@@ -43,6 +43,7 @@ int main(int ac,char **av,char **envp)
 				add_history (line);
 			if(*line)
 				parse(line, envp, e_data);
+			// sig_main();
 		}
 	}
 	return(errno);

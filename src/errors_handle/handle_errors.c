@@ -83,7 +83,7 @@ int	red_error(int *i, int *j, char *argv)
 		|| (argv[*i] == c1 && argv[(*i) - 1] == c2) \
 		|| (argv[*i] == c2 && argv[(*i) - 1] == c1) \
 		|| ((argv[*i] == c1 || argv[*i] == c2) \
-		&& (argv[(*i) + 1] == argv[(*i) + 2])))
+		&& (argv[(*i)] == argv[(*i) + 1])))
 			error = 1;
 	}
 	return (error);

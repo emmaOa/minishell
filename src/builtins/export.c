@@ -2,7 +2,7 @@
 
 int	check_valid_enva_jout(char *str)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if ((!ft_isalpha(str[0]) && str[0] != '_'))
@@ -19,7 +19,6 @@ int	check_valid_enva_jout(char *str)
 	return (0);
 }
 
-
 int	ft_export_arv(t_exec_data *data)
 {
 	t_env_list	*arv;
@@ -33,33 +32,34 @@ int	ft_export_arv(t_exec_data *data)
 
 int	ft_export(t_exec_data *data)
 {
-	int	alpha;
-	t_env_list *env;
+	t_env_list	*env;
 
-	alpha = 'A';
 	env = data->head_env;
 	if (data->nb_arv == 1)
 	{
-		env = data->head_env;
-		while (alpha <= 'Z')
-		{
-			while (env)
-			{
-				if (env->key[0] == alpha)
-				{
-					if (env->cont)
-						printf("declare -x %s=\"%s\"\n", env->key, env->cont);
-					else
-						printf("declare -x %s\n", env->key);
-				}
-				env = env->next;
-			}
-			env = data->head_env;
-			alpha++;
-		}
+		with_alpha(data);
+		without_alpha(data);
+	}
+	else
+	{
+		ft_export_arv(data);
+		lstadd_back_plus(&data->head_env, data->key_without_cont);
+	}
+	return (0);
+}
+
+void	with_alpha(t_exec_data *data)
+{
+	int			alpha;
+	t_env_list	*env;
+
+	env = data->head_env;
+	alpha = 'A';
+	while (alpha <= 'Z')
+	{
 		while (env)
 		{
-			if (env->key[0] < 'A' || env->key[0] > 'Z')
+			if (env->key[0] == alpha)
 			{
 				if (env->cont)
 					printf("declare -x %s=\"%s\"\n", env->key, env->cont);
@@ -68,11 +68,25 @@ int	ft_export(t_exec_data *data)
 			}
 			env = env->next;
 		}
+		env = data->head_env;
+		alpha++;
 	}
-	else
+}
+
+void	without_alpha(t_exec_data *data)
+{
+	t_env_list	*env;
+
+	env = data->head_env;
+	while (env)
 	{
-		ft_export_arv(data);
-		lstadd_back_plus(&data->head_env, data->key_without_cont);
+		if (env->key[0] < 'A' || env->key[0] > 'Z')
+		{
+			if (env->cont)
+				printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+			else
+				printf("declare -x %s\n", env->key);
+		}
+		env = env->next;
 	}
-	return (0);
 }

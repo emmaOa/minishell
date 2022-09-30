@@ -13,22 +13,22 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <unistd.h>
-#include <errno.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/wait.h>
-#include <dirent.h>
-#include <ctype.h>
-#include <sys/types.h>
-# include <sys/time.h>
-#include <sys/stat.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "../libft/libft.h"
-#include <fcntl.h>
-#include <signal.h>
+# include	<unistd.h>
+# include	<errno.h>
+# include	<stdlib.h>
+# include	<stdio.h>
+# include	<string.h>
+# include	<sys/wait.h>
+# include	<dirent.h>
+# include	<ctype.h>
+# include	<sys/types.h>
+# include	<sys/time.h>
+# include	<sys/stat.h>
+# include	<readline/readline.h>
+# include	<readline/history.h>
+# include	"../libft/libft.h"
+# include	<fcntl.h>
+# include	<signal.h>
 
 typedef struct s_glob
 {
@@ -95,6 +95,7 @@ typedef struct s_exec_data
    int    i;
    int    infile;
    int	  fd_her;
+   char	  **ev;
    struct s_env_list *head_env;
    struct s_env_list *env_list;
    struct s_env_list *key_without_cont;
@@ -163,11 +164,13 @@ int		count_args(char **args);
 int		get_char_index(char *str, char c);
 char	*get_variable_name(char *str);
 int		is_acceptable(char c);
+void	free_2d_array(char **arr);
 
 //-----------------------------------------------------
 
 t_exec_data	*is_builtins(t_list *exec, t_exec_data *e_data);
 t_env_list	*arv_to_list(t_exec_data *data, char *str[]);
+t_env_list	*ft_lstlast_mini(t_env_list *lst);
 void        arr_to_list(t_exec_data *data, char *str[]);
 int         exec_builtins(t_list *exec, t_exec_data *e_data);
 int	        ft_echo(char **arv);
@@ -199,7 +202,7 @@ char        *check_home(void);
 char        *val_env(char **env);
 int         check_trash(char *buf);
 void		here_d(char *delimiter, t_exec_data *e_data);
-void        exec_cmd(t_exec_data *e_data, t_list *exec);
+void        exec_cmd(t_list *exec);
 int     	ft_pipe(t_exec_data *e_data);
 void    	ft_exit_bonus(char *s);
 int     	ft_open_outfiles(t_exec_data *e_data, t_list *exec);
@@ -215,7 +218,25 @@ void    	free_bonus_int(int **tabl, int start, int len);
 void        sig_handler(int signum);
 void        sig_handler_child(int signum);
 int     	check_inf(int *infiles, int len);
-int		exec_herdoc(t_list *exec, t_exec_data *e_data);
-int	ft_lstsize(t_list *lst);
-
+int			exec_herdoc(t_list *exec, t_exec_data *e_data);
+void		sig_main(void);
+void		sig_child(void);
+void		exec_builtins_utl(t_list *exec, t_exec_data *e_data, char **arv);
+void		val_env_utl(char *val, char **env, int i);
+int			ft_unset_utl(t_exec_data *data, char *key);
+void		cd_utl(t_exec_data *e_data, char **arv);
+void		my_pwd(t_exec_data *e_data, char **arv);
+void		with_alpha(t_exec_data *data);
+void		without_alpha(t_exec_data *data);
+void		without_cont(t_exec_data *data, char *str);
+void		not_str(t_exec_data *data);
+void		with_cont(t_exec_data *data, char *str);
+void		end_foork(t_exec_data *e_data);
+void		start_foork(t_exec_data *e_data);
+void		middle_foork(t_exec_data *e_data);
+char		*check_home_utl(int i);
+void		add_back_plus_equal(t_exec_data *data, char *cont, char *key);
+void		add_back_equal(t_exec_data *data, char *cont, char *key);
+void 		ft_p(char **str);
+char		**list_to_arr(t_exec_data *data);
 #endif

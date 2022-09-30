@@ -264,12 +264,11 @@ void 	here_d(char *delimiter, t_exec_data *e_data)
 {
 	char *line;
 
-	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 	while (1)
 	{
 		line = readline("> ");
-		if (ft_strcmp(delimiter, line) == 0 || !line)
+		if (!line || ft_strcmp(delimiter, line) == 0)
 			exit(0);
 		else
 		{
@@ -311,8 +310,6 @@ int exec_herdoc(t_list *exec, t_exec_data *e_data)
 					here_d(((t_data *)node->content)->hd[i], e_data);
 				wait(NULL);
 				g_glob.child = 0;
-				signal(SIGQUIT,SIG_IGN);
-				signal(SIGINT,sig_handler);
 				if (e_data->infile != -1)
 					e_data->infile = e_data->fd_her;
 				i++;
@@ -322,7 +319,19 @@ int exec_herdoc(t_list *exec, t_exec_data *e_data)
 	}
 	return (0);
 }
+void sig_main(void)
+{
+	// printf("ll\n");
+	signal(SIGQUIT,SIG_IGN);
+	signal(SIGINT,sig_handler);
+}
 
+void sig_child(void)
+{
+	// printf("jj\n");
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
 void sig_handler(int signum)
 {
 	(void)signum;
@@ -335,21 +344,6 @@ void sig_handler(int signum)
 	}
 	else
 		ft_putstr_fd("\n", 2);
-}
-
-int	ft_lstsize(t_list *lst)
-{
-	int		count;
-	t_list	*tmp;
-
-	tmp = lst;
-	count = 0;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		count++;
-	}
-	return (count);
 }
 
 int	parse(char *line, char **envp, t_exec_data *e_data)
@@ -402,7 +396,6 @@ int	parse(char *line, char **envp, t_exec_data *e_data)
 		ft_close(e_data);
 		free_bonus_int(e_data->fd_pipe, 0, e_data->nb_node);
 		ft_wait(e_data);
-
 	}
 	free(lexer);
 	free_exec(exec);

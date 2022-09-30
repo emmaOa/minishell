@@ -34,7 +34,7 @@ void	free_exec(t_list *exec)
 
 	while (exec)
 	{
-		free_2d_array(((t_data *)exec->content)->args);
+		// free_2d_array(((t_data *)exec->content)->args);
 		free_2d_array(((t_data *)exec->content)->outfiles);
 		free_2d_array(((t_data *)exec->content)->append);
 		free_2d_array(((t_data *)exec->content)->hd);
@@ -51,4 +51,14 @@ void	free_exec(t_list *exec)
 		exec = exec->next;
 		free(tmp);
 	}
+}
+
+int	ft_len_2d(char **tabl)
+{
+	int	i;
+
+	i = 0;
+	while (tabl[i])
+		i++;
+	return (i);
 }
