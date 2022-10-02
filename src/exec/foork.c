@@ -98,6 +98,6 @@ int	mult_pipe(t_exec_data *e_data, t_list *exec)
 	if (e_data->name_built != NULL)
 		exec_builtins(exec, e_data);
 	else
-		exec_cmd(exec);
+		exec_cmd(exec, e_data);
 	return (0);
 }

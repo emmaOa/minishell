@@ -1,15 +1,15 @@
 #include"../../include/minishell.h"
 
-void	exec_cmd(t_list *exec)
+void	exec_cmd(t_list *exec, t_exec_data *e_data)
 {
 	char	*url;
+	char	**env;
 
-	
-	url = ft_url(ft_path(g_glob.envp), exec);
-	ft_putstr_fd(url, 2);
+	env = list_to_arr(e_data);
+	url = ft_url(ft_path(env), exec);
 	if (url == NULL)
 		ft_exit_bonus("command not founde");
-	if (execve(url, ((t_data *)exec->content)->args, g_glob.envp) < 0)
+	if (execve(url, ((t_data *)exec->content)->args, env) < 0)
 		ft_exit_bonus("command not execute");
 }
 

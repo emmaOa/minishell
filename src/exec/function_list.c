@@ -1,36 +1,40 @@
 #include"../../include/minishell.h"
 
-char	*check_home(void)
+char	*check_home(t_exec_data *e_data)
 {
 	int	i;
 	int	x;
+	char	**env;
 
 	i = 0;
 	x = 0;
-	while (g_glob.envp[i])
+	env = list_to_arr(e_data);
+	while (env[i])
 	{
-		if (ft_strncmp(g_glob.envp[i], "HOME", ft_strlen("HOME")) == 0)
-			return (check_home_utl(i));
+		if (ft_strncmp(env[i], "HOME", ft_strlen("HOME")) == 0)
+			return (check_home_utl(i, e_data));
 		i++;
 	}
 	return (NULL);
 }
 
-char	*check_home_utl(int i)
+char	*check_home_utl(int i, t_exec_data *e_data)
 {
 	int		x;
 	int		j;
 	char	*path;
+	char	**env;
 
 	x = 0;
-	path = malloc(ft_strlen(g_glob.envp[i]) - ft_strlen("HOME"));
+	env = list_to_arr(e_data);
+	path = malloc(ft_strlen(env[i]) - ft_strlen("HOME"));
 	j = 0;
-	while (g_glob.envp[i][j] != '=')
+	while (env[i][j] != '=')
 		j++;
 	j++;
-	while (g_glob.envp[i][j])
+	while (env[i][j])
 	{
-		path[x] = g_glob.envp[i][j];
+		path[x] = env[i][j];
 		x++;
 		j++;
 	}

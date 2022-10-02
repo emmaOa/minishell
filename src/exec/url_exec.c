@@ -18,12 +18,7 @@ char	*ft_path(char *env[])
 	if (!tmp)
 		ft_exit_bonus("path not founde: ");
 	i = 0;
-	while (tmp[i] && tmp[i] != '=')
-	{
-		tmp[i] = tmp[i + 1];
-		i++;
-	}
-	return (tmp);
+	return (ft_strchr(tmp, '=') + 1);
 }
 
 char	*ft_url(char *path, t_list *exec)

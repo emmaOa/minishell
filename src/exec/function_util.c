@@ -51,7 +51,11 @@ char 	**list_to_arr(t_exec_data *data)
 	data->ev = (char **)malloc(ft_lstsize_mini(data->head_env) * sizeof(char *));
 	while (tmp->next)
 	{
-		data->ev[i] = ft_strjoin(ft_strdup(tmp->key), tmp->cont);
+		if (tmp->cont)
+		{
+			data->ev[i] = ft_strjoin(ft_strdup(tmp->key), "=");
+			data->ev[i] = ft_strjoin(data->ev[i], tmp->cont);
+		}
 		tmp = tmp->next;
 		i++;
 	}

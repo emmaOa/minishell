@@ -28,7 +28,7 @@ void	cd_utl(t_exec_data *e_data, char **arv)
 		e_data->pwd = getcwd(buf, sizeof(buf));
 		if (nb_arv(arv) == 1
 			|| ft_strncmp(arv[1], "~", ft_strlen(arv[1])) == 0)
-			chdir(check_home());
+			chdir(check_home(e_data));
 		else
 		{
 			cur_pwd = ft_strjoin(ft_strdup("/"), arv[1]);
