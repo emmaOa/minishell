@@ -8,7 +8,7 @@ char	*check_home(t_exec_data *e_data)
 
 	i = 0;
 	x = 0;
-	env = list_to_arr(e_data);
+	env = list_to_arr(e_data->head_env);
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "HOME", ft_strlen("HOME")) == 0)
@@ -26,7 +26,7 @@ char	*check_home_utl(int i, t_exec_data *e_data)
 	char	**env;
 
 	x = 0;
-	env = list_to_arr(e_data);
+	env = list_to_arr(e_data->head_env);
 	path = malloc(ft_strlen(env[i]) - ft_strlen("HOME"));
 	j = 0;
 	while (env[i][j] != '=')

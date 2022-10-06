@@ -22,6 +22,8 @@ void	exec_builtins_utl(t_list *exec, t_exec_data *e_data, char **arv)
 		exit(0);
 	else if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
 		ft_cd(exec, e_data);
+	if (g_glob.child == 1)
+		exit(0);
 }
 
 int	exec_builtins(t_list *exec, t_exec_data *e_data)
@@ -34,7 +36,5 @@ int	exec_builtins(t_list *exec, t_exec_data *e_data)
 		arv = ((t_data *)exec->content)->args;
 		exec_builtins_utl(exec, e_data, arv);
 	}
-	if (e_data->nb_node != 1)
-		exit(0);
 	return (0);
 }

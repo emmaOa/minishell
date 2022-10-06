@@ -10,7 +10,7 @@ int	ft_open_outfiles(t_exec_data *data, t_list *exec)
 	name_files = ((t_data *)exec->content)->outfiles;
 	if (name_files)
 	{
-		while (i < count_args(name_files))
+		while (i < count_args(name_files) - 1)
 		{
 			data->fd_outfiles = open(name_files[i], O_CREAT | O_RDWR, 0666);
 			if (data->fd_outfiles == -1)

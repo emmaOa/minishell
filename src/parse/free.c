@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdoulyaz <kdoulyaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 03:39:53 by omeslall          #+#    #+#             */
-/*   Updated: 2022/09/23 02:57:54 by omeslall         ###   ########.fr       */
+/*   Updated: 2022/09/25 01:34:15 by kdoulyaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_exec(t_list *exec)
 
 	while (exec)
 	{
-		// free_2d_array(((t_data *)exec->content)->args);
+		free_2d_array(((t_data *)exec->content)->args);
 		free_2d_array(((t_data *)exec->content)->outfiles);
 		free_2d_array(((t_data *)exec->content)->append);
 		free_2d_array(((t_data *)exec->content)->hd);
@@ -51,14 +51,4 @@ void	free_exec(t_list *exec)
 		exec = exec->next;
 		free(tmp);
 	}
-}
-
-int	ft_len_2d(char **tabl)
-{
-	int	i;
-
-	i = 0;
-	while (tabl[i])
-		i++;
-	return (i);
 }

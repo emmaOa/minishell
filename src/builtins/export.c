@@ -62,9 +62,19 @@ void	with_alpha(t_exec_data *data)
 			if (env->key[0] == alpha)
 			{
 				if (env->cont)
-					printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+				{
+					ft_putstr_fd("declare -x ", g_glob.fd_built);
+					ft_putstr_fd(env->key, g_glob.fd_built);
+					ft_putstr_fd("=\"", g_glob.fd_built);
+					ft_putstr_fd(env->cont, g_glob.fd_built);
+					ft_putstr_fd("\"\n", g_glob.fd_built);
+				}
 				else
-					printf("declare -x %s\n", env->key);
+				{
+					ft_putstr_fd("declare -x ", g_glob.fd_built);
+					ft_putstr_fd(env->key, g_glob.fd_built);
+					ft_putstr_fd("\n", g_glob.fd_built);
+				}
 			}
 			env = env->next;
 		}
@@ -83,9 +93,19 @@ void	without_alpha(t_exec_data *data)
 		if (env->key[0] < 'A' || env->key[0] > 'Z')
 		{
 			if (env->cont)
-				printf("declare -x %s=\"%s\"\n", env->key, env->cont);
+			{
+				ft_putstr_fd("declare -x ", g_glob.fd_built);
+				ft_putstr_fd(env->key, g_glob.fd_built);
+				ft_putstr_fd("=\"", g_glob.fd_built);
+				ft_putstr_fd(env->cont, g_glob.fd_built);
+				ft_putstr_fd("\"\n", g_glob.fd_built);
+			}
 			else
-				printf("declare -x %s\n", env->key);
+			{
+				ft_putstr_fd("declare -x ", g_glob.fd_built);
+				ft_putstr_fd(env->key, g_glob.fd_built);
+				ft_putstr_fd("\n", g_glob.fd_built);
+			}
 		}
 		env = env->next;
 	}

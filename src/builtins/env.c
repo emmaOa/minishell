@@ -45,7 +45,12 @@ int	ft_env(t_exec_data *data)
 	while (env)
 	{
 		if (env->cont)
-			printf("%s=%s\n", env->key, env->cont);
+		{
+			ft_putstr_fd(env->key, g_glob.fd_built);
+			ft_putstr_fd("=", g_glob.fd_built);
+			ft_putstr_fd(env->cont, g_glob.fd_built);
+			ft_putstr_fd("\n", g_glob.fd_built);
+		}
 		env = env->next;
 	}
 	return (0);
@@ -58,7 +63,10 @@ int	printf_list(t_env_list *list)
 	tmp = list;
 	while (tmp)
 	{
-		printf("%s=%s\n", tmp->key, tmp->cont);
+		ft_putstr_fd(tmp->key, g_glob.fd_built);
+		ft_putstr_fd("=", g_glob.fd_built);
+		ft_putstr_fd(tmp->cont, g_glob.fd_built);
+		ft_putstr_fd("\n", g_glob.fd_built);
 		tmp = tmp->next;
 	}
 	return (0);

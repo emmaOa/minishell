@@ -15,13 +15,13 @@ int	ft_echo(char **arv)
 			i++;
 		while (arv[i])
 		{
-			printf("%s", arv[i]);
+			ft_putstr_fd(arv[i], g_glob.fd_built);
 			if (arv[i + 1])
-				printf(" ");
+				ft_putstr_fd(" ", g_glob.fd_built);
 			i++;
 		}
 		if (n == 0)
-			printf("\n");
+			ft_putstr_fd("\n", g_glob.fd_built);
 	}
 	return (0);
 }

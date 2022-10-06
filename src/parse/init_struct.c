@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdoulyaz <kdoulyaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:45:36 by omeslall          #+#    #+#             */
-/*   Updated: 2022/09/24 17:31:13 by omeslall         ###   ########.fr       */
+/*   Updated: 2022/09/25 01:33:23 by kdoulyaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishell.h"
 
-t_list	*init_execution(char **envp)
+t_list	*init_execution()
 {
 	t_list	*exec;
 
 	exec = malloc(sizeof(t_list));
-	exec->content = init_data(envp);
+	exec->content = init_data();
 	exec->next = NULL;
 	return (exec);
 }
 
-t_data	*init_data(char **envp)
+t_data	*init_data(void)
 {
 	t_data	*data;
 	int		i;
@@ -33,22 +33,11 @@ t_data	*init_data(char **envp)
 	data->error = 0;
 	data->inf = NULL;
 	data->infiles = NULL;
-	data->len_infiles = 0;
 	data->n_infiles = 0;
 	data->outfiles = NULL;
 	data->append = NULL;
 	data->hd = NULL;
 	data->if_hd = 0;
-	if (g_glob.g_env == 0)
-	{
-		g_glob.envp = create_envp(envp);
-		g_glob.g_env = 1;
-	}
-	// if (g_glob.g_exp == 0)
-	// {
-	// 	g_glob.exp = creat_export(envp);
-	// 	g_glob.g_exp = 1;
-	// }
 	return (data);
 }
 

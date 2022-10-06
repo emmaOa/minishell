@@ -5,12 +5,13 @@ void	exec_cmd(t_list *exec, t_exec_data *e_data)
 	char	*url;
 	char	**env;
 
-	env = list_to_arr(e_data);
+	env = list_to_arr(e_data->head_env);
 	url = ft_url(ft_path(env), exec);
 	if (url == NULL)
 		ft_exit_bonus("command not founde");
 	if (execve(url, ((t_data *)exec->content)->args, env) < 0)
 		ft_exit_bonus("command not execute");
+	ft_putstr_fd("cmn\n", 2);
 }
 
 void ft_p(char **str)

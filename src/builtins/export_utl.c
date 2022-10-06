@@ -41,7 +41,10 @@ void	printf_list_expo(t_env_list *list)
 	tmp = list;
 	while (tmp)
 	{
-		printf("declare -x %s%s\n", tmp->key, tmp->cont);
+		ft_putstr_fd("declare -x ", g_glob.fd_built);
+		ft_putstr_fd(tmp->key, g_glob.fd_built);
+		ft_putstr_fd(tmp->cont, g_glob.fd_built);
+		ft_putstr_fd("\n", g_glob.fd_built);
 		tmp = tmp->next;
 	}
 }
@@ -79,7 +82,11 @@ int	prin_if(t_env_list *t_env, t_env_list *t_without_key)
 			env = env->next;
 		}
 		if (i == 0)
-			printf("declare -x %s\n", without_key->key);
+		{
+			ft_putstr_fd("declare -x ", g_glob.fd_built);
+			ft_putstr_fd(without_key->key, g_glob.fd_built);
+			ft_putstr_fd("\n", g_glob.fd_built);
+		}
 		without_key = without_key->next;
 	}
 	return (0);

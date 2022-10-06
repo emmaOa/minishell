@@ -9,9 +9,10 @@ MANDATORY= src/minishell.c src/lexer/lexer.c src/lexer/token.c src/lexer/lexer_u
 		src/exec/foork.c src/exec/url_exec.c src/exec/open_close_wait.c src/exec/pipe.c\
 		src/exec/env_function.c src/exec/function_list.c src/exec/function_util.c\
 		src/exec/exec_cm.c src/errors_handle/handle_errors_utils1.c\
-		src/exec/lst_add_back.c\
-		src/parse/free.c src/parse/qaout_utils.c src/parse/qaout_utils1.c src/parse/redirections_utils.c\
-		src/parse/redirections_utils1.c src/parse/utils.c $(VRLIBFT)\
+		src/exec/lst_add_back.c src/exec/herdoc.c src/exec/signals.c\
+		src/exec/exec.c src/exec/list.c src/parse/redirection_utils1.c\
+		src/parse/free.c src/parse/qaout_utils.c src/parse/redirections_utils.c\
+		src/parse/utils.c $(VRLIBFT)\
 
 CC=cc
 FLAGS= -Wall -Werror -Wextra

@@ -32,11 +32,10 @@
 
 typedef struct s_glob
 {
+	struct s_env_list *head_env;
 	int		g_exit_status;
-	int		g_env;
 	int		child;
-	char	**envp;
-	int		dollar;
+	int		fd_built;
 }				t_glob;
 t_glob			g_glob;
 
@@ -49,7 +48,7 @@ typedef struct s_token
 		R_REDIRECTION = '>',
 		L_REDIRECTION = '<',
 		PIPE = '|',
-	}			type;
+	}			e_type;
 }				t_token;
 
 typedef struct t_lexer
@@ -89,13 +88,12 @@ typedef struct s_exec_data
    int    nb_arv;
    int    nb_node;
    int    **fd_pipe;
+   int	  *fd_her;
    int    fd_outfiles;
    int    forck;
    char   *url;
    int    i;
    int    infile;
-   int	  fd_her;
-   char	  **ev;
    struct s_env_list *head_env;
    struct s_env_list *env_list;
    struct s_env_list *key_without_cont;
@@ -113,15 +111,23 @@ t_token	*init_token(char *value, int type);
 t_token	*fill_token(t_lexer *lexer);
 int		get_type(char *value);
 int		is_a_special_char(char c);
-int	    parse(char *line, char **envp, t_exec_data *e_data);
+int	    parse(char *line, t_exec_data *e_data);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strequ(char *s1, char *s2);
 void	lexer_skip_whitespaces(t_lexer *lexer);
 t_token	*arg_token(t_lexer *lexer);
 void	run_qouate(t_lexer *lexer, char *c);
 void	free_token(t_token *token);
-t_list	*init_execution(char **envp);
-t_data	*init_data(char **envp);
+t_list	*init_execution(void);
+void	utils1_qaout(t_list *exec, char **tmp, char **arg);
+void	utils1_position_quote(int f, int *i, int *q, char *tmp);
+int		utils2_position_quote(int j, int *i, int *q, char *tmp);
+int		utils3_position_quote(int j, int *i, int *q, char *tmp);
+void	utils3_qaout_in_redi(char **tmp, char **arg, t_list *exec);
+void	utils2_qaout_in_redi(char **tmp, char **arg, t_list *exec);
+void	utils_expand(t_list *exec, char *value, char **tmp, int *i);
+void	skip_in_qaout(char *argv, int *i);
+t_data	*init_data(void);
 int		check_qaout(char *s);
 void	single_quote(char *value, char **arg, int i);
 int		position_quote_s(char *s, int f);
@@ -132,7 +138,7 @@ int		position_quote(char *s, int f);
 void	fill_args(t_list *exec, t_token *token);
 void	**ft_2d_realloc(void **arg, int size);
 int		len_2d_array(void **array);
-void	fill_pipe(t_list *exec, char **envp);
+void	fill_pipe(t_list *exec);
 void	fill_redirections(t_list *exec, t_token **token, t_lexer *lexer);
 void	fill_infile(t_list *exec, t_token *token);
 int		*ft_int_realloc(int *ptr, int size);
@@ -161,10 +167,8 @@ int		is_acceptable(char c);
 int		big_len(int s1, int s2);
 char	**create_envp(char **envp);
 int		count_args(char **args);
-int		get_char_index(char *str, char c);
-char	*get_variable_name(char *str);
-int		is_acceptable(char c);
 void	free_2d_array(char **arr);
+char	**add_env(char **strs, char *arg);
 
 //-----------------------------------------------------
 
@@ -202,7 +206,7 @@ int         ft_cd(t_list *exec, t_exec_data *e_data);
 char        *check_home(t_exec_data *e_data);
 char        *val_env(char **env);
 int         check_trash(char *buf);
-void		here_d(char *delimiter, t_exec_data *e_data);
+void		here_d(char *delimiter, t_exec_data *e_data, int len);
 void        exec_cmd(t_list *exec, t_exec_data *e_data);
 int     	ft_pipe(t_exec_data *e_data);
 void    	ft_exit_bonus(char *s);
@@ -218,7 +222,7 @@ void    	ft_free_int(int **tabl, int start, int len);
 void    	free_bonus_int(int **tabl, int start, int len);
 void        sig_handler(int signum);
 void        sig_handler_child(int signum);
-int     	check_inf(int *infiles, int len);
+int     	check_inf(int *infiles, int len, int nb_node, t_exec_data *e_data);
 int			exec_herdoc(t_list *exec, t_exec_data *e_data);
 void		sig_main(void);
 void		sig_child(void);
@@ -239,5 +243,11 @@ char		*check_home_utl(int i, t_exec_data *e_data);
 void		add_back_plus_equal(t_exec_data *data, char *cont, char *key);
 void		add_back_equal(t_exec_data *data, char *cont, char *key);
 void 		ft_p(char **str);
-char		**list_to_arr(t_exec_data *data);
+char	 	**list_to_arr(t_env_list *env);
+int			mult_cmd(t_exec_data *e_data, t_list *exec);
+int			out_file(t_exec_data *e_data, t_list *exec);
+int			execution(t_exec_data *e_data, t_list *exec);
+char		*random_name(void);
+int			list(t_exec_data *e_data, t_list *exec);
+
 #endif

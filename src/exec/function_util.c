@@ -40,25 +40,27 @@ void	dele_node(t_env_list *node)
 	return ;
 }
 
-char 	**list_to_arr(t_exec_data *data)
+char 	**list_to_arr(t_env_list *env)
 {
 	int i;
+	char **ev;
 
 	i = 0;
 	t_env_list *tmp;
-	tmp = data->head_env;
-	free_2d_array(data->ev);
-	data->ev = (char **)malloc(ft_lstsize_mini(data->head_env) * sizeof(char *));
+	tmp = env;
+	ev = NULL;
+	free_2d_array(ev);
+	ev = (char **)malloc(ft_lstsize_mini(env) * sizeof(char *));
 	while (tmp->next)
 	{
 		if (tmp->cont)
 		{
-			data->ev[i] = ft_strjoin(ft_strdup(tmp->key), "=");
-			data->ev[i] = ft_strjoin(data->ev[i], tmp->cont);
+			ev[i] = ft_strjoin(ft_strdup(tmp->key), "=");
+			ev[i] = ft_strjoin(ev[i], tmp->cont);
 		}
 		tmp = tmp->next;
 		i++;
 	}
-	data->ev[i] = NULL;
-	return (data->ev);
+	ev[i] = NULL;
+	return (ev);
 }

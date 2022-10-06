@@ -26,23 +26,27 @@ int main(int ac,char **av,char **envp)
 	if (ac == 1)
 	{
 		e_data = malloc(sizeof(t_exec_data));
+
 		e_data->pwd = val_env(envp);
 		e_data->url = NULL;
-		e_data->fd_outfiles = -2;
-		e_data->infile = -2;
-		g_glob.child = 0;
-		e_data->ev = NULL;
+		e_data->fd_her = NULL;
+		e_data->nb_node = 0;
 		arr_to_list(e_data, envp);
+		g_glob.head_env = e_data->head_env;
 		sig_main();
 		while(1337)
-		{	
+		{
+			g_glob.child = 0;
+			g_glob.fd_built = 1;
+			e_data->infile = -2;
+			e_data->fd_outfiles = -2;
 			line = readline("minishell:");
 			if (!line)
 				break;
 			if (line && *line)
 				add_history (line);
 			if(*line)
-				parse(line, envp, e_data);
+				parse(line, e_data);
 			// sig_main();
 		}
 	}
