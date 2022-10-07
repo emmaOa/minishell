@@ -48,12 +48,11 @@ int	mult_cmd(t_exec_data *e_data, t_list *exec)
 		e_data->infile = check_inf(((t_data *)exec->content)->infiles,((t_data *)exec->content)->n_infiles, e_data->i, e_data);
 	out_file(e_data, exec);
 	e_data = is_builtins(exec, e_data);
+	g_glob.child = 1;
 	e_data->forck = fork();
 	if (e_data->forck == -1)
 		ft_exit_bonus("error: failed in fork");
-	g_glob.child = 1;
 	if (e_data->forck == 0)
 		mult_pipe(e_data, exec);
-
 	return (0);
 }

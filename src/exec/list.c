@@ -6,20 +6,18 @@ int	list(t_exec_data *e_data, t_list *exec)
 	e_data = is_builtins(exec, e_data);
 	if (e_data->nb_node > 1 || (e_data->nb_node == 1 && !e_data->name_built))
 	{
-		ft_putstr_fd("multi_node\n", 2);
 		ft_pipe(e_data);
 		e_data->i = 0;
 		while (exec)
 		{
 			mult_cmd(e_data, exec);
-			// wait(NULL);
-			// // close()
 			e_data->i++;
 			exec = exec->next;
 		}
-		ft_wait(e_data);
+		printf("multi_node\n");
 		ft_close(e_data);
 		free_bonus_int(e_data->fd_pipe, 0, e_data->nb_node);
+		ft_wait(e_data);
 	}
 	else if (e_data->nb_node == 1 && e_data->name_built)
 	{
