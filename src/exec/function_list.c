@@ -2,9 +2,9 @@
 
 char	*check_home(t_exec_data *e_data)
 {
-	int	i;
-	int	x;
 	char	**env;
+	int		i;
+	int		x;
 
 	i = 0;
 	x = 0;

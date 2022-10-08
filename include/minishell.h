@@ -32,7 +32,7 @@
 
 typedef struct s_glob
 {
-	struct s_env_list *head_env;
+	struct	s_env_list *head_env;
 	int		g_exit_status;
 	int		child;
 	int		fd_built;
@@ -169,6 +169,7 @@ char	**create_envp(char **envp);
 int		count_args(char **args);
 void	free_2d_array(char **arr);
 char	**add_env(char **strs, char *arg);
+int		norm1(t_list *exec, char **value, int i);
 
 //-----------------------------------------------------
 
@@ -249,5 +250,10 @@ int			out_file(t_exec_data *e_data, t_list *exec);
 int			execution(t_exec_data *e_data, t_list *exec);
 char		*random_name(void);
 int			list(t_exec_data *e_data, t_list *exec);
+void		init_e_data(t_exec_data *e_data, char **envp);
+void		init_global();
+void		init_in_out(t_exec_data *e_data);
+void		check_line(char *line, t_exec_data *e_data);
+int			list_one_node(t_exec_data *e_data, t_list *exec);
 
 #endif

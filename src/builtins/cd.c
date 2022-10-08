@@ -12,12 +12,11 @@ int	ft_cd(t_list *exec, t_exec_data *e_data)
 		ft_putstr_fd("minishell: cd: too many arguments\n", g_glob.fd_built);
 	if (errno != 0)
 	{
-		ft_putstr_fd("minishell cd: ", 2);		
-		ft_putstr_fd(arv[1], 2);		
-		ft_putstr_fd(":", 2);		
-		ft_putstr_fd(strerror(errno), 2);		
-		ft_putstr_fd("\n", 2);		
-
+		ft_putstr_fd("minishell cd: ", 2);
+		ft_putstr_fd(arv[1], 2);
+		ft_putstr_fd(":", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
 	}
 	return (0);
 }

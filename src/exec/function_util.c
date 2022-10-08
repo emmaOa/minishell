@@ -2,7 +2,7 @@
 
 int	nb_arv(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -12,10 +12,10 @@ int	nb_arv(char **str)
 	return (i);
 }
 
-char *ft_strndup(char *str, int len)
+char	*ft_strndup(char *str, int len)
 {
-	char *c;
-	int  i;
+	int		i;
+	char	*c;
 
 	i = 0;
 	c = ft_calloc(len + 1, sizeof(char));
@@ -40,13 +40,13 @@ void	dele_node(t_env_list *node)
 	return ;
 }
 
-char 	**list_to_arr(t_env_list *env)
+char	**list_to_arr(t_env_list *env)
 {
-	int i;
-	char **ev;
+	t_env_list	*tmp;
+	char		**ev;
+	int			i;
 
 	i = 0;
-	t_env_list *tmp;
 	tmp = env;
 	ev = NULL;
 	free_2d_array(ev);

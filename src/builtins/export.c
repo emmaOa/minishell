@@ -48,6 +48,24 @@ int	ft_export(t_exec_data *data)
 	return (0);
 }
 
+void	put_with_alpha(t_env_list	*env)
+{
+	if (env->cont)
+	{
+		ft_putstr_fd("declare -x ", g_glob.fd_built);
+		ft_putstr_fd(env->key, g_glob.fd_built);
+		ft_putstr_fd("=\"", g_glob.fd_built);
+		ft_putstr_fd(env->cont, g_glob.fd_built);
+		ft_putstr_fd("\"\n", g_glob.fd_built);
+	}
+	else
+	{
+		ft_putstr_fd("declare -x ", g_glob.fd_built);
+		ft_putstr_fd(env->key, g_glob.fd_built);
+		ft_putstr_fd("\n", g_glob.fd_built);
+	}
+}
+
 void	with_alpha(t_exec_data *data)
 {
 	int			alpha;
@@ -60,22 +78,7 @@ void	with_alpha(t_exec_data *data)
 		while (env)
 		{
 			if (env->key[0] == alpha)
-			{
-				if (env->cont)
-				{
-					ft_putstr_fd("declare -x ", g_glob.fd_built);
-					ft_putstr_fd(env->key, g_glob.fd_built);
-					ft_putstr_fd("=\"", g_glob.fd_built);
-					ft_putstr_fd(env->cont, g_glob.fd_built);
-					ft_putstr_fd("\"\n", g_glob.fd_built);
-				}
-				else
-				{
-					ft_putstr_fd("declare -x ", g_glob.fd_built);
-					ft_putstr_fd(env->key, g_glob.fd_built);
-					ft_putstr_fd("\n", g_glob.fd_built);
-				}
-			}
+				put_with_alpha(env);
 			env = env->next;
 		}
 		env = data->head_env;

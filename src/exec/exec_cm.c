@@ -14,10 +14,11 @@ void	exec_cmd(t_list *exec, t_exec_data *e_data)
 	ft_putstr_fd("cmn\n", 2);
 }
 
-void ft_p(char **str)
+void	ft_p(char **str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (str[i])
 	{
 		printf("------>: %s <------\n", str[i]);

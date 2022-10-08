@@ -3,6 +3,7 @@
 t_exec_data	*is_builtins(t_list *exec, t_exec_data *e_data)
 {
 	char	**arv;
+
 	if (((t_data *)exec->content)->args)
 	{
 		arv = ((t_data *)exec->content)->args;

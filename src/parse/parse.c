@@ -121,7 +121,7 @@ int	norm1(t_list *exec, char **value, int i)
 
 int	check_inf(int *infiles, int len, int nb_node, t_exec_data *e_data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < len)
@@ -140,7 +140,6 @@ int	parse(char *line, t_exec_data *e_data)
 	t_token	*token;
 	t_lexer	*lexer;
 	t_list	*exec;
-	(void)e_data;
 
 	if (!handle_errors(line))
 		return (0);
@@ -156,7 +155,6 @@ int	parse(char *line, t_exec_data *e_data)
 	printer(exec);
 	exec_herdoc(exec, e_data);
 	list(e_data, exec);
-	// execution(e_data, exec);
 	free(lexer);
 	free_exec(exec);
 	// system("leaks minishell");
