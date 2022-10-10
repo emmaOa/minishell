@@ -14,6 +14,8 @@ int	list(t_exec_data *e_data, t_list *exec)
 			e_data->fd_outfiles = -2;
 			if (e_data->fd_her[e_data->i] != -2)
 				e_data->infile = e_data->fd_her[e_data->i];
+			if (e_data->infile != -2 || ((t_data *)exec->content)->infiles)
+				e_data->infile = check_inf(((t_data *)exec->content)->infiles, ((t_data *)exec->content)->n_infiles, e_data);
 			mult_cmd(e_data, exec);
 			e_data->i++;
 			exec = exec->next;

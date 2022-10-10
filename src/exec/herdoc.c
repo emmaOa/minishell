@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:54:05 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 16:26:56 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:50:51 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	here_d(char *delimiter, t_exec_data *e_data, int fd_hd)
 		{
 			if (line)
 			{
-				ft_putnbr_fd(e_data->infile, 2);
 				if (g_glob.expand_hd == 0 && check_exp(line) == 1)
 					ft_putstr_fd(ft_ex_hd(line, e_data), fd_hd);
 				else
@@ -40,10 +39,14 @@ void	here_d(char *delimiter, t_exec_data *e_data, int fd_hd)
 
 int	check_exp(char *line)
 {
-	if (line[0] == '$')
-		return (1);
-	else
-		return (0);
+	if (ft_strlen(line) != 1)
+	{
+		if (line[0] == '$' && (line[1] != '\'' && line[1] != '"'))
+			return (1);
+		else
+			return (0);
+	}
+	return (0);
 }
 
 char	*ft_ex_hd(char *line, t_exec_data *e_data)
@@ -89,6 +92,7 @@ int	exec_herdoc(t_list *exec, t_exec_data *e_data)
 	t_list	*node;
 	char	*value;
 	int		id_fork;
+	char	*name_hd;
 	int		len;
 	int		i;
 
@@ -104,16 +108,15 @@ int	exec_herdoc(t_list *exec, t_exec_data *e_data)
 			i = 0;
 			while (((t_data *)node->content)->hd[i])
 			{
+				name_hd = malloc(10);
+				name_hd = random_name();
 				g_glob.expand_hd = 0;
-				e_data->fd_her[len] = open(ft_strjoin(ft_strdup("/tmp/"), random_name()), O_CREAT | O_RDWR, 0666);
-				ft_putstr_fd("----->>>>", 2);
-				ft_putnbr_fd(e_data->fd_her[len], 2);
+				e_data->fd_her[len] = open(ft_strjoin(ft_strdup("/tmp/"), name_hd), O_CREAT | O_RDWR, 0666);
 				if (e_data->fd_her[len] == -1)
 				{
 					((t_data *)exec->content)->inf = ft_strdup(((t_data *)node->content)->hd[i]);
 					((t_data *)exec->content)->error = 1;
 				}
-				e_data->infile = e_data->fd_her[len];
 				if (check_qaout(((t_data *)node->content)->hd[i]))
 				{
         			norm1(exec, &value, i);
@@ -128,6 +131,8 @@ int	exec_herdoc(t_list *exec, t_exec_data *e_data)
 					here_d(((t_data *)node->content)->hd[i], e_data, e_data->fd_her[len]);
 				wait(NULL);
 				g_glob.child = 0;
+				close(e_data->fd_her[len]);
+				e_data->fd_her[len] = open(ft_strjoin(ft_strdup("/tmp/"), name_hd), O_CREAT | O_RDWR, 0666);
 				i++;
 			}
 		}
