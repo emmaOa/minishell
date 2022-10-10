@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/08/31 13:47:59 by omeslall         ###   ########.fr       */
+/*   Updated: 2022/10/10 01:09:06 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_glob
 	int		g_exit_status;
 	int		child;
 	int		fd_built;
+	int		expand_hd;
 }				t_glob;
 t_glob			g_glob;
 
@@ -207,7 +208,7 @@ int         ft_cd(t_list *exec, t_exec_data *e_data);
 char        *check_home(t_exec_data *e_data);
 char        *val_env(char **env);
 int         check_trash(char *buf);
-void		here_d(char *delimiter, t_exec_data *e_data, int len);
+void		here_d(char *delimiter, t_exec_data *e_data, int fd_hd);
 void        exec_cmd(t_list *exec, t_exec_data *e_data);
 int     	ft_pipe(t_exec_data *e_data);
 void    	ft_exit_bonus(char *s);
@@ -223,7 +224,7 @@ void    	ft_free_int(int **tabl, int start, int len);
 void    	free_bonus_int(int **tabl, int start, int len);
 void        sig_handler(int signum);
 void        sig_handler_child(int signum);
-int     	check_inf(int *infiles, int len, int nb_node, t_exec_data *e_data);
+int     	check_inf(int *infiles, int len, t_exec_data *e_data);
 int			exec_herdoc(t_list *exec, t_exec_data *e_data);
 void		sig_main(void);
 void		sig_child(void);
@@ -255,5 +256,7 @@ void		init_global();
 void		init_in_out(t_exec_data *e_data);
 void		check_line(char *line, t_exec_data *e_data);
 int			list_one_node(t_exec_data *e_data, t_list *exec);
+char		*ft_ex_hd(char *line, t_exec_data *e_data);
+int			check_exp(char *line);
 
 #endif

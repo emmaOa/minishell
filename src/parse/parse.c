@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parce.c                                            :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 21:46:55 by omeslall          #+#    #+#             */
-/*   Updated: 2022/09/24 00:09:09 by omeslall         ###   ########.fr       */
+/*   Updated: 2022/10/10 00:42:21 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	norm1(t_list *exec, char **value, int i)
 	return (0);
 }
 
-int	check_inf(int *infiles, int len, int nb_node, t_exec_data *e_data)
+int	check_inf(int *infiles, int len, t_exec_data *e_data)
 {
 	int	i;
 
@@ -130,8 +130,8 @@ int	check_inf(int *infiles, int len, int nb_node, t_exec_data *e_data)
 			return (infiles[i]);
 		i++;
 	}
-	if (e_data->fd_her[nb_node] != -2)
-		return (e_data->fd_her[nb_node]);
+	if (e_data->infile != -2)
+		return (e_data->infile);
 	return (infiles[len - 1]);
 }
 

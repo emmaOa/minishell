@@ -27,11 +27,15 @@ void	start_foork(t_exec_data *e_data)
 {
 	if (e_data->infile != -2)
 	{
+		ft_putstr_fd("----->", 2);
+		ft_putnbr_fd(e_data->infile, 2);
 		if (dup2(e_data->infile, 0) < 0)
 			ft_exit_bonus("failed dup2 stdin first command0");
 	}
 	if (e_data->fd_outfiles != -2)
 	{
+		ft_putstr_fd("----->>", 2);
+		ft_putnbr_fd(e_data->fd_outfiles, 2);
 		if (dup2(e_data->fd_outfiles, 1) < 0)
 			ft_exit_bonus("failed dup2 stdin first command1");
 	}
@@ -106,5 +110,7 @@ int	mult_pipe(t_exec_data *e_data, t_list *exec)
 		exec_builtins(exec, e_data);
 	else if (((t_data *)exec->content)->args)
 		exec_cmd(exec, e_data);
+	else
+		exit (0);
 	return (0);
 }

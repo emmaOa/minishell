@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 12:59:53 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/25 21:13:07 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/11/10 19:46:32 by omeslall          #+#    #+#             */
+/*   Updated: 2021/11/10 19:46:49 by omeslall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
 char	*ft_strchr(const char *str, int c)
 {

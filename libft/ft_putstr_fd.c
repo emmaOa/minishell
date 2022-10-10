@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 20:28:36 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/26 03:47:39 by iouazzan         ###   ########.fr       */
+/*   Created: 2022/10/09 22:27:45 by iouazzan          #+#    #+#             */
+/*   Updated: 2022/10/09 22:27:47 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

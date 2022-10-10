@@ -9,9 +9,10 @@ void	exec_cmd(t_list *exec, t_exec_data *e_data)
 	url = ft_url(ft_path(env), exec);
 	if (url == NULL)
 		ft_exit_bonus("command not founde");
+	ft_putnbr_fd(e_data->infile, 2);
+	// ft_putnbr_fd(e_data->fd_outfiles, 2);
 	if (execve(url, ((t_data *)exec->content)->args, env) < 0)
 		ft_exit_bonus("command not execute");
-	ft_putstr_fd("cmn\n", 2);
 }
 
 void	ft_p(char **str)

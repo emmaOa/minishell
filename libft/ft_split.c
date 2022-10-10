@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 20:30:45 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/25 22:34:13 by iouazzan         ###   ########.fr       */
+/*   Created: 2022/10/09 22:27:51 by iouazzan          #+#    #+#             */
+/*   Updated: 2022/10/09 22:27:54 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 #include<stdio.h>
 
 static int	get_count(char const *s, char d)

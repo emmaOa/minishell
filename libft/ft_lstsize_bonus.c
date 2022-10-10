@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 01:50:33 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/26 01:50:38 by iouazzan         ###   ########.fr       */
+/*   Created: 2022/10/09 22:27:17 by iouazzan          #+#    #+#             */
+/*   Updated: 2022/10/09 22:27:20 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
 int	ft_lstsize(t_list *lst)
 {

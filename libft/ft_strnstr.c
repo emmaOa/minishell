@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ftstrnstr.c                                     :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 18:39:51 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/25 22:01:38 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/11/10 20:53:50 by omeslall          #+#    #+#             */
+/*   Updated: 2021/11/14 18:57:06 by omeslall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
 char	*ft_strnstr(char *str, char *to_find, size_t n)
 {

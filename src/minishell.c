@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:50:37 by omeslall          #+#    #+#             */
-/*   Updated: 2022/08/24 13:54:47 by omeslall         ###   ########.fr       */
+/*   Updated: 2022/10/09 22:46:42 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_global(void)
 {
 	g_glob.child = 0;
 	g_glob.fd_built = 1;
+	g_glob.expand_hd = 0;
 }
 
 void	init_in_out(t_exec_data *e_data)
