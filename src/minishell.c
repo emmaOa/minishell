@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:50:37 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/09 22:46:42 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:36:10 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int	main(int ac, char **av, char **envp)
 			check_line(line, e_data);
 		}
 	}
+	system("leaks minishell");
 	return (errno);
 }

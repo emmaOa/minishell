@@ -5,11 +5,11 @@ MANDATORY= src/minishell.c src/lexer/lexer.c src/lexer/token.c src/lexer/lexer_u
 		src/parse/envp.c src/errors_handle/handle_errors.c src/errors_handle/handle_errors_utils.c\
 		src/builtins/builtins.c src/builtins/check_builtins.c src/builtins/cd.c\
 		src/builtins/echo.c src/builtins/env.c src/builtins/export.c src/builtins/export_utl.c\
-		src/builtins/pwd.c src/builtins/unset.c src/exec/arry_function.c\
+		src/builtins/pwd.c src/builtins/unset.c src/builtins/put_fd_built.c src/exec/arry_function.c\
 		src/exec/foork.c src/exec/url_exec.c src/exec/open_close_wait.c src/exec/pipe.c\
 		src/exec/env_function.c src/exec/function_list.c src/exec/function_util.c\
-		src/exec/exec_cm.c src/errors_handle/handle_errors_utils1.c\
-		src/exec/lst_add_back.c src/exec/herdoc.c src/exec/signals.c\
+		src/exec/exec_cm.c src/errors_handle/handle_errors_utils1.c src/exec/start_foork.c\
+		src/exec/lst_add_back.c src/exec/herdoc.c src/exec/signals.c src/exec/herdoc_utl.c\
 		src/exec/exec.c src/exec/list.c src/parse/redirection_utils1.c\
 		src/parse/free.c src/parse/qaout_utils.c src/parse/redirections_utils.c\
 		src/parse/utils.c $(VRLIBFT)\

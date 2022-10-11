@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 21:46:55 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/10 00:42:21 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:35:57 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,10 +153,11 @@ int	parse(char *line, t_exec_data *e_data)
 		token = get_next_token(lexer);
 	}
 	printer(exec);
+	e_data->fd_her = malloc(ft_lstsize(exec) * sizeof(int));
 	exec_herdoc(exec, e_data);
 	list(e_data, exec);
 	free(lexer);
 	free_exec(exec);
-	// system("leaks minishell");
+	free(e_data->fd_her);
 	return (0);
 }

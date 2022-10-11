@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdoulyaz <kdoulyaz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 09:59:48 by omeslall          #+#    #+#             */
-/*   Updated: 2022/09/24 19:49:12 by kdoulyaz         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:01:59 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	expand(t_list *exec, char *value, char **arg)
 
 char	*fill_expand(t_list *exec, char *value)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	**env;
 
 	i = -1;

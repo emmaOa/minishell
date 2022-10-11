@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:54:05 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:50:51 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:29:48 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,107 +37,80 @@ void	here_d(char *delimiter, t_exec_data *e_data, int fd_hd)
 	}
 }
 
-int	check_exp(char *line)
-{
-	if (ft_strlen(line) != 1)
-	{
-		if (line[0] == '$' && (line[1] != '\'' && line[1] != '"'))
-			return (1);
-		else
-			return (0);
-	}
-	return (0);
-}
-
-char	*ft_ex_hd(char *line, t_exec_data *e_data)
-{
-	t_env_list	*env;
-
-	env = e_data->head_env;
-	while (env)
-	{
-		if (ft_strcmp((line + 1), env->key) == 0)
-			return (env->cont);
-		env = env->next;
-	}
-	return ("");
-}
-
-char	*random_name(void)
-{
-	char	*name;
-	char	buff;
-	int		i;
-	int		fd;
-
-	name = malloc(10);
-	i = 0;
-	buff = '\0';
-	fd = open("/dev/random", O_RDWR);
-	while (i < 9)
-	{
-		read(fd, &buff, 1);
-		if (buff >= 97 && buff <= 122)
-		{
-			name[i] = buff;
-			i++;
-		}
-	}
-	name[9] = 0;
-	return (name);
-}
-
 int	exec_herdoc(t_list *exec, t_exec_data *e_data)
 {
 	t_list	*node;
-	char	*value;
-	int		id_fork;
-	char	*name_hd;
 	int		len;
-	int		i;
 
 	node = exec;
 	len = 0;
-	value = NULL;
-	e_data->fd_her = malloc(ft_lstsize(exec) * sizeof(int));
 	while (node)
 	{
 		e_data->fd_her[len] = -2;
 		if (((t_data *)node->content)->hd)
 		{
-			i = 0;
-			while (((t_data *)node->content)->hd[i])
-			{
-				name_hd = malloc(10);
-				name_hd = random_name();
-				g_glob.expand_hd = 0;
-				e_data->fd_her[len] = open(ft_strjoin(ft_strdup("/tmp/"), name_hd), O_CREAT | O_RDWR, 0666);
-				if (e_data->fd_her[len] == -1)
-				{
-					((t_data *)exec->content)->inf = ft_strdup(((t_data *)node->content)->hd[i]);
-					((t_data *)exec->content)->error = 1;
-				}
-				if (check_qaout(((t_data *)node->content)->hd[i]))
-				{
-        			norm1(exec, &value, i);
-					((t_data *)node->content)->hd[i] = value;
-					g_glob.expand_hd = 1;
-				}
-				g_glob.child = 1;
-				id_fork = fork();
-				if (id_fork == -1)
-					ft_exit_bonus("error: failed in fork herdoc");
-				if (id_fork == 0)
-					here_d(((t_data *)node->content)->hd[i], e_data, e_data->fd_her[len]);
-				wait(NULL);
-				g_glob.child = 0;
-				close(e_data->fd_her[len]);
-				e_data->fd_her[len] = open(ft_strjoin(ft_strdup("/tmp/"), name_hd), O_CREAT | O_RDWR, 0666);
-				i++;
-			}
+			mult_hd(exec, e_data, node, len);
 		}
 		len++;
 		node = node->next;
 	}
 	return (0);
+}
+
+int	mult_hd(t_list *exec, t_exec_data *e_data, t_list *node, int len)
+{
+	char	*name_hd;
+	int		i;
+
+	i = 0;
+	while (((t_data *)node->content)->hd[i])
+	{
+		name_hd = malloc(10);
+		name_hd = random_name();
+		g_glob.expand_hd = 0;
+		e_data->fd_her[len] = open
+			(ft_strjoin(ft_strdup("/tmp/"), name_hd), O_CREAT | O_RDWR, 0666);
+		if (if_cond
+			(exec, ((t_data *)node->content)->hd[i], e_data->fd_her[len], i))
+			((t_data *)node->content)->hd[i] = if_cond(exec,
+					((t_data *)node->content)->hd[i], e_data->fd_her[len], i);
+		g_glob.child = 1;
+		fork_her(e_data, ((t_data *)node->content)->hd[i], e_data->fd_her[len]);
+		g_glob.child = 0;
+		close(e_data->fd_her[len]);
+		e_data->fd_her[len] = open
+			(ft_strjoin(ft_strdup("/tmp/"), name_hd), O_CREAT | O_RDWR, 0666);
+		i++;
+	}
+	return (0);
+}
+
+void	fork_her(t_exec_data *e_data, char *delimiter, int fd_her)
+{
+	int	id_fork;
+
+	id_fork = fork();
+	if (id_fork == -1)
+		ft_exit_bonus("error: failed in fork herdoc");
+	if (id_fork == 0)
+		here_d(delimiter, e_data, fd_her);
+	wait(NULL);
+}
+
+char	*if_cond(t_list *exec, char *delimiter, int fd_hr, int i)
+{
+	char	*value;
+
+	value = NULL;
+	if (fd_hr == -1)
+	{
+		((t_data *)exec->content)->inf = ft_strdup(delimiter);
+		((t_data *)exec->content)->error = 1;
+	}
+	if (check_qaout(delimiter))
+	{
+		norm1(exec, &value, i);
+		g_glob.expand_hd = 1;
+	}
+	return (value);
 }

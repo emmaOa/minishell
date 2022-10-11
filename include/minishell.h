@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/10 01:09:06 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:25:35 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,5 +258,10 @@ void		check_line(char *line, t_exec_data *e_data);
 int			list_one_node(t_exec_data *e_data, t_list *exec);
 char		*ft_ex_hd(char *line, t_exec_data *e_data);
 int			check_exp(char *line);
+void		put_with_alpha(t_env_list	*env);
+void		start_foork_n_out(t_exec_data *e_data);
+int			mult_hd(t_list *exec, t_exec_data *e_data, t_list *node, int len);
+char		*if_cond(t_list *exec, char *delimiter, int fd_hr, int i);
+void		fork_her(t_exec_data *e_data, char *delimiter, int fd_her);
 
 #endif

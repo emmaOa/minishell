@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 17:58:54 by iouazzan          #+#    #+#             */
+/*   Updated: 2022/10/10 18:03:38 by iouazzan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include"../../include/minishell.h"
 
 int	check_valid_enva_jout(char *str)
@@ -46,24 +58,6 @@ int	ft_export(t_exec_data *data)
 		lstadd_back_plus(&data->head_env, data->key_without_cont);
 	}
 	return (0);
-}
-
-void	put_with_alpha(t_env_list	*env)
-{
-	if (env->cont)
-	{
-		ft_putstr_fd("declare -x ", g_glob.fd_built);
-		ft_putstr_fd(env->key, g_glob.fd_built);
-		ft_putstr_fd("=\"", g_glob.fd_built);
-		ft_putstr_fd(env->cont, g_glob.fd_built);
-		ft_putstr_fd("\"\n", g_glob.fd_built);
-	}
-	else
-	{
-		ft_putstr_fd("declare -x ", g_glob.fd_built);
-		ft_putstr_fd(env->key, g_glob.fd_built);
-		ft_putstr_fd("\n", g_glob.fd_built);
-	}
 }
 
 void	with_alpha(t_exec_data *data)

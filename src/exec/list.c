@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 18:00:05 by iouazzan          #+#    #+#             */
+/*   Updated: 2022/10/11 14:33:01 by iouazzan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include"../../include/minishell.h"
 
 int	list(t_exec_data *e_data, t_list *exec)
@@ -10,12 +22,12 @@ int	list(t_exec_data *e_data, t_list *exec)
 		e_data->i = 0;
 		while (exec)
 		{
-			e_data->infile = -2;
-			e_data->fd_outfiles = -2;
+			init_in_out(e_data);
 			if (e_data->fd_her[e_data->i] != -2)
 				e_data->infile = e_data->fd_her[e_data->i];
 			if (e_data->infile != -2 || ((t_data *)exec->content)->infiles)
-				e_data->infile = check_inf(((t_data *)exec->content)->infiles, ((t_data *)exec->content)->n_infiles, e_data);
+				e_data->infile = check_inf(((t_data *)exec->content)->infiles,
+						((t_data *)exec->content)->n_infiles, e_data);
 			mult_cmd(e_data, exec);
 			e_data->i++;
 			exec = exec->next;
@@ -32,7 +44,8 @@ int	list(t_exec_data *e_data, t_list *exec)
 int	list_one_node(t_exec_data *e_data, t_list *exec)
 {
 	if (((t_data *)exec->content)->infiles)
-		e_data->infile = check_inf(((t_data *)exec->content)->infiles, ((t_data *)exec->content)->n_infiles, e_data);
+		e_data->infile = check_inf(((t_data *)exec->content)->infiles,
+				((t_data *)exec->content)->n_infiles, e_data);
 	out_file(e_data, exec);
 	e_data = is_builtins(exec, e_data);
 	if (e_data->name_built)

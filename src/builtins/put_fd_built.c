@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   put_fd_built.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 17:59:00 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:59:01 by iouazzan         ###   ########.fr       */
+/*   Created: 2022/10/10 18:03:27 by iouazzan          #+#    #+#             */
+/*   Updated: 2022/10/10 18:03:42 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishell.h"
 
-int	ft_pwd(t_exec_data *data)
+void	put_with_alpha(t_env_list	*env)
 {
-	char	buf[1000];
-
-	if (getcwd(buf, sizeof(buf)))
+	if (env->cont)
 	{
-		ft_putstr_fd(buf, g_glob.fd_built);
-		ft_putstr_fd("\n", g_glob.fd_built);
+		ft_putstr_fd("declare -x ", g_glob.fd_built);
+		ft_putstr_fd(env->key, g_glob.fd_built);
+		ft_putstr_fd("=\"", g_glob.fd_built);
+		ft_putstr_fd(env->cont, g_glob.fd_built);
+		ft_putstr_fd("\"\n", g_glob.fd_built);
 	}
 	else
 	{
-		ft_putstr_fd(data->pwd, g_glob.fd_built);
+		ft_putstr_fd("declare -x ", g_glob.fd_built);
+		ft_putstr_fd(env->key, g_glob.fd_built);
 		ft_putstr_fd("\n", g_glob.fd_built);
 	}
-	return (0);
 }
