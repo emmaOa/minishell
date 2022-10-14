@@ -78,7 +78,10 @@ int	ft_unset(t_exec_data *data)
 		else
 		{
 			if (ft_unset_utl(data, arv->key) == 1)
+			{
+				
 				return (0);
+			}
 		}
 		arv = arv->next;
 	}

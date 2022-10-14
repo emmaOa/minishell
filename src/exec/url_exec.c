@@ -52,9 +52,13 @@ char	*ft_url(char *path, t_list *exec)
 		cmd_path = ft_strjoin(ft_strdup(url[i]), "/");
 		cmd_path = ft_strjoin(cmd_path, ((t_data *)exec->content)->args[0]);
 		if (access(cmd_path, F_OK) == 0)
+		{
+			free_2d_array(url);
 			return (cmd_path);
+		}
 		free(cmd_path);
 		i++;
 	}
+	free_2d_array(url);
 	return (NULL);
 }

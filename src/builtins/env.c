@@ -29,26 +29,6 @@ void	val_env_utl(char *val, char **env, int i)
 	val[x] = '\0';
 }
 
-char	*val_env(char **env)
-{
-	int		i;
-	char	*val;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "PWD", ft_strlen("PWD")) == 0)
-			val = malloc(ft_strlen(env[i]) + 1);
-		i++;
-	}
-	if (!val)
-	{
-		val = malloc(ft_strlen("not PWD") + 1);
-		val = "not PWD";
-	}
-	return (val);
-}
-
 int	ft_env(t_exec_data *data)
 {
 	t_env_list	*env;

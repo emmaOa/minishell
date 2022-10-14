@@ -21,7 +21,11 @@ void	here_d(char *delimiter, t_exec_data *e_data, int fd_hd)
 	{
 		line = readline("> ");
 		if (!line || ft_strcmp(delimiter, line) == 0)
+		{
+			if (ft_strcmp(delimiter, line) == 0)
+				free(line);
 			exit(0);
+		}
 		else
 		{
 			if (line)
@@ -60,16 +64,19 @@ int	exec_herdoc(t_list *exec, t_exec_data *e_data)
 int	mult_hd(t_list *exec, t_exec_data *e_data, t_list *node, int len)
 {
 	char	*name_hd;
+	char	*ran_nm;
 	int		i;
 
 	i = 0;
+	name_hd = NULL;
+	ran_nm = NULL;
 	while (((t_data *)node->content)->hd[i])
 	{
-		name_hd = malloc(10);
-		name_hd = random_name();
+		ran_nm = random_name();
+		name_hd = ft_strjoin(ft_strdup("/tmp/"), ran_nm);
+		free(ran_nm);
 		g_glob.expand_hd = 0;
-		e_data->fd_her[len] = open
-			(ft_strjoin(ft_strdup("/tmp/"), name_hd), O_CREAT | O_RDWR, 0666);
+		e_data->fd_her[len] = open(name_hd, O_CREAT | O_RDWR, 0666);
 		if (if_cond
 			(exec, ((t_data *)node->content)->hd[i], e_data->fd_her[len], i))
 			((t_data *)node->content)->hd[i] = if_cond(exec,
@@ -78,8 +85,8 @@ int	mult_hd(t_list *exec, t_exec_data *e_data, t_list *node, int len)
 		fork_her(e_data, ((t_data *)node->content)->hd[i], e_data->fd_her[len]);
 		g_glob.child = 0;
 		close(e_data->fd_her[len]);
-		e_data->fd_her[len] = open
-			(ft_strjoin(ft_strdup("/tmp/"), name_hd), O_CREAT | O_RDWR, 0666);
+		e_data->fd_her[len] = open(name_hd, O_CREAT | O_RDWR, 0666);
+		free(name_hd);
 		i++;
 	}
 	return (0);
@@ -104,7 +111,7 @@ char	*if_cond(t_list *exec, char *delimiter, int fd_hr, int i)
 	value = NULL;
 	if (fd_hr == -1)
 	{
-		((t_data *)exec->content)->inf = ft_strdup(delimiter);
+		((t_data *)exec->content)->inf = delimiter;
 		((t_data *)exec->content)->error = 1;
 	}
 	if (check_qaout(delimiter))

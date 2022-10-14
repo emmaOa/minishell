@@ -16,10 +16,8 @@ char	*check_home(t_exec_data *e_data)
 {
 	char	**env;
 	int		i;
-	int		x;
 
 	i = 0;
-	x = 0;
 	env = list_to_arr(e_data->head_env);
 	while (env[i])
 	{

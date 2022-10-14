@@ -50,10 +50,8 @@ void	double_quote(t_list *exec, char *value, char **arg, int i)
 	char	*tmp;
 	char	*tmp1;
 	int		j;
-	int		q;
 
 	j = 0;
-	q = 0;
 	j = position_quote_d(value, 0);
 	if ((int)ft_strlen(value) < i)
 	{

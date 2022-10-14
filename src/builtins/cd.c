@@ -21,7 +21,7 @@ int	ft_cd(t_list *exec, t_exec_data *e_data)
 	if (nb_arv(arv) <= 2)
 		cd_utl(e_data, arv);
 	else
-		ft_putstr_fd("minishell: cd: too many arguments\n", g_glob.fd_built);
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 	if (errno != 0)
 	{
 		ft_putstr_fd("minishell cd: ", 2);
@@ -39,8 +39,6 @@ void	cd_utl(t_exec_data *e_data, char **arv)
 	char	*cur_pwd;
 	char	*new_pwd;
 
-	cur_pwd = NULL;
-	new_pwd = NULL;
 	if (getcwd(buf, sizeof(buf)))
 	{
 		e_data->pwd = getcwd(buf, sizeof(buf));
@@ -52,11 +50,14 @@ void	cd_utl(t_exec_data *e_data, char **arv)
 			cur_pwd = ft_strjoin(ft_strdup("/"), arv[1]);
 			new_pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
 			e_data->pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
+			free(cur_pwd);
 			chdir(new_pwd);
+			free(new_pwd);
 		}
 	}
 	else
 		my_pwd(e_data, arv);
+
 }
 
 void	my_pwd(t_exec_data *e_data, char **arv)
@@ -66,8 +67,8 @@ void	my_pwd(t_exec_data *e_data, char **arv)
 	s = "cd: error retrieving current directory: getcwd: cannot access ";
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd("parent directories: No such file or directory\n", 2);
-	e_data->pwd = ft_strjoin(ft_strdup(e_data->pwd), "/");
-	e_data->pwd = ft_strjoin(ft_strdup(e_data->pwd), arv[1]);
+	e_data->pwd = ft_strjoin(e_data->pwd, "/");
+	e_data->pwd = ft_strjoin(e_data->pwd, arv[1]);
 }
 
 int	check_trash(char *buf)

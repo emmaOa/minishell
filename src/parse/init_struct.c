@@ -25,9 +25,7 @@ t_list	*init_execution(void)
 t_data	*init_data(void)
 {
 	t_data	*data;
-	int		i;
 
-	i = 0;
 	data = malloc(sizeof(t_data));
 	data->args = NULL;
 	data->error = 0;

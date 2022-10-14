@@ -38,9 +38,7 @@ void	expand(t_list *exec, char *value, char **arg)
 	int		i;
 	char	*tmp;
 	char	*c;
-	int		j;
 
-	j = 0;
 	tmp = ft_strdup("");
 	c = ft_strdup(" ");
 	i = 0;

@@ -44,9 +44,6 @@ int	ft_export_arv(t_exec_data *data)
 
 int	ft_export(t_exec_data *data)
 {
-	t_env_list	*env;
-
-	env = data->head_env;
 	if (data->nb_arv == 1)
 	{
 		with_alpha(data);
