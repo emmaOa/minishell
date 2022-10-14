@@ -12,8 +12,9 @@
 
 #include"../include/minishell.h"
 
-void	init_e_data(t_exec_data *e_data)
+void	init_e_data(t_exec_data *e_data, char **envp)
 {
+	e_data->pwd = val_env(envp);
 	e_data->url = NULL;
 	e_data->fd_her = NULL;
 	e_data->nb_node = 0;
@@ -51,7 +52,7 @@ int	main(int ac, char **av, char **envp)
 	if (ac == 1)
 	{
 		e_data = malloc(sizeof(t_exec_data));
-		init_e_data(e_data);
+		init_e_data(e_data, envp);
 		arr_to_list(e_data, envp);
 		g_glob.head_env = e_data->head_env;
 		sig_main();
@@ -61,7 +62,10 @@ int	main(int ac, char **av, char **envp)
 			init_in_out(e_data);
 			line = readline("minishell:");
 			if (!line)
+			{
+				free (e_data->pwd);
 				break ;
+			}
 			check_line(line, e_data);
 		}
 		free(e_data);

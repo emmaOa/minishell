@@ -47,7 +47,7 @@ char	*ft_url(char *path, t_list *exec)
 		return (NULL);
 	}
 	url = ft_split(path, ':');
-	while (url[i])
+	while (url[i]) 
 	{
 		cmd_path = ft_strjoin(ft_strdup(url[i]), "/");
 		cmd_path = ft_strjoin(cmd_path, ((t_data *)exec->content)->args[0]);

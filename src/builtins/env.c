@@ -48,6 +48,20 @@ int	ft_env(t_exec_data *data)
 	return (0);
 }
 
+char	*val_env(char **env)
+{
+	int		i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], "PWD", ft_strlen("PWD")) == 0)
+			return (ft_strdup(""));
+		i++;
+	}
+	return (ft_strdup("PWD is unset"));
+}
+
 int	printf_list(t_env_list *list)
 {
 	t_env_list	*tmp;

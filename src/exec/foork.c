@@ -70,12 +70,16 @@ void	middle_foork(t_exec_data *e_data)
 
 int	mult_pipe(t_exec_data *e_data, t_list *exec)
 {
+	char	*error;
+
+
 	sig_child();
 	if (e_data->infile == -1)
 	{
-		ft_putstr_fd
-		(ft_strjoin(ft_strdup
-		(((t_data *)exec->content)->inf), ": No such file or directory\n"), 2);
+		error = ft_strjoin(ft_strdup
+		(((t_data *)exec->content)->inf), ": No such file or directory\n");
+		ft_putstr_fd(error, 2);
+		free(error);
 		exit(1);
 	}
 	if (e_data->i == 0 || e_data->i == e_data->nb_node - 1)

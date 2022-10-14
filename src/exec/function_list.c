@@ -22,9 +22,13 @@ char	*check_home(t_exec_data *e_data)
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "HOME", ft_strlen("HOME")) == 0)
+		{
+			free_2d_array(env);
 			return (check_home_utl(i, e_data));
+		}
 		i++;
 	}
+	free_2d_array(env);
 	return (NULL);
 }
 
@@ -48,6 +52,7 @@ char	*check_home_utl(int i, t_exec_data *e_data)
 		x++;
 		j++;
 	}
+	free_2d_array(env);
 	path[x] = '\0';
 	return (path);
 }

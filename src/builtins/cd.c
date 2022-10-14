@@ -38,17 +38,24 @@ void	cd_utl(t_exec_data *e_data, char **arv)
 	char	buf[1000];
 	char	*cur_pwd;
 	char	*new_pwd;
+	char	*home;
 
 	if (getcwd(buf, sizeof(buf)))
 	{
-		e_data->pwd = getcwd(buf, sizeof(buf));
+		free (e_data->pwd);
+		e_data->pwd = ft_strdup(getcwd(buf, sizeof(buf)));
 		if (nb_arv(arv) == 1
 			|| ft_strncmp(arv[1], "~", ft_strlen(arv[1])) == 0)
-			chdir(check_home(e_data));
+		{
+			home = check_home(e_data);
+			chdir(home);
+			free(home);
+		}
 		else
 		{
 			cur_pwd = ft_strjoin(ft_strdup("/"), arv[1]);
 			new_pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
+			free (e_data->pwd);
 			e_data->pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
 			free(cur_pwd);
 			chdir(new_pwd);

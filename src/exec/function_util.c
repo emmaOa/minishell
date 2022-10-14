@@ -60,8 +60,6 @@ char	**list_to_arr(t_env_list *env)
 
 	i = 0;
 	tmp = env;
-	ev = NULL;
-	free_2d_array(ev);
 	ev = (char **)malloc(ft_lstsize_mini(env) * sizeof(char *));
 	while (tmp->next)
 	{

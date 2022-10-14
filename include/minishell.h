@@ -251,7 +251,7 @@ int			out_file(t_exec_data *e_data, t_list *exec);
 int			execution(t_exec_data *e_data, t_list *exec);
 char		*random_name(void);
 int			list(t_exec_data *e_data, t_list *exec);
-void		init_e_data(t_exec_data *e_data);
+void		init_e_data(t_exec_data *e_data, char **envp);
 void		init_global();
 void		init_in_out(t_exec_data *e_data);
 void		check_line(char *line, t_exec_data *e_data);
