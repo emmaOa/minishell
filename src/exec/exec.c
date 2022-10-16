@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:32 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/16 20:20:48 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/16 23:52:57 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	execution(t_exec_data *e_data, t_list *exec)
 
 int	out_file(t_exec_data *e_data, t_list *exec)
 {
-	if (((t_data *)exec->content)->outfiles || ((t_data *)exec->content)->append)
+	if (((t_data *)exec->content)->outfiles
+		|| ((t_data *)exec->content)->append)
 		ft_open_outfiles(e_data, exec);
 	return (0);
 }

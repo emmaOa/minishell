@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:00:17 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/16 22:06:17 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:49:20 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	ft_open_outfiles(t_exec_data *data, t_list *exec)
 		{
 			while (i < count_args(name_files) - 1)
 			{
-				data->fd_outfiles = open(name_files[i], O_CREAT | O_RDWR | O_TRUNC, 0666);
+				data->fd_outfiles = open
+					(name_files[i], O_CREAT | O_RDWR | O_TRUNC, 0666);
 				if (data->fd_outfiles == -1)
 				{
 					perror(strerror(errno));
@@ -38,7 +39,6 @@ int	ft_open_outfiles(t_exec_data *data, t_list *exec)
 			}
 		}
 	}
-
 	return (0);
 }
 
@@ -54,7 +54,8 @@ void	ft_append(t_exec_data *data, t_list *exec)
 	{
 		while (i < count_args(name_files) - 1)
 		{
-			data->fd_outfiles = open(name_files[i], O_CREAT | O_RDWR | O_APPEND, 0666);
+			data->fd_outfiles = open
+				(name_files[i], O_CREAT | O_RDWR | O_APPEND, 0666);
 			if (data->fd_outfiles == -1)
 			{
 				perror(strerror(errno));
