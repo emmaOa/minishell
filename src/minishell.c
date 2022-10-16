@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:50:37 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/11 14:36:10 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:31:24 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ int	main(int ac, char **av, char **envp)
 
 	if (!av || !envp)
 		return (0);
+	if (!envp[0])
+		ft_exit("env not exist ", 1);
 	errno = 0;
 	if (ac == 1)
 	{
+		g_glob.g_exit = 0;
 		e_data = malloc(sizeof(t_exec_data));
 		init_e_data(e_data, envp);
 		arr_to_list(e_data, envp);
@@ -71,5 +74,5 @@ int	main(int ac, char **av, char **envp)
 		free(e_data);
 	}
 	// system("leaks minishell");
-	return (errno);
+	return (g_glob.g_exit);
 }

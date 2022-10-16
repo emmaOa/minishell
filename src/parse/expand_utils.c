@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:24:17 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/02 20:04:42 by omeslall         ###   ########.fr       */
+/*   Updated: 2022/10/14 21:36:15 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	expand_exit_status(char **tmp, int *i)
 {
 	char	*tmp1;
 
-	tmp1 = ft_itoa(g_glob.g_exit_status);
+	tmp1 = ft_itoa(g_glob.g_exit);
 	if (tmp1)
 	{
 		*tmp = ft_strjoin(*tmp, tmp1);

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:06 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:59:07 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:44:02 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_unset(t_exec_data *data)
 
 	arv = data->arv_unset;
 	if (!arv->next)
-		exit(0);
+		return (0);
 	data->arv_unset = arv->next;
 	dele_node(arv);
 	arv = data->arv_unset;
@@ -78,10 +78,7 @@ int	ft_unset(t_exec_data *data)
 		else
 		{
 			if (ft_unset_utl(data, arv->key) == 1)
-			{
-				
 				return (0);
-			}
 		}
 		arv = arv->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:23 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:58:25 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:33:59 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	ft_cd(t_list *exec, t_exec_data *e_data)
 void	cd_utl(t_exec_data *e_data, char **arv)
 {
 	char	buf[1000];
-	char	*cur_pwd;
-	char	*new_pwd;
 	char	*home;
 
 	if (getcwd(buf, sizeof(buf)))
@@ -52,19 +50,24 @@ void	cd_utl(t_exec_data *e_data, char **arv)
 			free(home);
 		}
 		else
-		{
-			cur_pwd = ft_strjoin(ft_strdup("/"), arv[1]);
-			new_pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
-			free (e_data->pwd);
-			e_data->pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
-			free(cur_pwd);
-			chdir(new_pwd);
-			free(new_pwd);
-		}
+			cd_utl_2(e_data, arv, buf);
 	}
 	else
 		my_pwd(e_data, arv);
+}
 
+void	cd_utl_2(t_exec_data *e_data, char **arv, char buf[1000])
+{
+	char	*cur_pwd;
+	char	*new_pwd;
+
+	cur_pwd = ft_strjoin(ft_strdup("/"), arv[1]);
+	new_pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
+	free (e_data->pwd);
+	e_data->pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
+	free(cur_pwd);
+	chdir(new_pwd);
+	free(new_pwd);
 }
 
 void	my_pwd(t_exec_data *e_data, char **arv)

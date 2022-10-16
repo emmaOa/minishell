@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/11 14:25:35 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/16 20:24:26 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 typedef struct s_glob
 {
 	struct	s_env_list *head_env;
-	int		g_exit_status;
+	int		g_exit;
 	int		child;
 	int		fd_built;
 	int		expand_hd;
@@ -211,7 +211,7 @@ int         check_trash(char *buf);
 void		here_d(char *delimiter, t_exec_data *e_data, int fd_hd);
 void        exec_cmd(t_list *exec, t_exec_data *e_data);
 int     	ft_pipe(t_exec_data *e_data);
-void    	ft_exit_bonus(char *s);
+void    	ft_exit(char *s, int nb);
 int     	ft_open_outfiles(t_exec_data *e_data, t_list *exec);
 int     	mult_pipe(t_exec_data *e_data, t_list *exec);
 void    	ft_foork(t_exec_data *e_data);
@@ -244,7 +244,6 @@ void		middle_foork(t_exec_data *e_data);
 char		*check_home_utl(int i, t_exec_data *e_data);
 void		add_back_plus_equal(t_exec_data *data, char *cont, char *key);
 void		add_back_equal(t_exec_data *data, char *cont, char *key);
-void 		ft_p(char **str);
 char	 	**list_to_arr(t_env_list *env);
 int			mult_cmd(t_exec_data *e_data, t_list *exec);
 int			out_file(t_exec_data *e_data, t_list *exec);
@@ -263,5 +262,9 @@ void		start_foork_n_out(t_exec_data *e_data);
 int			mult_hd(t_list *exec, t_exec_data *e_data, t_list *node, int len);
 char		*if_cond(t_list *exec, char *delimiter, int fd_hr, int i);
 void		fork_her(t_exec_data *e_data, char *delimiter, int fd_her);
+void		cd_utl_2(t_exec_data *e_data, char **arv, char buf[1000]);
+char		*url_2(char *arg);
+void		ft_wait_her(void);
+void		ft_append(t_exec_data *data, t_list *exec);
 
 #endif

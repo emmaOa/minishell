@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:54:05 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/11 14:29:48 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:28:52 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	here_d(char *delimiter, t_exec_data *e_data, int fd_hd)
 		line = readline("> ");
 		if (!line || ft_strcmp(delimiter, line) == 0)
 		{
-			if (ft_strcmp(delimiter, line) == 0)
+			if (line)
 				free(line);
 			exit(0);
 		}
@@ -68,8 +68,6 @@ int	mult_hd(t_list *exec, t_exec_data *e_data, t_list *node, int len)
 	int		i;
 
 	i = 0;
-	name_hd = NULL;
-	ran_nm = NULL;
 	while (((t_data *)node->content)->hd[i])
 	{
 		ran_nm = random_name();
@@ -98,10 +96,10 @@ void	fork_her(t_exec_data *e_data, char *delimiter, int fd_her)
 
 	id_fork = fork();
 	if (id_fork == -1)
-		ft_exit_bonus("error: failed in fork herdoc");
+		ft_exit("error: failed in fork", 10);
 	if (id_fork == 0)
 		here_d(delimiter, e_data, fd_her);
-	wait(NULL);
+	ft_wait_her();
 }
 
 char	*if_cond(t_list *exec, char *delimiter, int fd_hr, int i)

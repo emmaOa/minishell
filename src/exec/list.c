@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:00:05 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/11 14:33:01 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/16 18:31:29 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ int	list_one_node(t_exec_data *e_data, t_list *exec)
 	if (((t_data *)exec->content)->infiles)
 		e_data->infile = check_inf(((t_data *)exec->content)->infiles,
 				((t_data *)exec->content)->n_infiles, e_data);
+	if (e_data->infile == -1)
+	{
+		ft_putstr_fd("No such file or directory\n", 2);
+		g_glob.g_exit = 1;
+		return (0);
+	}
 	out_file(e_data, exec);
 	e_data = is_builtins(exec, e_data);
 	if (e_data->name_built)
@@ -53,6 +59,7 @@ int	list_one_node(t_exec_data *e_data, t_list *exec)
 		if (e_data->fd_outfiles != -2)
 			g_glob.fd_built = e_data->fd_outfiles;
 		exec_builtins(exec, e_data);
+		close(e_data->fd_outfiles);
 		e_data->name_built = NULL;
 	}
 	return (0);
