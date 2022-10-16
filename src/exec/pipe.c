@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:00:22 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 18:00:23 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:39:12 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_pipe(t_exec_data *data)
 
 	x = 0;
 	i = 0;
-	errno = 0;
 	data->fd_pipe = (int **)malloc((data->nb_node + 1) * sizeof(int *));
 	while (x < data->nb_node)
 	{
@@ -29,10 +28,7 @@ int	ft_pipe(t_exec_data *data)
 	while (i < data->nb_node)
 	{
 		if (pipe(data->fd_pipe[i]) == -1)
-		{
-			printf("error: pipe failed%s\n", strerror(errno));
-			exit(errno);
-		}
+			ft_exit("error: pipe failed\n", 1);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:20 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 00:26:48 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:34:30 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	ft_append(t_exec_data *data, t_list *exec)
 	char	**name_files;
 
 	i = 0;
-	errno = 0;
 	name_files = ((t_data *)exec->content)->append;
 	if (name_files)
 	{

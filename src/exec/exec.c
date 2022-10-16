@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:32 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/16 23:52:57 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:39:49 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	mult_cmd(t_exec_data *e_data, t_list *exec)
 	g_glob.child = 1;
 	e_data->forck = fork();
 	if (e_data->forck == -1)
-		ft_exit("error: failed in fork", 10);
+		ft_exit("error: failed in fork\n", 10);
 	if (e_data->forck == 0)
 		mult_pipe(e_data, exec);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:26 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/16 17:00:49 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:39:35 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	exec_cmd(t_list *exec, t_exec_data *e_data)
 	env = list_to_arr(e_data->head_env);
 	url = ft_url(ft_path(env), exec);
 	if (url == NULL)
-		ft_exit("command not founde", 127);
+		ft_exit("command not founde\n", 127);
 	if (execve(url, ((t_data *)exec->content)->args, env) < 0)
-		ft_exit("command not executed", 1);
+		ft_exit("command not executed\n", 1);
 }
 
 void	free_bonus_int(int **tabl, int start, int len)
@@ -47,6 +47,6 @@ void	ft_free_int(int **tabl, int start, int len)
 
 void	ft_exit(char *s, int nb)
 {
-	perror(s);
+	ft_putstr_fd(s, 2);
 	exit(nb);
 }

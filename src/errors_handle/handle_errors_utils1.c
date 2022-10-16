@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_errors_utils1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omeslall <omeslall@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 03:05:33 by omeslall          #+#    #+#             */
-/*   Updated: 2022/09/29 17:07:36 by omeslall         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:42:28 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ void	utils_handle_errors(char *argv, size_t *i, size_t *j)
 			*j += 1;
 		*i = *j;
 	}
-}
-
-void	path_err(void)
-{
-	write(2, "path dosn't exist\n", 18);
-	exit(127);
 }
 
 void	skip_in_qaout(char *argv, int *i)

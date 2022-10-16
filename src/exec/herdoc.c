@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:54:05 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/15 22:28:52 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:40:17 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	fork_her(t_exec_data *e_data, char *delimiter, int fd_her)
 
 	id_fork = fork();
 	if (id_fork == -1)
-		ft_exit("error: failed in fork", 10);
+		ft_exit("error: failed in fork\n", 10);
 	if (id_fork == 0)
 		here_d(delimiter, e_data, fd_her);
 	ft_wait_her();
