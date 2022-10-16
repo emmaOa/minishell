@@ -6,84 +6,11 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 21:46:55 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/16 17:34:46 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:27:35 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishell.h"
-
-void	printer(t_list *exec)
-{
-	int i;
-	i = 0;
-	while (exec)
-	{	
-		printf("========================================================================================\n\n");
-
-		if(((t_data *)exec->content)->args)
-		{
-			i = 0;
-			printf("-----------------args-------------------------\n");
-			while(((t_data *)exec->content)->args[i])
-			{
-					printf("----((t_data *)exec->content)->args[%d]----------->%s\n",i,((t_data *)exec->content)->args[i]);
-				i++;
-			}
-			printf("-----------------args-------------------------\n\n");
-		}
-		i = 0;
-		if(((t_data *)exec->content)->infiles)
-		{
-			printf("-----------------infiles-------------------------\n");
-			while(((t_data *)exec->content)->n_infiles > i)
-			{
-					printf("---((t_data *)exec->content)->infiles[%d]--->%d\n",i,((t_data *)exec->content)->infiles[i]);
-					printf("---((t_data *)exec->content)->inf--->%s\n",((t_data *)exec->content)->inf);
-				i++;
-			}
-			printf("-----------------infiles-------------------------\n\n");
-				
-		}
-		i = 0;
-		if(((t_data *)exec->content)->outfiles)
-		{
-			printf("-----------------outfiles-------------------------\n");
-			while(((t_data *)exec->content)->outfiles[i])
-			{
-					printf("---((t_data *)exec->content)->outfiles[%d]--->%s\n",i,((t_data *)exec->content)->outfiles[i]);
-				i++;
-			}
-			printf("-----------------outfiles-------------------------\n");
-
-		}
-		i = 0;
-		if(((t_data *)exec->content)->append)
-		{
-			printf("-----------------append-------------------------\n");
-			while(((t_data *)exec->content)->append[i])
-			{
-					printf("---((t_data *)exec->content)->append[%d]--->%s\n",i,((t_data *)exec->content)->append[i]);
-				i++;
-			}
-			printf("-----------------append-------------------------\n");
-				
-		}
-		i = 0;
-		if(((t_data *)exec->content)->hd)
-		{
-			printf("-----------------hd-------------------------\n");
-			while(((t_data *)exec->content)->hd[i])
-			{
-					printf("---((t_data *)exec->content)->hd[%d]--->%s\n",i,((t_data *)exec->content)->hd[i]);
-				i++;
-			}
-			printf("-----------------hd-------------------------\n");
-				
-		}
-		printf("========================================================================================\n");
-		exec = exec->next;
-	}
-}
 
 int	count_args(char **args)
 {
@@ -152,7 +79,6 @@ int	parse(char *line, t_exec_data *e_data)
 		free_token(token);
 		token = get_next_token(lexer);
 	}
-	printer(exec);
 	e_data->fd_her = malloc(ft_lstsize(exec) * sizeof(int));
 	exec_herdoc(exec, e_data);
 	list(e_data, exec);

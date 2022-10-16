@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:20 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:59:21 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:26:48 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,33 @@ char	*cont_evn(char *env)
 		cont[j] = '\0';
 	}
 	return (cont);
+}
+
+void	ft_append(t_exec_data *data, t_list *exec)
+{
+	int		i;
+	char	**name_files;
+
+	i = 0;
+	errno = 0;
+	name_files = ((t_data *)exec->content)->append;
+	if (name_files)
+	{
+		while (i < count_args(name_files) - 1)
+		{
+			data->fd_outfiles = open
+				(name_files[i], O_CREAT | O_RDWR | O_APPEND, 0666);
+			if (data->fd_outfiles == -1)
+			{
+				if (g_glob.child == 0)
+				{
+					g_glob.g_exit = 1;
+					printf("open append failed\n");
+					return ;
+				}
+				ft_exit("open append failed\n", 1);
+			}
+			i++;
+		}
+	}
 }

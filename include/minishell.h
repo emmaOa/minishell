@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/16 23:51:56 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:22:05 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,5 +263,8 @@ void		cd_utl_2(t_exec_data *e_data, char **arv, char buf[1000]);
 char		*url_2(char *arg);
 void		ft_wait_her(void);
 void		ft_append(t_exec_data *data, t_list *exec);
+void		int_main(char **envp, t_exec_data *e_data);
+void		open_outfile_utl(char **name_files, t_exec_data *data);
+void		open_append_utl(char **name_files, t_exec_data *data);
 
 #endif
