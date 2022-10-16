@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:42 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:58:43 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:17:38 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,27 @@ void	val_env_utl(char *val, char **env, int i)
 	val[x] = '\0';
 }
 
-int	ft_env(t_exec_data *data)
+int	ft_env(t_exec_data *data, t_list *exec)
 {
 	t_env_list	*env;
 
-	env = data->head_env;
-	while (env)
+	if (count_args(((t_data *)exec->content)->args) == 1)
 	{
-		if (env->cont)
+		env = data->head_env;
+		while (env)
 		{
-			ft_putstr_fd(env->key, g_glob.fd_built);
-			ft_putstr_fd("=", g_glob.fd_built);
-			ft_putstr_fd(env->cont, g_glob.fd_built);
-			ft_putstr_fd("\n", g_glob.fd_built);
+			if (env->cont)
+			{
+				ft_putstr_fd(env->key, g_glob.fd_built);
+				ft_putstr_fd("=", g_glob.fd_built);
+				ft_putstr_fd(env->cont, g_glob.fd_built);
+				ft_putstr_fd("\n", g_glob.fd_built);
+			}
+			env = env->next;
 		}
-		env = env->next;
 	}
+	else
+		ft_putstr_fd("number of argument not valid\n", 2);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:50:37 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/15 22:31:24 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:10:03 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int ac, char **av, char **envp)
 		return (0);
 	if (!envp[0])
 		ft_exit("env not exist ", 1);
-	errno = 0;
 	if (ac == 1)
 	{
 		g_glob.g_exit = 0;

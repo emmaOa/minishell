@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:12 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/16 17:18:14 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:13:19 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	exec_builtins_utl(t_list *exec, t_exec_data *e_data, char **arv)
 		ft_unset(e_data);
 	}
 	else if (ft_strncmp(arv[0], "env", ft_strlen("env")) == 0)
-		ft_env(e_data);
+		ft_env(e_data, exec);
 	else if (ft_strncmp(arv[0], "exit", ft_strlen("exit")) == 0)
 		exit(0);
 	else if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
