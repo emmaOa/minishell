@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:08:26 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 00:40:42 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 02:09:49 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,7 @@ void	start_foork_n_out(t_exec_data *e_data)
 {
 	if (e_data->nb_node != 1)
 	{
-		if (e_data->name_built)
-			g_glob.fd_built = e_data->fd_pipe[e_data->i][1];
-		else
-		{
-			if (dup2(e_data->fd_pipe[e_data->i][1], 1) < 0)
-				ft_exit("failed dup2 stdout first command\n", 1);
-		}
+		if (dup2(e_data->fd_pipe[e_data->i][1], 1) < 0)
+			ft_exit("failed dup2 stdout first command\n", 1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/17 00:22:05 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 01:53:05 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ int			ft_export(t_exec_data *data);
 int			ft_export_arv(t_exec_data *data);
 void		lstadd_back_plus(t_env_list **lst, t_env_list *new);
 int			check_unset(char *str);
-int			ft_env(t_exec_data *data, t_list *exec);
+int			ft_env(t_exec_data *data);
 int			ft_unset(t_exec_data *data);
 void		arv_unset(t_exec_data *data, char *str[]);
 int			ft_cd(t_list *exec, t_exec_data *e_data);
