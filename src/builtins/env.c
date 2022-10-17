@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:42 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 02:05:29 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 02:19:13 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,29 @@ void	val_env_utl(char *val, char **env, int i)
 	val[x] = '\0';
 }
 
-int	ft_env(t_exec_data *data)
+int	ft_env(t_exec_data *data, t_list *exec)
 {
 	t_env_list	*env;
 
-	env = data->head_env;
-	while (env)
+	if (count_args(((t_data *)exec->content)->args) == 2)
 	{
-		if (env->cont)
+		env = data->head_env;
+		while (env)
 		{
-			ft_putstr_fd(env->key, g_glob.fd_built);
-			ft_putstr_fd("=", g_glob.fd_built);
-			ft_putstr_fd(env->cont, g_glob.fd_built);
-			ft_putstr_fd("\n", g_glob.fd_built);
+			if (env->cont)
+			{
+				ft_putstr_fd(env->key, g_glob.fd_built);
+				ft_putstr_fd("=", g_glob.fd_built);
+				ft_putstr_fd(env->cont, g_glob.fd_built);
+				ft_putstr_fd("\n", g_glob.fd_built);
+			}
+			env = env->next;
 		}
-		env = env->next;
+	}
+	else
+	{
+		ft_putstr_fd("No such file or directory\n", 2);
+		g_glob.child = 127;
 	}
 	return (0);
 }
