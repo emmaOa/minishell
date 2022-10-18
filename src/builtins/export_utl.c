@@ -15,13 +15,16 @@
 int	just_equals(t_env_list *t_env, t_env_list *node)
 {
 	t_env_list	*env;
+	char	*tmp;
 
 	env = t_env;
 	while (env)
 	{
 		if (ft_strcmp(env->key, node->key) == 0)
 		{
+			tmp = env->cont;
 			env->cont = node->cont;
+			free(tmp);
 			return (1);
 		}
 		env = env->next;
@@ -32,13 +35,16 @@ int	just_equals(t_env_list *t_env, t_env_list *node)
 int	plus_equals(t_env_list *t_env, t_env_list *node)
 {
 	t_env_list	*env;
+	char	*tmp;
 
 	env = t_env;
 	while (env)
 	{
 		if (ft_strncmp(env->key, node->key, ft_strlen(env->key)) == 0)
 		{
+			tmp = env->cont;
 			env->cont = ft_strjoin(ft_strdup(env->cont), node->cont);
+			free(tmp);
 			return (1);
 		}
 		env = env->next;

@@ -46,7 +46,9 @@ void	dele_node(t_env_list *node)
 {
 	if (!node)
 		return ;
+	free(node->cont);
 	node->cont = NULL;
+	free(node->key);
 	node->key = NULL;
 	free(node);
 	return ;

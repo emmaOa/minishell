@@ -22,6 +22,7 @@ void	exec_builtins_utl(t_list *exec, t_exec_data *e_data, char **arv)
 	{
 		e_data->arv_list = arv_to_list(e_data, arv);
 		ft_export(e_data);
+		lstclear(&e_data->arv_list);
 	}
 	else if (ft_strcmp(arv[0], "unset") == 0)
 	{

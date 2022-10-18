@@ -267,4 +267,6 @@ void		open_outfile_utl(char **name_files, t_exec_data *data);
 void		open_append_utl(char **name_files, t_exec_data *data);
 void		ft_exit_builtin(char **arv);
 void		valid_nb(char *str);
+void		lstclear(t_env_list **lst);
+
 #endif

@@ -62,6 +62,18 @@ char	*cont_evn(char *env)
 	return (cont);
 }
 
+void	lstclear(t_env_list **lst)
+{
+	t_env_list	*temp;
+
+	while (*lst != NULL)
+	{
+		temp = *lst;
+		*lst = (*lst)->next;
+		free(temp);
+	}
+}
+
 void	ft_append(t_exec_data *data, t_list *exec)
 {
 	int		i;
