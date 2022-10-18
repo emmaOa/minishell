@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 00:02:51 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 00:07:41 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:38:01 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_global(void)
 	g_glob.child = 0;
 	g_glob.fd_built = 1;
 	g_glob.expand_hd = 0;
+	g_glob.g_exit = 0;
 }
 
 void	init_in_out(t_exec_data *e_data)

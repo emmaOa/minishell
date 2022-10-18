@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:12 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 02:14:47 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/18 12:09:42 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 void	exec_builtins_utl(t_list *exec, t_exec_data *e_data, char **arv)
 {
-	if (ft_strncmp(e_data->name_built, "echo", ft_strlen("echo")) == 0)
+	if (ft_strcmp(e_data->name_built, "echo") == 0)
 		ft_echo(arv);
-	else if (ft_strncmp(arv[0], "pwd", ft_strlen("pwd")) == 0)
+	else if (ft_strcmp(arv[0], "pwd") == 0)
 		ft_pwd(e_data);
-	else if (ft_strncmp(arv[0], "export", ft_strlen("export")) == 0)
+	else if (ft_strcmp(arv[0], "export") == 0)
 	{
 		e_data->arv_list = arv_to_list(e_data, arv);
 		ft_export(e_data);
 	}
-	else if (ft_strncmp(arv[0], "unset", ft_strlen("unset")) == 0)
+	else if (ft_strcmp(arv[0], "unset") == 0)
 	{
 		arv_unset(e_data, ((t_data *)exec->content)->args);
 		ft_unset(e_data);
 	}
-	else if (ft_strncmp(arv[0], "env", ft_strlen("env")) == 0)
+	else if (ft_strcmp(arv[0], "env") == 0)
 		ft_env(e_data, exec);
-	else if (ft_strncmp(arv[0], "exit", ft_strlen("exit")) == 0)
-		exit(0);
-	else if (ft_strncmp(arv[0], "cd", ft_strlen("cd")) == 0)
+	else if (ft_strcmp(arv[0], "exit") == 0)
+		ft_exit_builtin(arv);
+	else if (ft_strcmp(arv[0], "cd") == 0)
 		ft_cd(exec, e_data);
 	if (g_glob.child == 1)
 		exit(0);

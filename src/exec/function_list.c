@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:46 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:59:48 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:43:46 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ char	*check_home(t_exec_data *e_data)
 	env = list_to_arr(e_data->head_env);
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], "HOME", ft_strlen("HOME")) == 0)
+		if (ft_strncmp(env[i], "HOME=", ft_strlen("HOME=")) == 0)
 		{
 			free_2d_array(env);
 			return (check_home_utl(i, e_data));
 		}
 		i++;
 	}
+	ft_putstr_fd("HOME not found\n", 2);
 	free_2d_array(env);
 	return (NULL);
 }

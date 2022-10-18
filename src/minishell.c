@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:50:37 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/17 00:09:10 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:50:12 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	main(int ac, char **av, char **envp)
 				break ;
 			}
 			check_line(line, e_data);
+			free(line);
 		}
 		free(e_data);
 	}

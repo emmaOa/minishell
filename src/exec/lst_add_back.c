@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:00:11 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 18:00:13 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:51:54 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	lstadd_back_plus(t_env_list **lst, t_env_list *new)
 {
 	t_env_list	*tmp;
+	t_env_list	*_free;
 
 	if (new == 0)
 		return ;
@@ -23,12 +24,14 @@ void	lstadd_back_plus(t_env_list **lst, t_env_list *new)
 		if (just_equals(*lst, new) == 0)
 		{
 			tmp = malloc(sizeof(t_env_list));
-			tmp->cont = new->cont;
-			tmp->key = new->key;
+			tmp->cont = ft_strdup(new->cont);
+			tmp->key = ft_strdup(new->key);
 			tmp->next = NULL;
 			lstadd_back(lst, tmp);
 		}
+		_free = new;
 		new = new->next;
+		free(_free);
 	}
 }
 
@@ -80,7 +83,6 @@ void	add_back_equal(t_exec_data *data, char *cont, char *key)
 	t_env_list	*tmp;
 
 	tmp = NULL;
-	tmp = malloc(sizeof(t_env_list));
 	tmp = malloc(sizeof(t_env_list));
 	tmp->key = key;
 	tmp->cont = cont;

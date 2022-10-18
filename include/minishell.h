@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/17 02:14:40 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/18 11:19:33 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,6 @@ int			check_equal(char *str, int indec);
 int			check_valid_enva_jout(char *str);
 void		dele_node(t_env_list *node);
 void		lstadd_back_export(t_exec_data *data);
-int			prin_if(t_env_list *t_env, t_env_list *t_without_key);
 char		*ft_strndup(char *str, int len);
 void		lstadd_back(t_env_list **lst, t_env_list *new);
 int			ft_export(t_exec_data *data);
@@ -266,5 +265,5 @@ void		ft_append(t_exec_data *data, t_list *exec);
 void		int_main(char **envp, t_exec_data *e_data);
 void		open_outfile_utl(char **name_files, t_exec_data *data);
 void		open_append_utl(char **name_files, t_exec_data *data);
-
+void		ft_exit_builtin(char **arv);
 #endif

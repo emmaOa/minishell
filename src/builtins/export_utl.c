@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:47 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:58:49 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:59:15 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,35 +71,6 @@ int	check_equal(char *str, int indec)
 		if (str[i] == '=' || indec < 1)
 			return (1);
 		i++;
-	}
-	return (0);
-}
-
-int	prin_if(t_env_list *t_env, t_env_list *t_without_key)
-{
-	int			i;
-	t_env_list	*env;
-	t_env_list	*without_key;
-
-	env = t_env;
-	without_key = t_without_key;
-	i = 0;
-	while (without_key)
-	{
-		while (env)
-		{
-			if (ft_strncmp
-				(env->key, without_key->key, ft_strlen(without_key->key)) == 0)
-				i = 1;
-			env = env->next;
-		}
-		if (i == 0)
-		{
-			ft_putstr_fd("declare -x ", g_glob.fd_built);
-			ft_putstr_fd(without_key->key, g_glob.fd_built);
-			ft_putstr_fd("\n", g_glob.fd_built);
-		}
-		without_key = without_key->next;
 	}
 	return (0);
 }

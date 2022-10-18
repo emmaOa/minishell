@@ -12,7 +12,7 @@ MANDATORY= src/minishell.c src/lexer/lexer.c src/lexer/token.c src/lexer/lexer_u
 		src/exec/lst_add_back.c src/exec/herdoc.c src/exec/signals.c src/exec/herdoc_utl.c\
 		src/exec/exec.c src/exec/list.c  src/exec/initialization.c src/parse/redirection_utils1.c\
 		src/parse/free.c src/parse/qaout_utils.c src/parse/redirections_utils.c\
-		src/parse/utils.c $(VRLIBFT)\
+		src/parse/utils.c src/builtins/exit.c $(VRLIBFT)\
 
 CC=cc
 FLAGS= -Wall -Werror -Wextra
