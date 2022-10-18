@@ -64,14 +64,19 @@ char	*cont_evn(char *env)
 
 void	lstclear(t_env_list **lst)
 {
-	t_env_list	*temp;
+	t_env_list	*tmp;
 
 	while (*lst != NULL)
 	{
-		temp = *lst;
+		tmp = *lst;
+		free(tmp->cont);
+		tmp->cont = NULL;
+		free(tmp->key);
+		tmp->key = NULL;
 		*lst = (*lst)->next;
-		free(temp);
+		free(tmp);
 	}
+	*lst = NULL;
 }
 
 void	ft_append(t_exec_data *data, t_list *exec)

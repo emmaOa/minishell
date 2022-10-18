@@ -16,7 +16,9 @@ void	init_e_data(t_exec_data *e_data, char **envp)
 {
 	e_data->pwd = val_env(envp);
 	e_data->url = NULL;
+	e_data->head = NULL;
 	e_data->fd_her = NULL;
+	e_data->key_without_cont = NULL;
 	e_data->nb_node = 0;
 }
 

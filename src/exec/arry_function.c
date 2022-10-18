@@ -77,8 +77,10 @@ t_env_list	*arv_to_list(t_exec_data *data, char *str[])
 	int			i;
 
 	i = 0;
-	data->head = NULL;
-	data->key_without_cont = NULL;
+	if (data->head)
+		lstclear(&data->head);
+	if (data->key_without_cont)
+		lstclear(&data->key_without_cont);
 	if (str)
 	{
 		while (str[i])
