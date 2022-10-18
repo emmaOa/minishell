@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:13 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/18 12:11:01 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:28:52 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_env_list	*arv_to_list(t_exec_data *data, char *str[])
 
 	i = 0;
 	data->head = NULL;
+	data->key_without_cont = NULL;
 	if (str)
 	{
 		while (str[i])

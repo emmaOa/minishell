@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:14:29 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/18 12:54:16 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:28:25 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	ft_exit_builtin(char **arv)
 {
-	int	i;
-	int	j;
 	int	nb;
 
-	i = 1;
-	j = 0;
 	if (g_glob.child == 1)
 		return ;
 	if (count_args(arv) == 2)
