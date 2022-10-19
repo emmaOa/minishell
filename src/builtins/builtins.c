@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:12 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/18 12:09:42 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:20:47 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	exec_builtins_utl(t_list *exec, t_exec_data *e_data, char **arv)
 		e_data->arv_list = arv_to_list(e_data, arv);
 		ft_export(e_data);
 		lstclear(&e_data->arv_list);
+		lstclear(&e_data->key_without_cont);
 	}
 	else if (ft_strcmp(arv[0], "unset") == 0)
 	{

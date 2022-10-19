@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:20 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 00:34:30 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:26:02 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,18 @@ void	lstclear(t_env_list **lst)
 {
 	t_env_list	*tmp;
 
-	while (*lst != NULL)
+	if (*lst)
 	{
-		tmp = *lst;
-		free(tmp->cont);
-		tmp->cont = NULL;
-		free(tmp->key);
-		tmp->key = NULL;
-		*lst = (*lst)->next;
-		free(tmp);
+		while (*lst)
+		{
+			tmp = *lst;
+			*lst = (*lst)->next;
+			free(tmp->key);
+			if (tmp->cont)
+				free(tmp->cont);
+			free(tmp);
+		}
 	}
-	*lst = NULL;
 }
 
 void	ft_append(t_exec_data *data, t_list *exec)

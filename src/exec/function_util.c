@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:52 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:59:53 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/19 10:08:51 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	dele_node(t_env_list *node)
 {
 	if (!node)
 		return ;
-	free(node->cont);
+	if (node->cont)
+		free(node->cont);
 	node->cont = NULL;
 	free(node->key);
 	node->key = NULL;

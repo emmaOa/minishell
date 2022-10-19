@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 00:02:51 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 19:38:01 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:06:57 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_e_data(t_exec_data *e_data, char **envp)
 	e_data->url = NULL;
 	e_data->head = NULL;
 	e_data->fd_her = NULL;
+	e_data->arv_list = NULL;
 	e_data->key_without_cont = NULL;
 	e_data->nb_node = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:00:11 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 23:51:54 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:12:08 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	lstadd_back_plus(t_env_list **lst, t_env_list *new)
 {
 	t_env_list	*tmp;
-	t_env_list	*_free;
 
 	if (new == 0)
 		return ;
@@ -29,9 +28,7 @@ void	lstadd_back_plus(t_env_list **lst, t_env_list *new)
 			tmp->next = NULL;
 			lstadd_back(lst, tmp);
 		}
-		_free = new;
 		new = new->next;
-		free(_free);
 	}
 }
 
@@ -84,8 +81,8 @@ void	add_back_equal(t_exec_data *data, char *cont, char *key)
 
 	tmp = NULL;
 	tmp = malloc(sizeof(t_env_list));
-	tmp->key = key;
-	tmp->cont = cont;
+	tmp->key = ft_strdup(key);
+	tmp->cont = ft_strdup(cont);
 	tmp->next = NULL;
 	lstadd_back(&data->head_env, tmp);
 }
@@ -97,7 +94,7 @@ void	add_back_plus_equal(t_exec_data *data, char *cont, char *key)
 	tmp = NULL;
 	tmp = malloc(sizeof(t_env_list));
 	tmp->key = ft_strndup(key, (ft_strlen(key) - 1));
-	tmp->cont = cont;
+	tmp->cont = ft_strdup(cont);
 	tmp->next = NULL;
 	lstadd_back(&data->head_env, tmp);
 }
