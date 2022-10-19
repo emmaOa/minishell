@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:14:29 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/18 15:28:25 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:43:32 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_exit_builtin(char **arv)
 void	valid_nb(char *str)
 {
 	int	i;
- 
+
 	i = 0;
 	if (ft_isdigit(str[0]) == 0 && (str[0] != '-' || str[0] != '+'))
 		ft_exit("numeric argument required\n", 255);

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:47 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 23:59:15 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:44:03 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	just_equals(t_env_list *t_env, t_env_list *node)
 {
 	t_env_list	*env;
-	char	*tmp;
+	char		*tmp;
 
 	env = t_env;
 	while (env)
@@ -35,7 +35,7 @@ int	just_equals(t_env_list *t_env, t_env_list *node)
 int	plus_equals(t_env_list *t_env, t_env_list *node)
 {
 	t_env_list	*env;
-	char	*tmp;
+	char		*tmp;
 
 	env = t_env;
 	while (env)

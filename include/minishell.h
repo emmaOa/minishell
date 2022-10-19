@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/19 13:38:13 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:17:23 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,6 @@ void		add_back_equal(t_exec_data *data, char *cont, char *key);
 char		**list_to_arr(t_env_list *env);
 int			mult_cmd(t_exec_data *e_data, t_list *exec);
 int			out_file(t_exec_data *e_data, t_list *exec);
-int			execution(t_exec_data *e_data, t_list *exec);
 char		*random_name(void);
 int			list(t_exec_data *e_data, t_list *exec);
 void		init_e_data(t_exec_data *e_data, char **envp);
@@ -266,5 +265,7 @@ void		open_append_utl(char **name_files, t_exec_data *data);
 void		ft_exit_builtin(char **arv);
 void		valid_nb(char *str);
 void		lstclear(t_env_list **lst);
+void		close_free(t_exec_data *e_data);
+void		check_file(t_list *exec, t_exec_data *e_data, int i);
 
 #endif
