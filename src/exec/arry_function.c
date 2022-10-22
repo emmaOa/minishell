@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:13 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/19 11:27:08 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:06:07 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	with_cont(t_exec_data *data, char *str)
 	tmp->key = key_evn(str);
 	tmp->cont = cont_evn(str);
 	tmp->next = NULL;
-	lstadd_back(&data->head, tmp);
+	lstadd_back(&data->arv_list, tmp);
 }
 
 void	without_cont(t_exec_data *data, char *str)
@@ -60,23 +60,12 @@ void	without_cont(t_exec_data *data, char *str)
 	}
 }
 
-void	not_str(t_exec_data *data)
+void	arv_to_list(t_exec_data *data, char *str[])
 {
-	t_env_list	*tmp;
-
-	tmp = malloc(sizeof(t_env_list));
-	tmp->key = "NULL";
-	tmp->cont = "NULL";
-	tmp->next = NULL;
-	lstadd_back(&data->head, tmp);
-}
-
-t_env_list	*arv_to_list(t_exec_data *data, char *str[])
-{
-	int			i;
+	int	i;
 
 	i = 0;
-	data->head = NULL;
+	data->arv_list = NULL;
 	data->key_without_cont = NULL;
 	if (str)
 	{
@@ -89,5 +78,4 @@ t_env_list	*arv_to_list(t_exec_data *data, char *str[])
 			i++;
 		}
 	}
-	return (data->head);
 }

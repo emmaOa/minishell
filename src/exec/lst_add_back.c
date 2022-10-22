@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:00:11 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/19 11:12:08 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:00:17 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	lstadd_back_plus(t_env_list **lst, t_env_list *new)
 {
 	t_env_list	*tmp;
 
-	if (new == 0)
+	if (!new)
 		return ;
 	while (new)
 	{
 		if (just_equals(*lst, new) == 0)
 		{
 			tmp = malloc(sizeof(t_env_list));
-			tmp->cont = ft_strdup(new->cont);
 			tmp->key = ft_strdup(new->key);
+			tmp->cont = ft_strdup(new->cont);
 			tmp->next = NULL;
 			lstadd_back(lst, tmp);
 		}

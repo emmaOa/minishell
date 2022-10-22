@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:42 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 02:19:13 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:42:58 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_env(t_exec_data *data, t_list *exec)
 		ft_putstr_fd("No such file or directory\n", 2);
 		g_glob.child = 127;
 	}
-	return (0);
+	return (g_glob.child);
 }
 
 char	*val_env(char **env)

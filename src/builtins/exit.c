@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:14:29 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/19 13:43:32 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:54:59 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	ft_exit_builtin(char **arv)
 	if (g_glob.child == 1)
 		return ;
 	if (count_args(arv) == 2)
-		exit (0);
+		exit (g_glob.g_exit);
 	valid_nb(arv[1]);
 	if (count_args(arv) > 3)
 	{
 		printf("exit: too many arguments\n");
+		g_glob.g_exit = 1;
 		return ;
 	}
 	nb = ft_atoi(arv[1]);

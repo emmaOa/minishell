@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:36 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:58:38 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:40:47 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_echo(char **arv)
 		if (n == 0)
 			ft_putstr_fd("\n", g_glob.fd_built);
 	}
-	return (0);
+	return (g_glob.g_exit);
 }
 
 int	ft_check_n_echo(char *str)
@@ -43,7 +43,7 @@ int	ft_check_n_echo(char *str)
 	int	i;
 
 	i = 1;
-	if (str[0] != '-')
+	if (str[0] != '-' || (str[0] == '-' && str[1] == '\0'))
 		return (1);
 	while (str[i])
 	{

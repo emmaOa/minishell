@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:20 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/19 11:26:02 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/20 22:54:15 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	lstclear(t_env_list **lst)
 		{
 			tmp = *lst;
 			*lst = (*lst)->next;
-			free(tmp->key);
+			if (tmp->key)
+				free(tmp->key);
 			if (tmp->cont)
 				free(tmp->cont);
 			free(tmp);

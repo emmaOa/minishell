@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:23 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/14 18:33:59 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:50:20 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 int	ft_cd(t_list *exec, t_exec_data *e_data)
 {
 	char	**arv;
+	(void)e_data;
 
 	errno = 0;
 	arv = ((t_data *)exec->content)->args;
-	if (nb_arv(arv) <= 2)
-		cd_utl(e_data, arv);
-	else
-		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+	cd_utl(e_data, arv);
 	if (errno != 0)
 	{
 		ft_putstr_fd("minishell cd: ", 2);
@@ -29,8 +27,9 @@ int	ft_cd(t_list *exec, t_exec_data *e_data)
 		ft_putstr_fd(":", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
+		g_glob.g_exit = 1;
 	}
-	return (0);
+	return (g_glob.g_exit);
 }
 
 void	cd_utl(t_exec_data *e_data, char **arv)
@@ -77,6 +76,7 @@ void	my_pwd(t_exec_data *e_data, char **arv)
 	s = "cd: error retrieving current directory: getcwd: cannot access ";
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd("parent directories: No such file or directory\n", 2);
+	g_glob.g_exit = 1;
 	e_data->pwd = ft_strjoin(e_data->pwd, "/");
 	e_data->pwd = ft_strjoin(e_data->pwd, arv[1]);
 }

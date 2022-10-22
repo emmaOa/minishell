@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:00 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 17:59:01 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:41:14 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	ft_pwd(t_exec_data *data)
 		ft_putstr_fd(data->pwd, g_glob.fd_built);
 		ft_putstr_fd("\n", g_glob.fd_built);
 	}
-	return (0);
+	return (g_glob.g_exit);
 }

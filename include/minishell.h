@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/19 17:17:23 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:39:55 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ typedef struct s_exec_data
 	struct s_env_list	*env_list;
 	struct s_env_list	*key_without_cont;
 	struct s_env_list	*arv_list;
-	struct s_env_list	*head;
 	struct s_data		*parse;
 }					t_exec_data;
 
@@ -171,8 +170,8 @@ char		**add_env(char **strs, char *arg);
 int			norm1(t_list *exec, char **value, int i);
 //-----------------------------------------------------
 t_exec_data	*is_builtins(t_list *exec, t_exec_data *e_data);
-t_env_list	*arv_to_list(t_exec_data *data, char *str[]);
 t_env_list	*ft_lstlast_mini(t_env_list *lst);
+void		arv_to_list(t_exec_data *data, char *str[]);
 int			ft_lstsize_mini(t_env_list *lst);
 void		arr_to_list(t_exec_data *data, char *str[]);
 int			exec_builtins(t_list *exec, t_exec_data *e_data);

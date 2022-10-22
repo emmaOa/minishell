@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:47 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/19 13:44:03 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:46:11 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	just_equals(t_env_list *t_env, t_env_list *node)
 		if (ft_strcmp(env->key, node->key) == 0)
 		{
 			tmp = env->cont;
-			env->cont = node->cont;
+			env->cont = ft_strdup(node->cont);
 			free(tmp);
 			return (1);
 		}
