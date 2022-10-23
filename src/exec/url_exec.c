@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:00:33 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/17 00:40:51 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/23 16:44:11 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_path(char *env[])
 		i++;
 	}
 	if (!tmp)
-		ft_exit("No such file or directory\n", 127);
+		return (NULL);
 	i = 0;
 	return (ft_strchr(tmp, '=') + 1);
 }
@@ -46,11 +46,15 @@ char	*ft_url(char *path, t_list *exec)
 	char	**url;
 	char	*cmd_path;
 
-	i = 0;
-	if (ft_strchr(((t_data *)exec->content)->args[0], '/'))
+	i = -1;
+	errno = 0;
+	if ((ft_strchr(((t_data *)exec->content)->args[0], '/') && access
+			(((t_data *)exec->content)->args[0], F_OK | X_OK) == -1) || !path)
+		return (access_file(((t_data *)exec->content)->args[0]));
+	else if (ft_strchr(((t_data *)exec->content)->args[0], '/'))
 		return (url_2(((t_data *)exec->content)->args[0]));
 	url = ft_split(path, ':');
-	while (url[i])
+	while (url[++i])
 	{
 		cmd_path = ft_strjoin(ft_strdup(url[i]), "/");
 		cmd_path = ft_strjoin(cmd_path, ((t_data *)exec->content)->args[0]);
@@ -60,8 +64,21 @@ char	*ft_url(char *path, t_list *exec)
 			return (cmd_path);
 		}
 		free(cmd_path);
-		i++;
 	}
 	free_2d_array(url);
 	return (NULL);
+}
+
+char	*access_file(char *str)
+{
+	if (access(str, F_OK | X_OK) == -1)
+	{
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		if (errno == 20)
+			exit (126);
+		else
+			exit (127);
+	}
+	return (url_2(str));
 }

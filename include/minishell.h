@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/21 13:39:55 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/23 16:16:35 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include	<sys/wait.h>
 # include	<dirent.h>
 # include	<ctype.h>
+# include	<errno.h>
 # include	<sys/types.h>
 # include	<sys/time.h>
 # include	<sys/stat.h>
@@ -263,6 +264,7 @@ void		open_outfile_utl(char **name_files, t_exec_data *data);
 void		open_append_utl(char **name_files, t_exec_data *data);
 void		ft_exit_builtin(char **arv);
 void		valid_nb(char *str);
+char		*access_file(char *str);
 void		lstclear(t_env_list **lst);
 void		close_free(t_exec_data *e_data);
 void		check_file(t_list *exec, t_exec_data *e_data, int i);

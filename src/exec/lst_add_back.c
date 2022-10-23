@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:00:11 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/21 17:00:17 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/23 18:24:15 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	lstadd_back_export(t_exec_data *data)
 			ft_putstr_fd("=", 2);
 			ft_putstr_fd(arv->cont, 2);
 			ft_putstr_fd(" : not a valid identifier\n", 2);
+			g_glob.g_exit = 1;
 		}
 		arv = arv->next;
 	}

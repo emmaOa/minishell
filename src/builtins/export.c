@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:54 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/21 17:45:05 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/23 18:46:46 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	check_valid_enva_jout(char *str)
 		return (1);
 	while (str[i])
 	{
-		if (!ft_isalpha(str[i]) && !ft_isalnum(str[i]) && str[i] != '_'
-			&& (str[i] == '+' && str[i + 1] != '\0'))
-			return (1);
 		if (str[i] == '+' && str[i + 1] == '\0')
 			return (2);
+		if ((!ft_isalpha(str[i]) && !ft_isalnum(str[i]) && str[i] != '_')
+			|| (str[i] == '+' && str[i + 1] != '\0'))
+			return (1);
 		i++;
 	}
 	return (0);
@@ -54,7 +54,7 @@ int	ft_export(t_exec_data *data)
 		ft_export_arv(data);
 		lstadd_back_plus(&data->head_env, data->key_without_cont);
 	}
-	return (g_glob.g_exit);			
+	return (g_glob.g_exit);
 }
 
 void	with_alpha(t_exec_data *data)

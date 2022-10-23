@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 09:59:48 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/10 18:01:59 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/23 16:39:48 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,11 @@ char	*fill_expand(t_list *exec, char *value)
 			len = ft_strlen(value);
 			free(value);
 			value = ft_strdup(env[i] + len);
+			free_2d_array(env);
 			return (value);
 		}
 	}
 	free(value);
+	free_2d_array(env);
 	return (NULL);
 }

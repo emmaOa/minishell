@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:58:23 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/21 17:50:20 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/23 19:59:49 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	ft_cd(t_list *exec, t_exec_data *e_data)
 {
 	char	**arv;
-	(void)e_data;
 
 	errno = 0;
 	arv = ((t_data *)exec->content)->args;
@@ -58,15 +57,12 @@ void	cd_utl(t_exec_data *e_data, char **arv)
 void	cd_utl_2(t_exec_data *e_data, char **arv, char buf[1000])
 {
 	char	*cur_pwd;
-	char	*new_pwd;
 
 	cur_pwd = ft_strjoin(ft_strdup("/"), arv[1]);
-	new_pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
 	free (e_data->pwd);
 	e_data->pwd = ft_strjoin(ft_strdup(buf), cur_pwd);
 	free(cur_pwd);
-	chdir(new_pwd);
-	free(new_pwd);
+	chdir(arv[1]);
 }
 
 void	my_pwd(t_exec_data *e_data, char **arv)
