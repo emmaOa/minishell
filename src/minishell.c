@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:50:37 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/22 15:41:11 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/24 01:29:13 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(int ac, char **av, char **envp)
 		int_main(envp, e_data);
 		while (1337)
 		{
-			init_global();
 			init_in_out(e_data);
+			init_global(e_data);
 			line = readline("minishell:");
 			if (!line)
 			{

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:51:19 by omeslall          #+#    #+#             */
-/*   Updated: 2022/10/23 16:16:35 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/24 01:29:28 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ int			out_file(t_exec_data *e_data, t_list *exec);
 char		*random_name(void);
 int			list(t_exec_data *e_data, t_list *exec);
 void		init_e_data(t_exec_data *e_data, char **envp);
-void		init_global(void);
+void		init_global(t_exec_data *e_data);
 void		init_in_out(t_exec_data *e_data);
 void		check_line(char *line, t_exec_data *e_data);
 int			list_one_node(t_exec_data *e_data, t_list *exec);

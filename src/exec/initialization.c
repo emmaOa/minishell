@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 00:02:51 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/21 14:39:50 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/24 00:56:20 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ void	init_e_data(t_exec_data *e_data, char **envp)
 	e_data->nb_node = 0;
 }
 
-void	init_global(void)
+void	init_global(t_exec_data *e_data)
 {
 	g_glob.child = 0;
 	g_glob.fd_built = 1;
 	g_glob.expand_hd = 0;
+	g_glob.head_env = e_data->head_env;
 }
 
 void	init_in_out(t_exec_data *e_data)
@@ -39,6 +40,5 @@ void	int_main(char **envp, t_exec_data *e_data)
 	g_glob.g_exit = 0;
 	init_e_data(e_data, envp);
 	arr_to_list(e_data, envp);
-	g_glob.head_env = e_data->head_env;
 	sig_main();
 }

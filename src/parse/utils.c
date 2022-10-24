@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdoulyaz <kdoulyaz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:53:37 by kdoulyaz          #+#    #+#             */
-/*   Updated: 2022/09/25 01:15:55 by kdoulyaz         ###   ########.fr       */
+/*   Updated: 2022/10/23 20:04:29 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishell.h"
-
-// char	*g_variable(char *str)
-// {
-// 	int		i;
-// 	char	*tmp;
-
-// 	i = -1;
-// 	tmp = malloc(sizeof(char) * g_index(str, '=') + 1);
-// 	if (!tmp)
-// 		return (NULL);
-// 	while (++i < g_index(str, '='))
-// 		tmp[i] = str[i];
-// 	tmp[i] = 0;
-// 	return (tmp);
-// }
 
 char	*ft_join(char *s1, char *s2)
 {
@@ -84,34 +69,6 @@ char	*ft_join1(char *s1, char *s2)
 	return (str);
 }
 
-// char	**creat_export(char **env)
-// {
-// 	int		i;
-// 	char	*tmp;
-// 	char	*vtmp;
-// 	char	*value;
-// 	char	**export;
-
-// 	i = -1;
-// 	export = ft_calloc(1, sizeof(char *));
-// 	while (env[++i])
-// 	{
-// 		tmp = NULL;
-// 		tmp = ft_join(tmp, "declare -x ");
-// 		vtmp = g_variable(env[i]);
-// 		tmp = ft_join(tmp, vtmp);
-// 		free(vtmp);
-// 		tmp = ft_join(tmp, "=\"");
-// 		value = ft_strdup(env[i] + g_index(env[i], '=') + 1);
-// 		tmp = ft_join(tmp, value);
-// 		free(value);
-// 		tmp = ft_join(tmp, "\"");
-// 		export = add_env(export, tmp);
-// 		free(tmp);
-// 	}
-// 	return (export);
-// }
-
 void	fill_outfile(t_list *exec, t_token *token)
 {
 	((t_data *)exec->content)->outfiles = (char **)ft_2d_realloc \
@@ -120,18 +77,3 @@ void	fill_outfile(t_list *exec, t_token *token)
 	((t_data *)exec->content)->outfiles[len_2d_array \
 	((void **)(((t_data *)exec->content)->outfiles))] = ft_strdup(token->value);
 }
-
-// char	*g_v_n(char *str)
-// {
-// 	int		i;
-// 	char	*tmp;
-
-// 	i = -1;
-// 	tmp = malloc(sizeof(char) * g_index(str, '=') + 1);
-// 	if (!tmp)
-// 		return (NULL);
-// 	while (++i < g_index(str, '='))
-// 		tmp[i] = str[i];
-// 	tmp[i] = 0;
-// 	return (tmp);
-// }

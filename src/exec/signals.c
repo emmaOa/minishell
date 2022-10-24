@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:00:27 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/10 18:00:29 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/24 01:02:08 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	sig_handler(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_glob.g_exit = 1;
 	}
 	else
 		ft_putstr_fd("\n", 2);

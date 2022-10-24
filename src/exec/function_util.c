@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:59:52 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/10/19 13:34:53 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/10/24 02:41:56 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,14 @@ char	**list_to_arr(t_env_list *env)
 
 	i = 0;
 	tmp = env;
-	ev = (char **)malloc(ft_lstsize_mini(env) * sizeof(char *));
-	while (tmp->next)
+	ev = (char **)malloc((ft_lstsize_mini(env) + 1) * sizeof(char *));
+	while (tmp)
 	{
-		if (tmp->cont)
-		{
-			ev[i] = ft_strjoin(ft_strdup(tmp->key), "=");
-			ev[i] = ft_strjoin(ev[i], tmp->cont);
-		}
+		ev[i] = ft_strjoin(ft_strdup(tmp->key), "=");
+		ev[i] = ft_strjoin(ev[i], tmp->cont);
 		tmp = tmp->next;
 		i++;
 	}
-	ev[i] = NULL;
+	ev[i] = 0;
 	return (ev);
 }
